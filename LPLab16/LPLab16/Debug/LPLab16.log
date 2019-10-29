@@ -1,0 +1,192 @@
+<<<<<<< HEAD
+﻿Сборка начата 25.10.2019 18:02:13.
+Окружение на момент начала сборки:
+ALLUSERSPROFILE = C:\ProgramData
+APPDATA = C:\Users\USER\AppData\Roaming
+=======
+﻿Сборка начата 29.10.2019 23:48:49.
+Окружение на момент начала сборки:
+ALLUSERSPROFILE = C:\ProgramData
+APPDATA = C:\Users\USER\AppData\Roaming
+BTK_BASELIBCTX:1668 = 0F9B77D0
+>>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+CommonProgramFiles = C:\Program Files (x86)\Common Files
+CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
+CommonProgramW6432 = C:\Program Files\Common Files
+COMPUTERNAME = DEFENDER-SD
+ComSpec = C:\WINDOWS\system32\cmd.exe
+configsetroot = C:\WINDOWS\ConfigSetRoot
+C_EM64T_REDIST11 = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\
+DriverData = C:\Windows\System32\Drivers\DriverData
+easyplussdk = "C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin"
+ESET_OPTIONS =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+FPS_BROWSER_USER_PROFILE_STRING = Default
+HOMEDRIVE = C:
+HOMEPATH = \Users\USER
+KMP_DUPLICATE_LIB_OK = TRUE
+LOCALAPPDATA = C:\Users\USER\AppData\Local
+LOGONSERVER = \\DEFENDER-SD
+MKL_SERIAL = YES
+MSBuildLoadMicrosoftTargetsReadOnly = true
+NUMBER_OF_PROCESSORS = 4
+OneDrive = C:\Users\USER\OneDrive
+OS = Windows_NT
+Path = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\install\AOMEI Backupper;C:\Program Files\Java\jdk-10.0.1\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\install\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\atom\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\.dotnet\tools
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+PkgDefApplicationConfigFile = C:\Users\USER\AppData\Local\Microsoft\VisualStudio\15.0_3403365a\devenv.exe.config
+PROCESSOR_ARCHITECTURE = x86
+PROCESSOR_ARCHITEW6432 = AMD64
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
+PROCESSOR_LEVEL = 6
+PROCESSOR_REVISION = 4e03
+ProgramData = C:\ProgramData
+ProgramFiles = C:\Program Files (x86)
+ProgramFiles(x86) = C:\Program Files (x86)
+ProgramW6432 = C:\Program Files
+<<<<<<< HEAD
+PSModulePath = %ProgramFiles%\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC = C:\Users\Public
+=======
+PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC = C:\Users\Public
+SESSIONNAME = Console
+>>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+SystemDrive = C:
+SystemRoot = C:\WINDOWS
+TEMP = C:\Users\USER\AppData\Local\Temp
+TMP = C:\Users\USER\AppData\Local\Temp
+USERDOMAIN = DEFENDER-SD
+USERDOMAIN_ROAMINGPROFILE = DEFENDER-SD
+USERNAME = USER
+USERPROFILE = C:\Users\USER
+VBOX_MSI_INSTALL_PATH = C:\install\VisualBox\
+VisualStudioDir = C:\Users\USER\Documents\Visual Studio 2017
+VisualStudioEdition = Microsoft Visual Studio Community 2017
+VisualStudioVersion = 15.0
+VS110COMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools\
+VS120COMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\
+VS140COMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+VSAPPIDDIR = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\
+VSAPPIDNAME = devenv.exe
+VSLANG = 1049
+VSSKUEDITION = Community
+windir = C:\WINDOWS
+
+     1>Проект "E:\Compil\LPLab16\LPLab16\LPLab16.vcxproj" в узле 2 (целевые объекты Build).
+     1>InitializeBuildStatus:
+<<<<<<< HEAD
+         Создание "Debug\LPLab16.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt pch.cpp
+         pch.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Error.cpp FST.cpp Greibach.cpp IT.cpp In.cpp LT.cpp LexAnaliz.cpp Log.cpp MFST.cpp Main.cpp Parm.cpp PolishNotation.cpp
+         Error.cpp
+         FST.cpp
+     1>e:\compil\lplab16\lplab16\fst.cpp(197): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+         Greibach.cpp
+         IT.cpp
+         In.cpp
+     1>e:\compil\lplab16\lplab16\in.cpp(30): warning C4018: <: несоответствие типов со знаком и без знака
+         LT.cpp
+         LexAnaliz.cpp
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(95): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(124): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(276): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(281): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(283): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(288): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(290): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(326): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(328): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(332): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(334): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(344): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(346): warning C4018: >=: несоответствие типов со знаком и без знака
+         Log.cpp
+         MFST.cpp
+     1>e:\compil\lplab16\lplab16\mfst.cpp(234): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+         Main.cpp
+         Parm.cpp
+         PolishNotation.cpp
+         Создание кода...
+     1>e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(18): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(66): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(35): warning C4715: FST::function: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(50): warning C4715: FST::string: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(81): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(95): warning C4715: FST::print: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(108): warning C4715: FST::main: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(122): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
+=======
+         Обращение к "Debug\LPLab16.tlog\unsuccessfulbuild".
+       ClCompile:
+         Для всех выходных данных обновления не требуется.
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt MFST.cpp
+         MFST.cpp
+     1>e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+>>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\LPLab16\Debug\LPLab16.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\LPLab16\Debug\LPLab16.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\LPLab16\Debug\LPLab16.lib" /MACHINE:X86 Debug\Error.obj
+         Debug\FST.obj
+         Debug\Greibach.obj
+         Debug\In.obj
+         Debug\IT.obj
+         Debug\LexAnaliz.obj
+         Debug\Log.obj
+         Debug\LT.obj
+         Debug\Main.obj
+         Debug\MFST.obj
+         Debug\Parm.obj
+         Debug\pch.obj
+         Debug\PolishNotation.obj
+         LPLab16.vcxproj -> E:\Compil\LPLab16\Debug\LPLab16.exe
+       FinalizeBuildStatus:
+         Файл "Debug\LPLab16.tlog\unsuccessfulbuild" удаляется.
+         Обращение к "Debug\LPLab16.tlog\LPLab16.lastbuildstate".
+     1>Сборка проекта "E:\Compil\LPLab16\LPLab16\LPLab16.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+       "E:\Compil\LPLab16\LPLab16\LPLab16.vcxproj" (целевой объект Build ) (1) ->
+       (ClCompile конечный объект) -> 
+<<<<<<< HEAD
+         e:\compil\lplab16\lplab16\fst.cpp(197): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+         e:\compil\lplab16\lplab16\in.cpp(30): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(95): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(124): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(276): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(281): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(283): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(288): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(290): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(326): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(328): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(332): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(334): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(344): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(346): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\mfst.cpp(234): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+         e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(18): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(66): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(35): warning C4715: FST::function: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(50): warning C4715: FST::string: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(81): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(95): warning C4715: FST::print: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(108): warning C4715: FST::main: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(122): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
+
+    Предупреждений: 25
+    Ошибок: 0
+
+Прошло времени 00:00:30.24
+=======
+         e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+
+    Предупреждений: 1
+    Ошибок: 0
+
+Прошло времени 00:00:03.54
+>>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2

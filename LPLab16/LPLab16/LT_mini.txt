@@ -1,0 +1,66 @@
+===========LEX TABLE mini==============
+
+tfi(ti,ti)
+{
+dti;
+<<<<<<< HEAD
+i=ivivivlvlviviv(lvl);
+=======
+dsfi(si,ti,ti);
+i=i(i,l,l)vivlvlviviv(lvl);
+>>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+ri;
+};
+
+sfi(si,si)
+{
+dsi;
+<<<<<<< HEAD
+dsfi(si,ti,ti);
+i=i(i)v(ivivi)vivi(i,l,l);
+ri;
+};
+
+=======
+i=i(i,l,l)v(ivivi);
+ri;
+};
+
+dti;
+>>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+
+m
+{
+dsi;
+dsi;
+dti;
+dti;
+dsi;
+dqi;
+dsi;
+dsi;
+dsi;
+dtfi(si);
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=l;
+i=i(i,i);
+i=i(i,i);
+i=l;
+pl;
+pi;
+pi;
+pi(i);
+rl;
+};
