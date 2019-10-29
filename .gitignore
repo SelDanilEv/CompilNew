@@ -2,7 +2,7 @@
 *.d
 
 
-Danil.txt
+/Danil.txt
 
 # Compiled Object files
 *.slo
