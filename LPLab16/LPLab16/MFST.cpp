@@ -3,18 +3,11 @@
 #define NS(n)	GRB::Rule::Chain::N(n)
 #define TS(n)	GRB::Rule::Chain::T(n)
 #define ISNS(n)	GRB::Rule::Chain::isN(n)
-<<<<<<< HEAD
-int FST_TRACE_n = -1;
-char rbuf[205],		// для правила
-	 sbuf[205],		// для стека
-	 lbuf[1024];	// для ленты
-=======
 
 int FST_TRACE_n = -1;
 char rbuf[205],		// для правила
 sbuf[205],		// для стека
 lbuf[1024];	// для ленты
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 
 namespace MFST
 {
@@ -61,13 +54,8 @@ namespace MFST
 	{
 		grebach = pgrebach;
 		lex = plex;
-<<<<<<< HEAD
-		lenta = new short[lenta_size = lex.lextable.size];		// массив для ленты, состоящией из символов таблицы лексем
-		for (int k = 0; k < lenta_size; k++) lenta[k] = TS(lex.lextable.table[k].lexema);	// заполнение массива терминалами
-=======
 		lenta = new short[lenta_size = lex.mylextable.size];		// массив для ленты, состоящией из символов таблицы лексем
 		for (int k = 0; k < lenta_size; k++) lenta[k] = TS(lex.mylextable.table[k].lexema);	// заполнение массива терминалами
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 		lenta_position = 0;
 		st.push(grebach.stbottomT);		// дно стека в стек
 		st.push(grebach.startN);		// стартовый символ в стек
@@ -88,11 +76,7 @@ namespace MFST
 					if ((nrulechain = rule.getNextChain(lenta[lenta_position], chain, nrulechain + 1)) >= 0)	// получаем следующую цепочку по терминалу из ленты
 					{
 						MFST_TRACE1			// вывод ++номера шага автомата, правила, ленты и стека
-<<<<<<< HEAD
-						savestate();		// сохраняем состояние
-=======
 							savestate();		// сохраняем состояние
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 						st.pop();			// извлекаем из стека символ
 						push_chain(chain);	// помещаем цепочку в стек
 						rc = NS_OK;			// найдено правило и цепочка, цепочка записана в стек
@@ -101,11 +85,7 @@ namespace MFST
 					else		// не найдена подходящая цепочка
 					{
 						MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE")
-<<<<<<< HEAD
-						savediagnosis(NS_NORULECHAIN);
-=======
 							savediagnosis(NS_NORULECHAIN);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 						rc = reststate() ? NS_NORULECHAIN : NS_NORULE;	// восстановить состояние автомата
 					};
 				}
@@ -117,17 +97,10 @@ namespace MFST
 				st.pop(); nrulechain = -1; rc = TS_OK;
 				MFST_TRACE3			// вывод ++номера шага автомата, ленты и стека
 			}
-<<<<<<< HEAD
-			else 
-			{
-				MFST_TRACE4("TS_NOK/NS_NORULECHAIN")		// вывод ++номера шага автомата и сообщения
-				rc = reststate() ? TS_NOK : NS_NORULECHAIN;
-=======
 			else
 			{
 				MFST_TRACE4("TS_NOK/NS_NORULECHAIN")		// вывод ++номера шага автомата и сообщения
 					rc = reststate() ? TS_NOK : NS_NORULECHAIN;
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			};
 		}
 		else { rc = LENTA_END; MFST_TRACE4("LENTA_END") };
@@ -230,22 +203,14 @@ namespace MFST
 
 	char* Mfst::getDiagnosis(short n, char* buf)
 	{
-<<<<<<< HEAD
-		char* rc = nullptr;
-=======
 		char* rc = (char*)"";
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 		int errid = 0;
 		int lpos = -1;
 		if (n < MFST_DIAGN_NUMBER && (lpos = diagnosis[n].lenta_position) >= 0)
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
 			Error::ERROR err = Error::geterror(errid);
-<<<<<<< HEAD
-			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d, %s", err.id, lex.lextable.table[lpos].sn, err.message);
-=======
 			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d, %s", err.id, lex.mylextable.table[lpos].sn, err.message);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			rc = buf;
 		};
 		return rc;

@@ -1,5 +1,4 @@
 #include "pch.h"
-<<<<<<< HEAD
 
 using namespace std;
 
@@ -57,7 +56,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		countOfAllInputLex++;
 		if (lextable.table[lextable_pos].lexema != LEX_LEFTTHESIS && lextable.table[lextable_pos].lexema != LEX_RIGHTTHESIS)
 			counter++;
-		if (lextable.table[lextable_pos].lexema == LEX_COMMA &&lextable.table[lextable_pos - 2].lexema != LEX_LEFTTHESIS)
+		if (lextable.table[lextable_pos].lexema == LEX_COMMA && lextable.table[lextable_pos - 2].lexema != LEX_LEFTTHESIS)
 			counter++;
 		lextable_pos++;
 	} while (lextable.table[lextable_pos].lexema != LEX_SEMICOLON);
@@ -120,7 +119,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 				{
 					if (lextable.table[lextable_pos + i].lexema == LEX_ID)
 						countOfParameters++;
-					if (lextable.table[lextable_pos + i].lexema == LEX_LITERAL || lextable.table[lextable_pos + i ].lexema == LEX_ID)
+					if (lextable.table[lextable_pos + i].lexema == LEX_LITERAL || lextable.table[lextable_pos + i].lexema == LEX_ID)
 					{
 						AlmostAllEntries[counter1] = lextable.table[lextable_pos + i];
 						AlmostAllEntries[counter1].index = buffershort;
@@ -193,7 +192,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		r++;
 	}
 
-	for (int i = 0; (i < counter + 1) && AlmostAllEntries[i-1].lexema != LEX_SEMICOLON; i++)
+	for (int i = 0; (i < counter + 1) && AlmostAllEntries[i - 1].lexema != LEX_SEMICOLON; i++)
 	{
 		std::cout << AlmostAllEntries[i].lexema << AlmostAllEntries[i].value;
 		lextable.table[startLex + i] = AlmostAllEntries[i];
@@ -206,7 +205,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	bufferEntry.value = NULL;
 	for (int k = buffershort + 1; k < countOfAllInputLex + 1; k++)
 	{
-		AlmostAllEntries[k] = bufferEntry; 
+		AlmostAllEntries[k] = bufferEntry;
 		lextable.table[startLex + k] = bufferEntry;
 	}
 	delete[] AlmostAllEntries;
@@ -216,15 +215,4 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	std::cout << NEWLINE;
 
 	return true;
-=======
-#include "LexAnaliz.h"
-#include <stack>
-#include <queue>
-
-using namespace std;
-
-bool PolishNotation(int i, LexA::Tables &lex)
-{
-	return false;
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 }

@@ -16,8 +16,4 @@ namespace Parm         //параметры
 		PARM();
 	};
 	PARM getparm(int argc, _TCHAR** argv);    // структура с входными параметрами
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2

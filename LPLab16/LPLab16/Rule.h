@@ -12,56 +12,25 @@ namespace GRB
 		6,									  // количество правил
 		Rule(
 			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы
-<<<<<<< HEAD
-			8,                                // 
-			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-			Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
-			Rule::Chain(14, TS('s'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
-			Rule::Chain(14, TS('q'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
-			Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-			Rule::Chain(13, TS('s'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-			Rule::Chain(13, TS('q'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-=======
 			4,                                // 
 			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
 			Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
 			Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			Rule::Chain(9, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
 		),
 		Rule(
 			NS('N'), GRB_ERROR_SERIES + 1,    // конструкции в функциях
-<<<<<<< HEAD
-			20,                               // 
-			Rule::Chain(5, TS('d'), TS('t'), TS('i'), TS(';'), NS('N')),
-			Rule::Chain(5, TS('d'), TS('s'), TS('i'), TS(';'), NS('N')),
-			Rule::Chain(5, TS('d'), TS('q'), TS('i'), TS(';'), NS('N')),
-			Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
-			Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
-			Rule::Chain(9, TS('d'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')),
-			Rule::Chain(9, TS('d'), TS('s'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')),
-			Rule::Chain(9, TS('d'), TS('q'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')),
-=======
 			12,                               // 
 			Rule::Chain(5, TS('d'), TS('t'), TS('i'), TS(';'), NS('N')),
 			Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
 			Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
 			Rule::Chain(9, TS('d'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')),
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			Rule::Chain(4, TS('p'), TS('i'), TS(';'), NS('N')),
 			Rule::Chain(4, TS('p'), TS('l'), TS(';'), NS('N')),
 			Rule::Chain(4, TS('p'), NS('E'), TS(';'), NS('N')),
 			Rule::Chain(3, TS('p'), NS('E'), TS(';')),
 			Rule::Chain(4, TS('d'), TS('t'), TS('i'), TS(';')),
-<<<<<<< HEAD
-			Rule::Chain(4, TS('d'), TS('s'), TS('i'), TS(';')),
-			Rule::Chain(4, TS('d'), TS('q'), TS('i'), TS(';')),
 			Rule::Chain(8, TS('d'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';')),
-			Rule::Chain(8, TS('d'), TS('s'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';')),
-			Rule::Chain(8, TS('d'), TS('q'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';')),
-=======
-			Rule::Chain(8, TS('d'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';')),
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			Rule::Chain(3, TS('p'), TS('i'), TS(';')),
 			Rule::Chain(3, TS('p'), TS('l'), TS(';'))
 		),
@@ -79,19 +48,9 @@ namespace GRB
 		),
 		Rule(
 			NS('F'), GRB_ERROR_SERIES + 3,    // ошибка в параметрах функции
-<<<<<<< HEAD
-			6,                                // 
-			Rule::Chain(2, TS('t'), TS('i')),
-			Rule::Chain(2, TS('s'), TS('i')),
-			Rule::Chain(2, TS('q'), TS('i')),
-			Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('F')),
-			Rule::Chain(4, TS('s'), TS('i'), TS(','), NS('F')),
-			Rule::Chain(4, TS('q'), TS('i'), TS(','), NS('F'))
-=======
 			2,                                // 
 			Rule::Chain(2, TS('t'), TS('i')),
 			Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('F'))
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 		),
 		Rule(
 			NS('W'), GRB_ERROR_SERIES + 4,    // ошибка в параметрах вызываемой функции 

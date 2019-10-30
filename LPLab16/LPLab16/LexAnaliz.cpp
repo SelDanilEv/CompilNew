@@ -1,7 +1,4 @@
 #include "pch.h"
-<<<<<<< HEAD
-#include <string>
-=======
 #include "LexAnaliz.h"
 #include "In.h"
 #include "Error.h"
@@ -12,7 +9,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 
 
 namespace LexA
@@ -71,11 +67,7 @@ namespace LexA
 			if ((LT::GetEntry(mylextable, mylextable.size - 2)).lexema == LEX_DECLARE)
 				idtype = IT::V;
 			else
-<<<<<<< HEAD
 				if (((LT::GetEntry(mylextable, mylextable.size - 2)).lexema == LEX_LEFTTHESIS) || ((LT::GetEntry(mylextable, mylextable.size - 2)).lexema == LEX_COMMA))
-=======
-				if (((LT::GetEntry(mylextable, mylextable.size -2)).lexema == LEX_LEFTTHESIS) || ((LT::GetEntry(mylextable, mylextable.size -2)).lexema == LEX_COMMA))
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 					idtype = IT::P;
 
 		if (idtype == IT::F)
@@ -89,11 +81,7 @@ namespace LexA
 		}
 		else
 		{
-<<<<<<< HEAD
-			if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == LEX_INTEGER)
-=======
 			if ((LT::GetEntry(mylextable, mylextable.size - 1)).lexema == LEX_INTEGER)
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			{
 				iddatatype = IT::INT;
 				myentryI.value.vint = 0;
@@ -132,16 +120,10 @@ namespace LexA
 
 	void analyze(int currentLine, char *fulltextch)                         //функция анализа
 	{
-<<<<<<< HEAD
-
-		std::string fulltext = fulltextch;                         //исходный текст
-		std::string onelex[300];                                 //массив лексем(будущий)
-=======
 		Tables myTables;
 
 		std::string fulltext = fulltextch;                         //исходный текст
 		std::string onelex[250];                                 //массив лексем(будущий)
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 		int amountOfLex = 0;                              //кол во лексем
 		char symvols[] = ";,{}()+-*/=\n";                          //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
@@ -195,17 +177,9 @@ namespace LexA
 			}
 		}
 
-<<<<<<< HEAD
-		Tables myTables;
-
-		myTables.idtable = IT::Create(amountOfLex);                         //создания таблиц
-		myTables.lextable = LT::Create(amountOfLex);
-
-=======
 
 		myTables.myidtable = IT::Create(amountOfLex);                         //создания таблиц
 		myTables.mylextable = LT::Create(amountOfLex);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 
 		for (int i = 0; i < 5; i++)                //обнуление буфера имен
 		{
@@ -232,9 +206,9 @@ namespace LexA
 				case LEX_ID:
 					lex[0] = 1;
 					break;
-				case LEX_STRING:
-					lex[0] = 2;
-					lex[1] = 17;
+				case 's':
+					lex[0] = 2;      //string
+					lex[1] = 17;       //short
 					break;
 				case LEX_FUNCTION:
 					lex[0] = 3;
@@ -251,11 +225,7 @@ namespace LexA
 				case LEX_MAIN:
 					lex[0] = 7;
 					break;
-<<<<<<< HEAD
 				case LEX_SEMICOLON:
-=======
-				case LEX_SEMICOLON :
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 					lex[0] = 8;
 					break;
 				case LEX_COMMA:
@@ -321,11 +291,7 @@ namespace LexA
 			for (int i = 4; i >= str.length(); i--)
 				buff_name[i] = NULL;
 
-<<<<<<< HEAD
 			if (identifyLex == 0 || identifyLex == 16 || identifyLex == 10 || identifyLex == 11 || identifyLex == 7)          //если идентификатор
-=======
-			if (identifyLex == 0 || identifyLex == 16 || identifyLex == 10 || identifyLex == 11 || identifyLex == 7 )          //если идентификатор
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			{
 				for (int i = 0; i < str.length(); i++)
 					buff_name_str[i] = str[i];
@@ -333,43 +299,26 @@ namespace LexA
 					buff_name_str[i] = NULL;
 				switch (identifyLex)
 				{
-<<<<<<< HEAD
 				case 7:
-=======
-				case 7 :
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 					myentryI.areaOfVisibility[0] = 0;
 					for (int q = 0; q < 5; q++)
 						myentryI.id[q] = buff_name[q];
 					myentryI.iddatatype = IT::INT;
 					myentryI.idtype = IT::F;
 					myentryI.value.vint = 0;
-<<<<<<< HEAD
-					IT::Add(myTables.idtable, myentryI);
-					myentryL.idxTI = myTables.idtable.size - 1;
-=======
 					IT::Add(myTables.myidtable, myentryI);
 					myentryL.idxTI = myTables.myidtable.size - 1;
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 					break;
 				case 10:                                                         //область видимости
 					counterOfBracket++;
 					counterOfAreaOfVisibility++;
 					myentryI.areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
 					areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
-<<<<<<< HEAD
-					bufferi = myTables.lextable.size;
-					while (myTables.lextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.lextable.table[bufferi].lexema != LEX_MAIN && myTables.lextable.table[bufferi].lexema != LEX_SEMICOLON)
-					{
-						if (myTables.lextable.table[bufferi].lexema == LEX_ID)
-							myTables.idtable.table[myTables.lextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
-=======
 					bufferi = myTables.mylextable.size;
-					while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_MAIN&& myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON)
+					while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_MAIN && myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON)
 					{
 						if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
 							myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 						bufferi--;
 					}
 					break;
@@ -379,11 +328,7 @@ namespace LexA
 					counterOfAreaOfVisibility--;
 					break;
 				case 16:                                                             //литералы
-<<<<<<< HEAD
-					myentryI.idxfirstLE = myTables.lextable.size;
-=======
 					myentryI.idxfirstLE = myTables.mylextable.size;
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 					if (str[0] == '\'')                         //строковые
 					{
 						for (int i = 0; i < str.length(); i++)
@@ -412,15 +357,6 @@ namespace LexA
 
 					}
 					myentryI.idtype = IT::L;
-<<<<<<< HEAD
-					IT::Add(myTables.idtable, myentryI);                        //добавить в IT
-					myentryL.idxTI = myTables.idtable.size - 1;
-					break;
-				case 0:
-					if (IT::IsId(myTables.idtable, buff_name) == TI_NULLIDX && IT::IsId(myTables.idtable, buff_name_str) == TI_NULLIDX)      //было ли уже в таблице идентификаторов   
-					{
-						addNewInIT(myTables.idtable, myTables.lextable);
-=======
 					IT::Add(myTables.myidtable, myentryI);                        //добавить в IT
 					myentryL.idxTI = myTables.myidtable.size - 1;
 					break;
@@ -428,32 +364,18 @@ namespace LexA
 					if (IT::IsId(myTables.myidtable, buff_name) == TI_NULLIDX && IT::IsId(myTables.myidtable, buff_name_str) == TI_NULLIDX)      //было ли уже в таблице идентификаторов   
 					{
 						addNewInIT(myTables.myidtable, myTables.mylextable);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 					}
 					else
 					{
 						if (!isAStandartFunction)               //если не стандартная функция             
 						{
 							bufferb = true;
-<<<<<<< HEAD
-							for (int y = 0; y < myTables.idtable.size; y++)
-=======
 							for (int y = 0; y < myTables.myidtable.size; y++)
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 							{
 								bufferi = 0;
 								bufferi1 = 1;
 								buffer = "";
 								for (int w = 0; w < 5; w++)
-<<<<<<< HEAD
-									buffer += myTables.idtable.table[y].id[w];
-								if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
-								{
-									while (myTables.idtable.table[y].areaOfVisibility[bufferi1] != 0)  //узнаю сколько значащих в массиве видимости подозреваемого
-										bufferi1++;                         //counterOfAreaOfVisibility какой край области видимости сейчас
-									if (bufferi1 == counterOfAreaOfVisibility + 1) {                  //если одинокого цифр 
-										if (myTables.idtable.table[y].areaOfVisibility[bufferi1 - 1] == areaOfVisibilityLexAnaliz[bufferi1 - 1]) //запрет если одинаковык
-=======
 									buffer += myTables.myidtable.table[y].id[w];
 								if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
 								{
@@ -461,36 +383,22 @@ namespace LexA
 										bufferi1++;                         //counterOfAreaOfVisibility какой край области видимости сейчас
 									if (bufferi1 == counterOfAreaOfVisibility + 1) {                  //если одинокого цифр 
 										if (myTables.myidtable.table[y].areaOfVisibility[bufferi1 - 1] == areaOfVisibilityLexAnaliz[bufferi1 - 1]) //запрет если одинаковык
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 											bufferb = false;
 									}
 									else {
 										for (int q = 0; q < counterOfAreaOfVisibility + 1; q++)
-<<<<<<< HEAD
-											if (myTables.idtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])
-=======
 											if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 												bufferb = false;
 									}
 								}
 							}
 							if (bufferb)
-<<<<<<< HEAD
-								addNewInIT(myTables.idtable, myTables.lextable);
-							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.idtable, buff_name, areaOfVisibilityLexAnaliz);
-							myentryL.idxTI = LexInIT;
-						}
-						else {
-							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.idtable, buff_name_str, areaOfVisibilityLexAnaliz);
-=======
 								addNewInIT(myTables.myidtable, myTables.mylextable);
 							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name, areaOfVisibilityLexAnaliz);
 							myentryL.idxTI = LexInIT;
 						}
 						else {
 							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 							myentryL.idxTI = LexInIT;
 						}
 					}
@@ -498,11 +406,7 @@ namespace LexA
 				//и в любом случае в лексемы
 				myentryL.lexema = automats.lexema[identifyLex];
 				myentryL.sn = currentLine;
-<<<<<<< HEAD
-				LT::Add(myTables.lextable, myentryL);
-=======
 				LT::Add(myTables.mylextable, myentryL);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 			}
 			else                        //если не идентификатор
 			{
@@ -514,54 +418,42 @@ namespace LexA
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
 				myentryL.lexema = automats.lexema[identifyLex];
 				myentryL.sn = currentLine;
-<<<<<<< HEAD
-				LT::Add(myTables.lextable, myentryL);
-=======
 				LT::Add(myTables.mylextable, myentryL);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 				myentryL.value = SPACE;
 			}
 		}
 
-<<<<<<< HEAD
-		//polishNotation(16,myTables.lextable,myTables.idtable);
-		//polishNotation(74,myTables.lextable,myTables.idtable);
-
-		MFST_TRACE_START
-		MFST::Mfst mfst(myTables, GRB::getGreibach());
-		mfst.start();
-		mfst.printrules();
-
-		std::ofstream fileLT;               //формрирование файлов таблиц
-		fileLT.open("LT.txt");
-		LT::showTable(myTables.lextable, fileLT);
-=======
-		//polishNotation(32,myTables.mylextable,myTables.myidtable);
+		//polishNotation(17,myTables.mylextable,myTables.myidtable);
 		//polishNotation(62,myTables.mylextable,myTables.myidtable);
+
+
+		
+		MFST_TRACE_START
+
+		MFST::Mfst mfst(myTables, GRB::getGreibach());
+
+		system("pause");
+		mfst.start();
+		std::cout << "\n\n";
+		mfst.printrules();
+		system("pause");
 
 		std::ofstream fileLT;               //формрирование файлов таблиц
 		fileLT.open("LT.txt");
 		LT::showTable(myTables.mylextable, fileLT);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 		fileLT.close();
 
 		std::ofstream fileLT_mini;
 		fileLT_mini.open("LT_mini.txt");
-<<<<<<< HEAD
-		LT::showTable_mini(myTables.lextable, fileLT_mini);
-=======
 		LT::showTable_mini(myTables.mylextable, fileLT_mini);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 		fileLT_mini.close();
 
 		std::ofstream fileIT;
 		fileIT.open("IT.txt");
-<<<<<<< HEAD
-		IT::showTable(myTables.idtable, fileIT);
-=======
 		IT::showTable(myTables.myidtable, fileIT);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 		fileIT.close();
+
+		std::cout << "End of LexAnaliz\n";
 		system("pause");
 	}
 }

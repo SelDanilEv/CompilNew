@@ -1,10 +1,7 @@
 #include "pch.h"
-<<<<<<< HEAD
-=======
 #include "Log.h"
 
 #include <ctime>
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 
 namespace Log             //формирование файла Log
 {
