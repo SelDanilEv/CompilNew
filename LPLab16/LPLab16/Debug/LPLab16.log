@@ -1,4 +1,4 @@
-﻿Сборка начата 30.10.2019 21:51:31.
+﻿Сборка начата 30.10.2019 22:07:58.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
@@ -63,9 +63,17 @@ windir = C:\WINDOWS
      1>InitializeBuildStatus:
          Создание "Debug\LPLab16.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
-         Для всех выходных данных обновления не требуется.
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Greibach.cpp LexAnaliz.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt pch.cpp
+         pch.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Error.cpp FST.cpp Greibach.cpp IT.cpp In.cpp LT.cpp LexAnaliz.cpp Log.cpp MFST.cpp Main.cpp Parm.cpp PolishNotation.cpp
+         Error.cpp
+         FST.cpp
+     1>e:\compil\lplab16\lplab16\fst.cpp(203): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
          Greibach.cpp
+         IT.cpp
+         In.cpp
+     1>e:\compil\lplab16\lplab16\in.cpp(37): warning C4018: <: несоответствие типов со знаком и без знака
+         LT.cpp
          LexAnaliz.cpp
      1>e:\compil\lplab16\lplab16\lexanaliz.cpp(104): warning C4018: <: несоответствие типов со знаком и без знака
      1>e:\compil\lplab16\lplab16\lexanaliz.cpp(134): warning C4018: <: несоответствие типов со знаком и без знака
@@ -80,7 +88,22 @@ windir = C:\WINDOWS
      1>e:\compil\lplab16\lplab16\lexanaliz.cpp(342): warning C4018: >=: несоответствие типов со знаком и без знака
      1>e:\compil\lplab16\lplab16\lexanaliz.cpp(352): warning C4018: <: несоответствие типов со знаком и без знака
      1>e:\compil\lplab16\lplab16\lexanaliz.cpp(354): warning C4018: >=: несоответствие типов со знаком и без знака
+         Log.cpp
+         MFST.cpp
+     1>e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+         Main.cpp
+         Parm.cpp
+         PolishNotation.cpp
          Создание кода...
+     1>e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(72): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(41): warning C4715: FST::function: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(24): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(87): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(101): warning C4715: FST::print: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(56): warning C4715: FST::string: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(114): warning C4715: FST::main: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(128): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\LPLab16\Debug\LPLab16.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\LPLab16\Debug\LPLab16.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\LPLab16\Debug\LPLab16.lib" /MACHINE:X86 Debug\Error.obj
          Debug\FST.obj
@@ -95,6 +118,7 @@ windir = C:\WINDOWS
          Debug\Parm.obj
          Debug\pch.obj
          Debug\PolishNotation.obj
+         LINK : не найден или не выполнена сборка E:\Compil\LPLab16\Debug\LPLab16.exe при последней инкрементной компоновке; выполняется полная компоновка
          LPLab16.vcxproj -> E:\Compil\LPLab16\Debug\LPLab16.exe
        FinalizeBuildStatus:
          Файл "Debug\LPLab16.tlog\unsuccessfulbuild" удаляется.
@@ -105,6 +129,8 @@ windir = C:\WINDOWS
 
        "E:\Compil\LPLab16\LPLab16\LPLab16.vcxproj" (целевой объект Build ) (1) ->
        (ClCompile конечный объект) -> 
+         e:\compil\lplab16\lplab16\fst.cpp(203): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+         e:\compil\lplab16\lplab16\in.cpp(37): warning C4018: <: несоответствие типов со знаком и без знака
          e:\compil\lplab16\lplab16\lexanaliz.cpp(104): warning C4018: <: несоответствие типов со знаком и без знака
          e:\compil\lplab16\lplab16\lexanaliz.cpp(134): warning C4018: <: несоответствие типов со знаком и без знака
          e:\compil\lplab16\lplab16\lexanaliz.cpp(284): warning C4018: <: несоответствие типов со знаком и без знака
@@ -118,8 +144,18 @@ windir = C:\WINDOWS
          e:\compil\lplab16\lplab16\lexanaliz.cpp(342): warning C4018: >=: несоответствие типов со знаком и без знака
          e:\compil\lplab16\lplab16\lexanaliz.cpp(352): warning C4018: <: несоответствие типов со знаком и без знака
          e:\compil\lplab16\lplab16\lexanaliz.cpp(354): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+         e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(72): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(41): warning C4715: FST::function: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(24): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(87): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(101): warning C4715: FST::print: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(56): warning C4715: FST::string: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(114): warning C4715: FST::main: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(128): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
 
-    Предупреждений: 13
+    Предупреждений: 25
     Ошибок: 0
 
-Прошло времени 00:00:04.45
+Прошло времени 00:00:14.83
