@@ -2,100 +2,34 @@
 
       Name           Type      Data type        First in LT                Value
 
-  0        fi       function        integer              2                        0              0
-<<<<<<< HEAD
-  1         x      parameter          error              5              0 1
-  2         y      parameter          error              8              0 1
-  3         z       variable          error             13              0 1
-  4        I0        literal        integer             23                        3              0 1
-  5        I1        literal        integer             25                        5              0 1
-  6        I2        literal        integer             32                        3              0 1
-  7        I3        literal        integer             34                        5              0 1
-  8        fs       function         string             44                       NV              0
-  9         a      parameter         string             47                       NV              0 2
- 10         b      parameter         string             50                       NV              0 2
- 11         c       variable         string             55                       NV              0 2
- 12    substr       function         string             60                       NV              0 2
- 13         p      parameter          error             66              0 2
- 14         n      parameter          error             69              0 2
- 15        I4        literal        integer             93                        0              0 2
- 16        I5        literal        integer             95                        1              0 2
- 17      main       function        integer             95                        0              0
- 18         x       variable         string            107                       NV              0 3
- 19         m       variable         string            111                       NV              0 3
- 20         y       variable          error            115              0 3
- 21         z       variable          error            119              0 3
- 22        sa       variable         string            123                       NV              0 3
- 23     wwwww       variable          short            127                        0              0 3
- 24         t       variable         string            131                       NV              0 3
- 25        sb       variable         string            135                       NV              0 3
- 26        sc       variable         string            139                       NV              0 3
- 27    strlen       function        integer            144                        0              0 3
- 28         p      parameter         string            147                       NV              0 3
- 29        I6        literal        integer            152                       19              0 3
- 30        I7        literal        integer            156                      999              0 3
- 31        I8        literal        integer            160                      111              0 3
- 32        I9        literal        integer            164                      123              0 3
- 33       I10        literal        integer            168                      123              0 3
- 34       I11        literal        integer            172                    11111              0 3
- 35       I12        literal        integer            176                       65              0 3
- 36       I13        literal        integer            180                       34              0 3
- 37       I14        literal        integer            184                       32              0 3
- 38       I15        literal        integer            188                       23              0 3
- 39       I16        literal        integer            192                      423              0 3
- 40       I17        literal        integer            196                        5              0 3
- 41        S0        literal         string            200             '1234567890'              0 3
- 42        S1        literal         string            204             '1234567890'              0 3
- 43       I18        literal        integer            226                      188              0 3
- 44        S2        literal         string            229     'контрольный пример'              0 3
- 45       I19        literal        integer            244                        0              0 3
-=======
-  1         x      parameter        integer              5                        0              0 1
-  2         y      parameter        integer              8                        0              0 1
-  3         z       variable        integer             13                        0              0 1
-  4    substr       function         string             18                       NV              0 1
-  5         a      parameter         string             21                       NV              0 1
-  6         p      parameter        integer             24                        0              0 1
-  7         n      parameter        integer             27                        0              0 1
-  8        I0        literal        integer             36                        1              0 1
-  9        I1        literal        integer             38                        3              0 1
- 10        I2        literal        integer             43                        3              0 1
- 11        I3        literal        integer             45                        5              0 1
- 12        I4        literal        integer             52                        3              0 1
- 13        I5        literal        integer             54                        5              0 1
- 14        fs       function         string             64                       NV              0
- 15         a      parameter         string             67                       NV              0 2
- 16         b      parameter         string             70                       NV              0 2
- 17         c       variable         string             75                       NV              0 2
- 18        I6        literal        integer             83                        1              0 2
- 19        I7        literal        integer             85                        3              0 2
- 20         x       variable        integer            103                        0              0
- 21      main       function        integer            103                        0              0
- 22         m       variable         string            113                       NV              0 3
- 23         y       variable        integer            117                        0              0 3
- 24         z       variable        integer            121                        0              0 3
- 25        sa       variable         string            125                       NV              0 3
- 26     wwwww       variable          short            129                        0              0 3
- 27         t       variable         string            133                       NV              0 3
- 28        sb       variable         string            137                       NV              0 3
- 29        sc       variable         string            141                       NV              0 3
- 30    strlen       function        integer            146                        0              0 3
- 31         p      parameter         string            149                       NV              0 3
- 32        I8        literal        integer            154                       19              0 3
- 33        I9        literal        integer            158                      999              0 3
- 34       I10        literal        integer            162                      111              0 3
- 35       I11        literal        integer            166                      123              0 3
- 36       I12        literal        integer            170                      123              0 3
- 37       I13        literal        integer            174                    11111              0 3
- 38       I14        literal        integer            178                       65              0 3
- 39       I15        literal        integer            182                       34              0 3
- 40       I16        literal        integer            186                       32              0 3
- 41       I17        literal        integer            190                       23              0 3
- 42       I18        literal        integer            194                      423              0 3
- 43       I19        literal        integer            198                        5              0 3
- 44        S0        literal         string            202             '1234567890'              0 3
- 45        S1        literal         string            206             '1234567890'              0 3
- 46       I20        literal        integer            228                      188              0 3
- 47        S2        literal         string            231     'контрольный пример'              0 3
- 48       I21        literal        integer            246                        0              0 3
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+  0        fi       function          short              2                        0              0
+  1         x      parameter         string              5                       NV              0 1
+  2         y      parameter         string              8                       NV              0 1
+  3         z       variable         string             13                       NV              0 1
+  4        fs       function          short             28                        0              0
+  5         a      parameter         string             31                       NV              0 2
+  6         b      parameter         string             34                       NV              0 2
+  7         c       variable         string             39                       NV              0 2
+  8    substr       function          short             44                        0              0 2
+  9         p      parameter         string             50                       NV              0 2
+ 10         n      parameter         string             53                       NV              0 2
+ 11        I0        literal        integer             62                        1              0 2
+ 12        I1        literal        integer             64                        3              0 2
+ 13      main       function        integer             64                        0              0
+ 14         x       variable         string             84                       NV              0 3
+ 15         m       variable         string             88                       NV              0 3
+ 16         y       variable         string             92                       NV              0 3
+ 17         z       variable         string             96                       NV              0 3
+ 18        sa       variable         string            100                       NV              0 3
+ 19     wwwww       variable         string            104                       NV              0 3
+ 20         t       variable         string            108                       NV              0 3
+ 21        sb       variable         string            112                       NV              0 3
+ 22        sc       variable         string            116                       NV              0 3
+ 23    strlen       function          short            121                        0              0 3
+ 24         p      parameter         string            124                       NV              0 3
+ 25        I2        literal        integer            129                        5              0 3
+ 26        S0        literal         string            133             '1234567890'              0 3
+ 27        S1        literal         string            137             '1234567890'              0 3
+ 28        I3        literal        integer            159                      188              0 3
+ 29        S2        literal         string            162     'контрольный пример'              0 3
+ 30        I4        literal        integer            177                        0              0 3

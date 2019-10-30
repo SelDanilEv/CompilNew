@@ -3,13 +3,8 @@
 #define LT_MAXSIZE		4096		// максимальное количество строк в таблице лексем
 #define LT_TI_NULLIDX	0xfffffff	// нет элемента таблицы идентификаторов
 #define LEX_INTEGER		't'	// лексема для integer
-<<<<<<< HEAD
-#define LEX_STRING		's'	// лексема для string      |s
-#define LEX_SHORT		'q'	// лексема для short       |q
-=======
-#define LEX_STRING		's'	// лексема для string
-#define LEX_SHORT		'q'	// лексема для short
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+#define LEX_STRING		't'	// лексема для string
+#define LEX_SHORT		't'	// лексема для short
 #define LEX_ID			'i'	// лексема для идентификатора
 #define LEX_LITERAL		'l'	// лексема для литерала
 #define LEX_FUNCTION	'f'	// лексема для function

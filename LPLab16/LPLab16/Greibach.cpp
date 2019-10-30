@@ -1,16 +1,10 @@
 #include "pch.h"
-<<<<<<< HEAD
-=======
 #include <cstring>
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 #include "Rule.h"
 
 namespace GRB
 {
-<<<<<<< HEAD
-=======
 
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 	Rule::Chain::Chain(short psize, GRBALPHABET s, ...)	// конструктор
 	{
 		nt = new GRBALPHABET[size = psize];
@@ -37,10 +31,7 @@ namespace GRB
 	};
 
 	Greibach getGreibach() { return greibach; };
-<<<<<<< HEAD
-=======
 
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 	short Greibach::getRule(GRBALPHABET pnn, Rule& prule) // получить правило, возвращающая номер правила или -1
 	{
 		short rc = -1;
@@ -81,5 +72,4 @@ namespace GRB
 		b[size] = 0x00;
 		return b;
 	};
-
 }

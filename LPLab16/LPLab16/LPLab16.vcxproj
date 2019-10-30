@@ -20,11 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-<<<<<<< HEAD
-    <ProjectGuid>{AA669B6F-DD0D-4650-82B5-4EEEC490B12B}</ProjectGuid>
-=======
-    <ProjectGuid>{2B8FF4FD-D151-46BF-8FE7-B246686AD294}</ProjectGuid>
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+    <ProjectGuid>{C2CE5228-9F6D-49DD-B640-231A51939920}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LPLab16</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -157,10 +153,6 @@
   <ItemGroup>
     <ClInclude Include="Error.h" />
     <ClInclude Include="FST.h" />
-<<<<<<< HEAD
-=======
-    <ClInclude Include="Graphs.h" />
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
     <ClInclude Include="Greibach.h" />
     <ClInclude Include="In.h" />
     <ClInclude Include="IT.h" />

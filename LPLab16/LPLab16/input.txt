@@ -1,31 +1,17 @@
 integer function fi(integer x, integer y) 
 {
 declare integer z;
-<<<<<<< HEAD
-z = x+y+y*3+5*x-y/(3+5);
-=======
-declare string function substr(string a, integer p,integer n);
-z = substr(x, 1,3)+y*3+5*x-y/(3+5);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+z= x+y;
 return z;
 };
 
 string function fs (string a, string b) 
 {
 declare string c;
-<<<<<<< HEAD
 declare string function substr(string a, integer p,integer n);
-c = substr(a)+ (a*b-b)/a - substr(b, 0,1);
-return c;
-};
-
-=======
 c = substr(a, 1,3)+ (b-a*b);
 return c;
 };
-
-declare integer x;
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 
 main 
 {
@@ -39,17 +25,6 @@ declare string t;
 declare string sb;
 declare string sc;
 declare integer function strlen(string p);
-x = 19;
-m=999;
-m=111;
-m=123;
-t=123;
-t=11111;
-t=65;
-y=34;
-t=32;
-t=23;
-m=423;
 y = 5;
 sa ='1234567890';
 sb ='1234567890';

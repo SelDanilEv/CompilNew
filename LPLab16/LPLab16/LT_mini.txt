@@ -3,55 +3,30 @@
 tfi(ti,ti)
 {
 dti;
-<<<<<<< HEAD
-i=ivivivlvlviviv(lvl);
-=======
-dsfi(si,ti,ti);
-i=i(i,l,l)vivlvlviviv(lvl);
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+i=ivi;
 ri;
 };
 
-sfi(si,si)
+tfi(ti,ti)
 {
-dsi;
-<<<<<<< HEAD
-dsfi(si,ti,ti);
-i=i(i)v(ivivi)vivi(i,l,l);
-ri;
-};
-
-=======
+dti;
+dtfi(ti,ti,ti);
 i=i(i,l,l)v(ivivi);
 ri;
 };
 
-dti;
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
-
 m
 {
-dsi;
-dsi;
 dti;
 dti;
-dsi;
-dqi;
-dsi;
-dsi;
-dsi;
-dtfi(si);
-i=l;
-i=l;
-i=l;
-i=l;
-i=l;
-i=l;
-i=l;
-i=l;
-i=l;
-i=l;
-i=l;
+dti;
+dti;
+dti;
+dti;
+dti;
+dti;
+dti;
+dtfi(ti);
 i=l;
 i=l;
 i=l;

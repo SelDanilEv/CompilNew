@@ -1,8 +1,5 @@
 #include "pch.h"
-<<<<<<< HEAD
-=======
 #include <iomanip>
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 
 namespace IT
 {

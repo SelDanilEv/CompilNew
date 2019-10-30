@@ -33,11 +33,7 @@
 #define MFST_TRACE4(c)	std::cout << std::setw(4) << std::left << ++FST_TRACE_n << ": " << std::setw(20) << std::left << c <<std::endl; 
 #define MFST_TRACE5(c)	std::cout << std::setw(4) << std::left << FST_TRACE_n << ": " << std::setw(20) << std::left << c << std::endl; 
 #define MFST_TRACE6(c, k)	std::cout << std::setw(4) << std::left << FST_TRACE_n << ": " << std::setw(20) << std::left << c << k << std::endl; 
-<<<<<<< HEAD
-#define MFST_TRACE7		std::cout << '\n' << std::setw(4) << std::left << state.lenta_position << ": " \
-=======
 #define MFST_TRACE7		std::cout << std::setw(4) << std::left << state.lenta_position << ": " \
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 								  << std::setw(20) << std::left << rule.getCRule(rbuf, state.nrulechain) \
 								  << std::endl;
 

@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-﻿Сборка начата 25.10.2019 18:02:13.
+﻿Сборка начата 30.10.2019 21:51:31.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-=======
-﻿Сборка начата 29.10.2019 23:48:49.
-Окружение на момент начала сборки:
-ALLUSERSPROFILE = C:\ProgramData
-APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:1668 = 0F9B77D0
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -44,14 +36,8 @@ ProgramData = C:\ProgramData
 ProgramFiles = C:\Program Files (x86)
 ProgramFiles(x86) = C:\Program Files (x86)
 ProgramW6432 = C:\Program Files
-<<<<<<< HEAD
 PSModulePath = %ProgramFiles%\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 PUBLIC = C:\Users\Public
-=======
-PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
-PUBLIC = C:\Users\Public
-SESSIONNAME = Console
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
 SystemDrive = C:
 SystemRoot = C:\WINDOWS
 TEMP = C:\Users\USER\AppData\Local\Temp
@@ -75,58 +61,26 @@ windir = C:\WINDOWS
 
      1>Проект "E:\Compil\LPLab16\LPLab16\LPLab16.vcxproj" в узле 2 (целевые объекты Build).
      1>InitializeBuildStatus:
-<<<<<<< HEAD
          Создание "Debug\LPLab16.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt pch.cpp
-         pch.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Error.cpp FST.cpp Greibach.cpp IT.cpp In.cpp LT.cpp LexAnaliz.cpp Log.cpp MFST.cpp Main.cpp Parm.cpp PolishNotation.cpp
-         Error.cpp
-         FST.cpp
-     1>e:\compil\lplab16\lplab16\fst.cpp(197): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-         Greibach.cpp
-         IT.cpp
-         In.cpp
-     1>e:\compil\lplab16\lplab16\in.cpp(30): warning C4018: <: несоответствие типов со знаком и без знака
-         LT.cpp
-         LexAnaliz.cpp
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(95): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(124): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(276): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(281): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(283): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(288): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(290): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(326): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(328): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(332): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(334): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(344): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(346): warning C4018: >=: несоответствие типов со знаком и без знака
-         Log.cpp
-         MFST.cpp
-     1>e:\compil\lplab16\lplab16\mfst.cpp(234): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
-         Main.cpp
-         Parm.cpp
-         PolishNotation.cpp
-         Создание кода...
-     1>e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(18): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(66): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(35): warning C4715: FST::function: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(50): warning C4715: FST::string: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(81): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(95): warning C4715: FST::print: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(108): warning C4715: FST::main: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(122): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
-=======
-         Обращение к "Debug\LPLab16.tlog\unsuccessfulbuild".
-       ClCompile:
          Для всех выходных данных обновления не требуется.
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt MFST.cpp
-         MFST.cpp
-     1>e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Greibach.cpp LexAnaliz.cpp
+         Greibach.cpp
+         LexAnaliz.cpp
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(104): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(134): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(284): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(289): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(291): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(296): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(298): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(334): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(336): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(340): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(342): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(352): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(354): warning C4018: >=: несоответствие типов со знаком и без знака
+         Создание кода...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\LPLab16\Debug\LPLab16.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\LPLab16\Debug\LPLab16.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\LPLab16\Debug\LPLab16.lib" /MACHINE:X86 Debug\Error.obj
          Debug\FST.obj
@@ -151,42 +105,21 @@ windir = C:\WINDOWS
 
        "E:\Compil\LPLab16\LPLab16\LPLab16.vcxproj" (целевой объект Build ) (1) ->
        (ClCompile конечный объект) -> 
-<<<<<<< HEAD
-         e:\compil\lplab16\lplab16\fst.cpp(197): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-         e:\compil\lplab16\lplab16\in.cpp(30): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(95): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(124): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(276): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(281): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(283): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(288): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(290): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(326): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(328): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(332): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(334): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(344): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(346): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\mfst.cpp(234): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
-         e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(18): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(66): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(35): warning C4715: FST::function: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(50): warning C4715: FST::string: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(81): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(95): warning C4715: FST::print: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(108): warning C4715: FST::main: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(122): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(104): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(134): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(284): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(289): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(291): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(296): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(298): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(334): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(336): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(340): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(342): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(352): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\lexanaliz.cpp(354): warning C4018: >=: несоответствие типов со знаком и без знака
 
-    Предупреждений: 25
+    Предупреждений: 13
     Ошибок: 0
 
-Прошло времени 00:00:30.24
-=======
-         e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
-
-    Предупреждений: 1
-    Ошибок: 0
-
-Прошло времени 00:00:03.54
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
+Прошло времени 00:00:04.45

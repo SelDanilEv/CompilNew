@@ -18,46 +18,40 @@
     <ClInclude Include="pch.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Rule.h">
+    <ClInclude Include="Error.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="PolishNotation.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Parm.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="MFST.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="LT.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="LexAnaliz.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IT.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="In.h">
+    <ClInclude Include="FST.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Greibach.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
-    <ClInclude Include="Graphs.h">
+    <ClInclude Include="In.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
-    <ClInclude Include="FST.h">
+    <ClInclude Include="IT.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Error.h">
+    <ClInclude Include="LexAnaliz.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="LT.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="MFST.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Parm.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="PolishNotation.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,15 +59,21 @@
     <ClCompile Include="pch.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="MFST.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Parm.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="PolishNotation.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
     <ClCompile Include="Error.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="FST.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-=======
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
     <ClCompile Include="Greibach.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -95,23 +95,5 @@
     <ClCompile Include="Main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="MFST.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Parm.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PolishNotation.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-=======
-    <ClCompile Include="Error.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="FST.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
->>>>>>> 13b98efb756c1661bac5503f09b570e4133522f2
   </ItemGroup>
 </Project>
