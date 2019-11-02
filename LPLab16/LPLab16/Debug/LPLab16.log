@@ -1,7 +1,8 @@
-﻿Сборка начата 30.10.2019 22:07:58.
+﻿Сборка начата 01.11.2019 21:07:50.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
+BTK_BASELIBCTX:10968 = 11B2FE30
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -36,8 +37,9 @@ ProgramData = C:\ProgramData
 ProgramFiles = C:\Program Files (x86)
 ProgramFiles(x86) = C:\Program Files (x86)
 ProgramW6432 = C:\Program Files
-PSModulePath = %ProgramFiles%\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 PUBLIC = C:\Users\Public
+SESSIONNAME = Console
 SystemDrive = C:
 SystemRoot = C:\WINDOWS
 TEMP = C:\Users\USER\AppData\Local\Temp
@@ -96,14 +98,14 @@ windir = C:\WINDOWS
          PolishNotation.cpp
          Создание кода...
      1>e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(72): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(41): warning C4715: FST::function: значение возвращается не при всех путях выполнения
      1>e:\compil\lplab16\lplab16\fst.cpp(24): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(41): warning C4715: FST::function: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(72): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
      1>e:\compil\lplab16\lplab16\fst.cpp(87): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
      1>e:\compil\lplab16\lplab16\fst.cpp(101): warning C4715: FST::print: значение возвращается не при всех путях выполнения
-     1>e:\compil\lplab16\lplab16\fst.cpp(56): warning C4715: FST::string: значение возвращается не при всех путях выполнения
      1>e:\compil\lplab16\lplab16\fst.cpp(114): warning C4715: FST::main: значение возвращается не при всех путях выполнения
      1>e:\compil\lplab16\lplab16\fst.cpp(128): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
+     1>e:\compil\lplab16\lplab16\fst.cpp(56): warning C4715: FST::string: значение возвращается не при всех путях выполнения
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\LPLab16\Debug\LPLab16.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\LPLab16\Debug\LPLab16.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\LPLab16\Debug\LPLab16.lib" /MACHINE:X86 Debug\Error.obj
          Debug\FST.obj
@@ -118,7 +120,6 @@ windir = C:\WINDOWS
          Debug\Parm.obj
          Debug\pch.obj
          Debug\PolishNotation.obj
-         LINK : не найден или не выполнена сборка E:\Compil\LPLab16\Debug\LPLab16.exe при последней инкрементной компоновке; выполняется полная компоновка
          LPLab16.vcxproj -> E:\Compil\LPLab16\Debug\LPLab16.exe
        FinalizeBuildStatus:
          Файл "Debug\LPLab16.tlog\unsuccessfulbuild" удаляется.
@@ -146,16 +147,16 @@ windir = C:\WINDOWS
          e:\compil\lplab16\lplab16\lexanaliz.cpp(354): warning C4018: >=: несоответствие типов со знаком и без знака
          e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
          e:\compil\lplab16\lplab16\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(72): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(41): warning C4715: FST::function: значение возвращается не при всех путях выполнения
          e:\compil\lplab16\lplab16\fst.cpp(24): warning C4715: FST::integer: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(41): warning C4715: FST::function: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(72): warning C4715: FST::declare: значение возвращается не при всех путях выполнения
          e:\compil\lplab16\lplab16\fst.cpp(87): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
          e:\compil\lplab16\lplab16\fst.cpp(101): warning C4715: FST::print: значение возвращается не при всех путях выполнения
-         e:\compil\lplab16\lplab16\fst.cpp(56): warning C4715: FST::string: значение возвращается не при всех путях выполнения
          e:\compil\lplab16\lplab16\fst.cpp(114): warning C4715: FST::main: значение возвращается не при всех путях выполнения
          e:\compil\lplab16\lplab16\fst.cpp(128): warning C4715: FST::Short: значение возвращается не при всех путях выполнения
+         e:\compil\lplab16\lplab16\fst.cpp(56): warning C4715: FST::string: значение возвращается не при всех путях выполнения
 
     Предупреждений: 25
     Ошибок: 0
 
-Прошло времени 00:00:14.83
+Прошло времени 00:00:12.14

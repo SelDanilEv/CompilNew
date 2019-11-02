@@ -435,6 +435,9 @@ namespace LexA
 		system("pause");
 		mfst.start();
 		std::cout << "\n\n";
+
+		//mfst.savededucation();
+		MFST_TRACE1
 		mfst.printrules();
 		system("pause");
 
