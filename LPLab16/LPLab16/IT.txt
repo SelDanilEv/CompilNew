@@ -2,34 +2,7 @@
 
       Name           Type      Data type        First in LT                Value
 
-  0        fi       function          short              2                        0              0
-  1         x      parameter         string              5                       NV              0 1
-  2         y      parameter         string              8                       NV              0 1
+  0        fi       function         string              2                       NV              0
+  1         x      parameter        integer              5                        0              0 1
+  2         y      parameter        integer              8                        0              0 1
   3         z       variable         string             13                       NV              0 1
-  4        fs       function          short             28                        0              0
-  5         a      parameter         string             31                       NV              0 2
-  6         b      parameter         string             34                       NV              0 2
-  7         c       variable         string             39                       NV              0 2
-  8    substr       function          short             44                        0              0 2
-  9         p      parameter         string             50                       NV              0 2
- 10         n      parameter         string             53                       NV              0 2
- 11        I0        literal        integer             62                        1              0 2
- 12        I1        literal        integer             64                        3              0 2
- 13      main       function        integer             64                        0              0
- 14         x       variable         string             84                       NV              0 3
- 15         m       variable         string             88                       NV              0 3
- 16         y       variable         string             92                       NV              0 3
- 17         z       variable         string             96                       NV              0 3
- 18        sa       variable         string            100                       NV              0 3
- 19     wwwww       variable         string            104                       NV              0 3
- 20         t       variable         string            108                       NV              0 3
- 21        sb       variable         string            112                       NV              0 3
- 22        sc       variable         string            116                       NV              0 3
- 23    strlen       function          short            121                        0              0 3
- 24         p      parameter         string            124                       NV              0 3
- 25        I2        literal        integer            129                        5              0 3
- 26        S0        literal         string            133             '1234567890'              0 3
- 27        S1        literal         string            137             '1234567890'              0 3
- 28        I3        literal        integer            159                      188              0 3
- 29        S2        literal         string            162     'контрольный пример'              0 3
- 30        I4        literal        integer            177                        0              0 3

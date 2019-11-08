@@ -16,11 +16,22 @@ namespace LexA
 	struct MyAutomat                       //структура для автоматов
 	{
 		int automat[20];                        //массив автоматов
-		char lexema[18] = { LEX_ID,LEX_INTEGER,LEX_STRING,
-			LEX_FUNCTION,LEX_DECLARE,LEX_RETURN,LEX_PRINT,
-			LEX_MAIN ,LEX_SEMICOLON,LEX_COMMA,LEX_LEFTBRACE,
-			LEX_RIGHTBRACE,LEX_LEFTTHESIS,LEX_RIGHTTHESIS,
-			LEX_EQUAL,LEX_PLUS,LEX_LITERAL,LEX_SHORT };
+		char lexema[18] = { 
+			LEX_ID,LEX_INTEGER,LEX_STRING,
+			LEX_FUNCTION,LEX_DECLARE,LEX_RETURN,
+			LEX_PRINT,LEX_MAIN ,LEX_SEMICOLON,
+			LEX_COMMA,LEX_LEFTBRACE,LEX_RIGHTBRACE,
+			LEX_LEFTTHESIS,LEX_RIGHTTHESIS,LEX_EQUAL,
+			LEX_PLUS,LEX_LITERAL,LEX_SHORT,
+		};
+		char value[18] = { 
+			' ','i','s',
+			' ',' ',' ',
+			' ',' ',' ',
+			' ',' ',' ',
+			' ',' ',' ',
+			' ',' ','q',
+		};
 	}automats;
 
 
@@ -59,8 +70,10 @@ namespace LexA
 	IT::IDTYPE idtype;
 
 	void addNewInIT(IT::IdTable &myidtable, LT::LexTable &mylextable) {
+
 		idtype = IT::E;
 		iddatatype = IT::Err;
+
 		if ((LT::GetEntry(mylextable, mylextable.size - 1)).lexema == LEX_FUNCTION)
 			idtype = IT::F;
 		else
@@ -72,26 +85,26 @@ namespace LexA
 
 		if (idtype == IT::F)
 		{
-			if ((LT::GetEntry(mylextable, mylextable.size - 2)).lexema == LEX_INTEGER)
+			if ((LT::GetEntry(mylextable, mylextable.size - 2)).value == 'i')
 				iddatatype = IT::INT;
-			if ((LT::GetEntry(mylextable, mylextable.size - 2)).lexema == LEX_STRING)
+			if ((LT::GetEntry(mylextable, mylextable.size - 2)).value == 's')
 				iddatatype = IT::STR;
-			if ((LT::GetEntry(mylextable, mylextable.size - 2)).lexema == LEX_SHORT)
+			if ((LT::GetEntry(mylextable, mylextable.size - 2)).value == 'q')
 				iddatatype = IT::SHR;
 		}
 		else
 		{
-			if ((LT::GetEntry(mylextable, mylextable.size - 1)).lexema == LEX_INTEGER)
+			if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == 'i')
 			{
 				iddatatype = IT::INT;
 				myentryI.value.vint = 0;
 			}
-			if ((LT::GetEntry(mylextable, mylextable.size - 1)).lexema == LEX_SHORT)
+			if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == 's')
 			{
 				iddatatype = IT::SHR;
 				myentryI.value.vshr = 0;
 			}
-			if ((LT::GetEntry(mylextable, mylextable.size - 1)).lexema == LEX_STRING)
+			if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == 'q')
 			{
 				iddatatype = IT::STR;
 				myentryI.value.vstr.len = 0;
@@ -128,7 +141,6 @@ namespace LexA
 		char symvols[] = ";,{}()+-*/=\n";                          //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
 		currentLine = 0;
-
 		int LexInIT;                                      // какая строка в IT для лексемы
 
 		for (int counter = 0; counter < fulltext.size(); counter++)      //парсер для текста
@@ -194,7 +206,6 @@ namespace LexA
 			{
 				currentLine++;
 			}
-
 			char temp = onelex[i][0];                          //первая буква лексемы
 			str = onelex[i];
 			identifyLex = 0;
@@ -203,7 +214,7 @@ namespace LexA
 			if (temp == '1' || temp == '2' || temp == '3' || temp == '4' || temp == '5' || temp == '6' || temp == '7' || temp == '8' || temp == '9' || temp == '0' || temp == '\'')lex[0] = 16; else {
 				switch (temp)       //определение возможного типа лексемы
 				{
-				case LEX_ID:
+				case 'i':
 					lex[0] = 1;
 					break;
 				case 's':
@@ -417,6 +428,7 @@ namespace LexA
 				}
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
 				myentryL.lexema = automats.lexema[identifyLex];
+				myentryL.value = automats.value[identifyLex];
 				myentryL.sn = currentLine;
 				LT::Add(myTables.mylextable, myentryL);
 				myentryL.value = SPACE;
@@ -432,11 +444,13 @@ namespace LexA
 
 		MFST::Mfst mfst(myTables, GRB::getGreibach());
 
-		system("pause");
+		//system("pause");
 		mfst.start();
 		std::cout << "\n\n";
+
+		////mfst.savededucation();
 		mfst.printrules();
-		system("pause");
+		//system("pause");
 
 		std::ofstream fileLT;               //формрирование файлов таблиц
 		fileLT.open("LT.txt");
