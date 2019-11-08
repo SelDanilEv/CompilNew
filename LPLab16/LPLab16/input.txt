@@ -1,6 +1,6 @@
-integer function fi(integer x, integer y) 
+string function fi(integer x, integer y) 
 {
-declare integer z;
+declare short z;
 z= x+y;
 return z;
 };

@@ -33,7 +33,7 @@ namespace LT		// таблица лексем
 	struct Entry	// строка таблицы лексем
 	{
 		unsigned char lexema;	// лексема
-		char value;
+		char value;             // значение
 		int sn;							// номер строки в исходном тексте
 		int idxTI;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
 		int index;						// индекс для польской записи
