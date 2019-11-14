@@ -1,8 +1,7 @@
-﻿Сборка начата 07.11.2019 21:23:34.
+﻿Сборка начата 08.11.2019 18:51:10.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:19476 = 117B3040
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -66,21 +65,9 @@ windir = C:\WINDOWS
          Создание "Debug\LPLab16.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
          Для всех выходных данных обновления не требуется.
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt LexAnaliz.cpp
-         LexAnaliz.cpp
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(117): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(146): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(295): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(300): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(302): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(307): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(309): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(345): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(347): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(351): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(353): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(363): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\lplab16\lplab16\lexanaliz.cpp(365): warning C4018: >=: несоответствие типов со знаком и без знака
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\LPLab16.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt MFST.cpp
+         MFST.cpp
+     1>e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\LPLab16\Debug\LPLab16.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\LPLab16\Debug\LPLab16.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\LPLab16\Debug\LPLab16.lib" /MACHINE:X86 Debug\Error.obj
          Debug\FST.obj
@@ -105,21 +92,9 @@ windir = C:\WINDOWS
 
        "E:\Compil\LPLab16\LPLab16\LPLab16.vcxproj" (целевой объект Build ) (1) ->
        (ClCompile конечный объект) -> 
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(117): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(146): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(295): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(300): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(302): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(307): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(309): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(345): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(347): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(351): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(353): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(363): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\lplab16\lplab16\lexanaliz.cpp(365): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\lplab16\lplab16\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
 
-    Предупреждений: 13
+    Предупреждений: 1
     Ошибок: 0
 
-Прошло времени 00:00:02.06
+Прошло времени 00:00:05.05

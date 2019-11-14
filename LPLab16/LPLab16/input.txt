@@ -1,8 +1,9 @@
 string function fi(integer x, integer y) 
-{
+{;
 declare short z;
 z= x+y;
 return z;
+return 3;
 };
 
 

@@ -16,7 +16,7 @@ namespace LexA
 	struct MyAutomat                       //структура для автоматов
 	{
 		int automat[20];                        //массив автоматов
-		char lexema[18] = { 
+		char lexema[18] = {
 			LEX_ID,LEX_INTEGER,LEX_STRING,
 			LEX_FUNCTION,LEX_DECLARE,LEX_RETURN,
 			LEX_PRINT,LEX_MAIN ,LEX_SEMICOLON,
@@ -24,7 +24,7 @@ namespace LexA
 			LEX_LEFTTHESIS,LEX_RIGHTTHESIS,LEX_EQUAL,
 			LEX_PLUS,LEX_LITERAL,LEX_SHORT,
 		};
-		char value[18] = { 
+		char value[18] = {
 			' ','i','s',
 			' ',' ',' ',
 			' ',' ',' ',
@@ -134,14 +134,15 @@ namespace LexA
 	void analyze(int currentLine, char *fulltextch)                         //функция анализа
 	{
 		Tables myTables;
-
+				
 		std::string fulltext = fulltextch;                         //исходный текст
-		std::string onelex[250];                                 //массив лексем(будущий)
+		std::string onelex[300];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
-		char symvols[] = ";,{}()+-*/=\n";                          //символы сепараторы
+		char symvols[] = ";,{}()+-*/=\n\t";                        //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
 		currentLine = 0;
 		int LexInIT;                                      // какая строка в IT для лексемы
+
 
 		for (int counter = 0; counter < fulltext.size(); counter++)      //парсер для текста
 		{
@@ -158,8 +159,8 @@ namespace LexA
 							counter++;
 						} while (fulltext[counter - 1] != '\'');
 					else
-						throw ERROR_THROW(444)    //переписать ошибку
-						counter--;
+						throw ERROR_THROW(444);    //переписать ошибку
+					counter--;
 				}
 				else
 				{
@@ -439,18 +440,16 @@ namespace LexA
 		//polishNotation(62,myTables.mylextable,myTables.myidtable);
 
 
-		
+
 		MFST_TRACE_START
 
-		MFST::Mfst mfst(myTables, GRB::getGreibach());
+			MFST::Mfst mfst(myTables, GRB::getGreibach());
 
-		//system("pause");
 		mfst.start();
 		std::cout << "\n\n";
 
-		////mfst.savededucation();
+		mfst.savededucation();
 		mfst.printrules();
-		//system("pause");
 
 		std::ofstream fileLT;               //формрирование файлов таблиц
 		fileLT.open("LT.txt");
@@ -467,7 +466,7 @@ namespace LexA
 		IT::showTable(myTables.myidtable, fileIT);
 		fileIT.close();
 
-		std::cout << "End of LexAnaliz\n";
+		std::cout << "\nEnd of LexAnaliz\n\n";
 		system("pause");
 	}
 }
