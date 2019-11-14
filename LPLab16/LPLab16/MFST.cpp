@@ -7,7 +7,7 @@
 int FST_TRACE_n = -1;
 char rbuf[205],		// для правила
 sbuf[205],		// для стека
-lbuf[1024];	// для ленты
+lbuf[1024];	    // для ленты
 
 namespace MFST
 {
