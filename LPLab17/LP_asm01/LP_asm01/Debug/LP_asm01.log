@@ -1,8 +1,8 @@
-﻿Сборка начата 14.11.2019 11:53:15.
+﻿Сборка начата 15.11.2019 17:41:37.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:9116 = 117A93E8
+BTK_BASELIBCTX:13484 = 0D755428
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -27,7 +27,7 @@ OneDrive = C:\Users\USER\OneDrive
 OS = Windows_NT
 Path = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\install\AOMEI Backupper;C:\Program Files\Java\jdk-10.0.1\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\install\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\atom\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\.dotnet\tools
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
-PkgDefApplicationConfigFile = C:\Users\USER\AppData\Local\Microsoft\VisualStudio\15.0_3403365a\devenv.exe.config
+PkgDefApplicationConfigFile = C:\Users\USER\AppData\Local\Temp\dev52A8.tmp
 PROCESSOR_ARCHITECTURE = x86
 PROCESSOR_ARCHITEW6432 = AMD64
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
@@ -37,8 +37,9 @@ ProgramData = C:\ProgramData
 ProgramFiles = C:\Program Files (x86)
 ProgramFiles(x86) = C:\Program Files (x86)
 ProgramW6432 = C:\Program Files
-PSModulePath = %ProgramFiles%\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 PUBLIC = C:\Users\Public
+SESSIONNAME = Console
 SystemDrive = C:
 SystemRoot = C:\WINDOWS
 TEMP = C:\Users\USER\AppData\Local\Temp
@@ -62,10 +63,10 @@ windir = C:\WINDOWS
 
      1>Проект "E:\Compil\LPLab17\LP_asm01\LP_asm01\LP_asm01.vcxproj" в узле 2 (целевые объекты Build).
      1>InitializeBuildStatus:
-         Обращение к "Debug\LP_asm01.tlog\unsuccessfulbuild".
+         Создание "Debug\LP_asm01.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        _MASM:
          Assembling Main.asm...
-         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmp9af7f0371b104b8e858a803acdfe5843.cmd"
+         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmp2cf096d6b6144cafb56d8ca08e2c42c4.cmd"
          ml.exe /c /nologo /Zi /Fo"Debug\Main.obj" /W3 /errorReport:prompt  /TaMain.asm
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\LPLab17\LP_asm01\Debug\LP_asm01.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\LPLab17\LP_asm01\Debug\LP_asm01.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\LPLab17\LP_asm01\Debug\LP_asm01.lib" /MACHINE:X86 Debug\Main.obj
@@ -79,4 +80,4 @@ windir = C:\WINDOWS
     Предупреждений: 0
     Ошибок: 0
 
-Прошло времени 00:00:02.82
+Прошло времени 00:00:02.05

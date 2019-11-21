@@ -1,0 +1,17 @@
+===========LEX TABLE mini==============
+
+tfi(ti,ti)
+{
+dti;
+dtfi(ti,ti,ti);
+i=i(i,l,l)vivlvlviviv(lvl);
+ri;
+};
+
+m
+{
+dti;
+dti;
+i=l;
+rl;
+}

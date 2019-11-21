@@ -1,7 +1,6 @@
 .586
 .MODEL flat, stdcall
 includelib kernel32.lib
-includelib msvcrt.lib
 includelib libucrt.lib
 
 system            PROTO C :DWORD           ;вывод cmd - команды
@@ -10,8 +9,6 @@ SetConsoleTitleA   PROTO :DWORD      ; установить заголовок окна консоли
 GetStdHandle       PROTO :DWORD      ; получить handle вывода на консоль
 WriteConsoleA      PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD ; вывод на консоль
 
-includelib "..\Debug\LP_asm01a.lib"
-includelib LP_asm01a.lib
 
 getmin	           PROTO :DWORD, :DWORD
 getmax	           PROTO :DWORD, :DWORD
@@ -151,8 +148,8 @@ START:													; метка старта
     push offset space					
     call printconsole
 	;---------------------------------------
-	mov eax,max
-	sub eax,min
+	mov eax,min
+	sub eax,max
 
 	push eax                   ; исходное число
     push offset result3        ; место для результата

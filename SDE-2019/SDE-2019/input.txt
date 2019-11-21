@@ -1,0 +1,17 @@
+integer function fi(integer x, integer y) 
+{
+declare integer z;
+declare string function substr(string a, integer p,integer n);
+z = substr(x, 1,3)+y*3+5*x-y/(3+5);
+return z;
+};
+
+main 
+{
+declare integer z;
+declare string x;
+x = 'new string';
+return 0;
+}
+
+
