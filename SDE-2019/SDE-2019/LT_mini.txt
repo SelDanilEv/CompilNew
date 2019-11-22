@@ -2,16 +2,13 @@
 
 tfi(ti,ti)
 {
-dti;
-dtfi(ti,ti,ti);
-i=i(i,l,l)vivlvlviviv(lvl);
+nti;
 ri;
 };
 
-m
+s
 {
-dti;
-dti;
+nti;
 i=l;
 rl;
 }

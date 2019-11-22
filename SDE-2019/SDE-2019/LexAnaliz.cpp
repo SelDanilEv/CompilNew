@@ -16,7 +16,7 @@ namespace LexA
 	struct MyAutomat                       //структура для автоматов
 	{
 		int automat[7];                        //массив автоматов
-		
+
 		char lexema[17] = {
 			LEX_LITTLE,LEX_TEXT,LEX_FUNCTION,
 			LEX_START,LEX_NEW,LEX_RETURN,
@@ -49,6 +49,14 @@ namespace LexA
 		automats.automat[4] = FST::New((char*)str.c_str());
 		automats.automat[5] = FST::Return((char*)str.c_str());
 		automats.automat[6] = FST::print((char*)str.c_str());
+	}
+
+	void addToLT(int identifyLex,int currentLine,LT::LexTable &lextable,LT::Entry entryL)
+	{
+		entryL.lexema = automats.lexema[identifyLex];
+		entryL.value = automats.value[identifyLex];
+		entryL.sn = currentLine;
+		LT::Add(lextable, entryL);
 	}
 
 	unsigned char buff_name[ID_MAXSIZE];            //для идентификаторов
@@ -156,10 +164,8 @@ namespace LexA
 						{
 							onelex[amountOfLex] += fulltext[counter];
 							counter++;
-						} while (fulltext[counter - 1] != '\'');
-					else
-						throw ERROR_THROW_IN(125, currentLine, 0);    //переписать ошибку
-					counter--;
+						} while (fulltext[counter - 1] != '\'' && (fulltext[counter - 1] != '\n'));
+						counter--;
 				}
 				else
 				{
@@ -210,7 +216,7 @@ namespace LexA
 			str = onelex[i];
 			identifyLex = 0;
 			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/)
-			lex[0] = 0; lex[1] = 0; lex[2] = 0;
+			lex[0] = -1; lex[1] = -1; lex[2] = -1;
 			if (temp == '1' || temp == '2' || temp == '3' || temp == '4' || temp == '5' || temp == '6' || temp == '7' || temp == '8' || temp == '9' || temp == '0' || temp == '\'')lex[0] = 8; else {
 				switch (temp)       //определение возможного типа лексемы
 				{
@@ -274,21 +280,23 @@ namespace LexA
 			}
 			for (int i = 0; i < 3; i++)
 			{
-				if (lex[i] != 7)
-					if (lex[i] < 7 )         //если можно разобрать автоматом
+				if (lex[i] != 7 && lex[i] > -1)
+					if (lex[i] < 7)         //если можно разобрать автоматом
 					{
 						Update(str);
 						if (automats.automat[lex[i]] == lex[i])          //проверка подошел ли автомат
 							identifyLex = lex[i];
+						else
+							lex[i] = -1;
 					}
 					else
 					{
 						identifyLex = lex[i];                      //по номеру
 					}
-				else
-					lex[i] = 7;
 			}
 
+			if (lex[0] == -1 && lex[1] == -1 && lex[2] == -1) identifyLex = 7;
+			
 
 			isAStandartFunction = false;
 			for (int i = 0; i < standartFunction->length(); i++)
@@ -300,177 +308,159 @@ namespace LexA
 				buff_name[i] = str[i];
 			for (int i = 4; i >= str.length(); i--)
 				buff_name[i] = NULL;
-			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-			if (identifyLex == 0 || identifyLex == 16 || identifyLex == 10 || identifyLex == 11 || identifyLex == 7)          //если 
+			for (int i = 0; i < str.length(); i++)
+				buff_name_str[i] = str[i];
+			for (int i = 10; i >= str.length(); i--)
+				buff_name_str[i] = NULL;
+
+			switch (identifyLex)
 			{
-				for (int i = 0; i < str.length(); i++)
-					buff_name_str[i] = str[i];
-				for (int i = 10; i >= str.length(); i--)
-					buff_name_str[i] = NULL;
-				switch (identifyLex)
+			case 3:
+				if (IT::IsId(myTables.myidtable, buff_name) != TI_NULLIDX)
 				{
-				case 7:
-					if (IT::IsId(myTables.myidtable, buff_name) != TI_NULLIDX)
-					{
-						throw ERROR_THROW_IN(122, currentLine, 0);
-					}
-					myentryI.areaOfVisibility[0] = 0;
-					for (int q = 0; q < 5; q++)
-						myentryI.id[q] = buff_name[q];
-					myentryI.iddatatype = IT::INT;
-					myentryI.idtype = IT::F;
-					myentryI.value.vint = 0;
-					IT::Add(myTables.myidtable, myentryI);
-					myentryL.idxTI = myTables.myidtable.size - 1;
-					break;
-				case 10:                                                         //область видимости
-					counterOfBracket++;
-					counterOfAreaOfVisibility++;
-					myentryI.areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
-					areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
-					bufferi = myTables.mylextable.size;
-					while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_MAIN && myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON)
-					{
-						if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
-							myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
-						bufferi--;
-					}
-					break;
-				case 11:
-					areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = NULL;
-					myentryI.areaOfVisibility[counterOfAreaOfVisibility] = NULL;
-					counterOfAreaOfVisibility--;
-					break;
-				case 16:                                                             //литералы
-					myentryI.idxfirstLE = myTables.mylextable.size;
-					if (str[0] == '\'')                         //строковые
-					{
-						for (int i = 0; i < str.length(); i++)
-							myentryI.value.vstr.str[i] = str[i];
-						for (int i = ID_MAXSIZE; i >= str.length(); i--)
-							myentryI.value.vstr.str[i] = NULL;
-						myentryI.id[0] = 'S';
-						buffer = std::to_string(counterOfStringLiteral++);
-						for (int i = 0; i < buffer.length(); i++)
-							myentryI.id[i + 1] = buffer[i];
-						for (int i = ID_MAXSIZE - 1; i >= buffer.length(); i--)
-							myentryI.id[i + 1] = NULL;
-						myentryI.iddatatype = IT::STR;
-					}
-					else                               //целочисленные
-					{
-						if (!FST::literalInt((char*)str.c_str())) system("pause");
-						myentryI.value.vint = std::stoi(str);
-						myentryI.id[0] = 'I';
-						buffer = std::to_string(counterOfIntegerLiteral++);
-						for (int i = 0; i < buffer.length(); i++)
-							myentryI.id[i + 1] = buffer[i];
-						for (int i = ID_MAXSIZE - 1; i >= buffer.length(); i--)
-							myentryI.id[i + 1] = NULL;
-						myentryI.iddatatype = IT::INT;
+					throw ERROR_THROW_IN(122, currentLine, 0);
+				}
+				myentryI.areaOfVisibility[0] = 0;
+				for (int q = 0; q < 5; q++)
+					myentryI.id[q] = buff_name[q];
+				myentryI.iddatatype = IT::LIT;
+				myentryI.idtype = IT::F;
+				myentryI.value.vint = 0;
+				IT::Add(myTables.myidtable, myentryI);
+				myentryL.idxTI = myTables.myidtable.size - 1;
+				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
+				break;
+			case 11:                                                         //область видимости
+				counterOfBracket++;
+				counterOfAreaOfVisibility++;
+				myentryI.areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
+				areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
+				bufferi = myTables.mylextable.size;
+				while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_START && myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON)
+				{
+					if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
+						myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
+					bufferi--;
+				}
+				myentryL.idxTI = LT_TI_NULLIDX;
+				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
+				break;
+			case 12:
+				areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = NULL;
+				myentryI.areaOfVisibility[counterOfAreaOfVisibility] = NULL;
+				counterOfAreaOfVisibility--;
+				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
+				break;
+			case 8:                                                             //литералы
+				myentryI.idxfirstLE = myTables.mylextable.size;
+				if (str[0] == '\'')                         //строковые
+				{
+					if (str[str.length() - 1] != '\'')throw ERROR_THROW_IN(125, currentLine, 0);
+					for (int i = 0; i < str.length(); i++)
+						myentryI.value.vstr.str[i] = str[i];
+					for (int i = ID_MAXSIZE; i >= str.length(); i--)
+						myentryI.value.vstr.str[i] = NULL;
+					myentryI.id[0] = 'S';
+					buffer = std::to_string(counterOfStringLiteral++);
+					for (int i = 0; i < buffer.length(); i++)
+						myentryI.id[i + 1] = buffer[i];
+					for (int i = ID_MAXSIZE - 1; i >= buffer.length(); i--)
+						myentryI.id[i + 1] = NULL;
+					myentryI.iddatatype = IT::TXT;
+				}
+				else                               //целочисленные
+				{
+					if (!FST::literalInt((char*)str.c_str())) throw ERROR_THROW_IN(127, currentLine, 0);
+					myentryI.value.vint = std::stoi(str);
+					myentryI.id[0] = 'I';
+					buffer = std::to_string(counterOfIntegerLiteral++);
+					for (int i = 0; i < buffer.length(); i++)
+						myentryI.id[i + 1] = buffer[i];
+					for (int i = ID_MAXSIZE - 1; i >= buffer.length(); i--)
+						myentryI.id[i + 1] = NULL;
+					myentryI.iddatatype = IT::LIT;
 
-					}
-					myentryI.idtype = IT::L;
-					IT::Add(myTables.myidtable, myentryI);                        //добавить в IT
-					myentryL.idxTI = myTables.myidtable.size - 1;
-					break;
-				case 0:
-					if ((LT::GetEntry(myTables.mylextable, myTables.mylextable.size - 2)).lexema == 'd' ||
-						(LT::GetEntry(myTables.mylextable, myTables.mylextable.size - 2)).lexema == 't' ||
-						(LT::GetEntry(myTables.mylextable, myTables.mylextable.size - 1)).lexema == 't')
+				}
+				myentryI.idtype = IT::L;
+				IT::Add(myTables.myidtable, myentryI);                        //добавить в IT
+				myentryL.idxTI = myTables.myidtable.size - 1;
+				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
+				break;
+			case 7:
+				if ((LT::GetEntry(myTables.mylextable, myTables.mylextable.size - 2)).lexema == LEX_NEW ||
+					(LT::GetEntry(myTables.mylextable, myTables.mylextable.size - 2)).lexema == LEX_TYPES ||
+					(LT::GetEntry(myTables.mylextable, myTables.mylextable.size - 1)).lexema == LEX_TYPES)
+				{
+					if (IT::IsId(myTables.myidtable, buff_name) == TI_NULLIDX && IT::IsId(myTables.myidtable, buff_name_str) == TI_NULLIDX)      //было ли уже в таблице идентификаторов   
 					{
-						if (IT::IsId(myTables.myidtable, buff_name) == TI_NULLIDX && IT::IsId(myTables.myidtable, buff_name_str) == TI_NULLIDX)      //было ли уже в таблице идентификаторов   
-						{
-							addNewInIT(myTables.myidtable, myTables.mylextable);
-						}
-						else
-						{
-							if (!isAStandartFunction)               //если не стандартная функция             
-							{
-								bufferb = true;
-								for (int y = 0; y < myTables.myidtable.size; y++)
-								{
-									bufferi = 0;
-									bufferi1 = 1;
-									buffer = "";
-									for (int w = 0; w < 5; w++)
-										buffer += myTables.myidtable.table[y].id[w];
-									if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
-									{
-										//while (myTables.myidtable.table[y].areaOfVisibility[bufferi1] != 0)  //узнаю сколько значащих в массиве видимости подозреваемого
-										//	bufferi1++;                         //counterOfAreaOfVisibility какой край области видимости сейчас
-										//if (bufferi1 == counterOfAreaOfVisibility + 1) {                  //если одинокого цифр 
-										//	if (myTables.myidtable.table[y].areaOfVisibility[bufferi1 - 1] == areaOfVisibilityLexAnaliz[bufferi1 - 1]) //запрет если одинаковык
-										//		bufferb = false;
-										//}
-										//else {
-										//	for (int q = 0; q < counterOfAreaOfVisibility + 1; q++)
-										//		if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])
-										//			bufferb = false;
-										//}
-										bufferb = false;
-										for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
-										{
-											if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])bufferb = true;
-										}
-									}
-								}
-								if (bufferb)
-									addNewInIT(myTables.myidtable, myTables.mylextable);
-								else throw ERROR_THROW_IN(124, currentLine, 0);
-
-								LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name, areaOfVisibilityLexAnaliz);
-								myentryL.idxTI = LexInIT;
-							}
-							else {
-								LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
-								myentryL.idxTI = LexInIT;
-							}
-						}
+						addNewInIT(myTables.myidtable, myTables.mylextable);
 					}
 					else
 					{
-						for (int y = 0; y < myTables.myidtable.size; y++)
+						if (!isAStandartFunction)               //если не стандартная функция             
 						{
-							bufferi = 0;
-							bufferi1 = 1;
-							buffer = "";
-							for (int w = 0; w < 5; w++)
-								buffer += myTables.myidtable.table[y].id[w];
-							if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
+							bufferb = true;
+							for (int y = 0; y < myTables.myidtable.size; y++)
 							{
-								bufferb = false;
-								for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
+								bufferi = 0;
+								bufferi1 = 1;
+								buffer = "";
+								for (int w = 0; w < 5; w++)
+									buffer += myTables.myidtable.table[y].id[w];
+								if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
 								{
-									if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])bufferb = true;
+									bufferb = false;
+									for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
+									{
+										if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])bufferb = true;
+									}
 								}
 							}
+							if (bufferb)
+								addNewInIT(myTables.myidtable, myTables.mylextable);
+							else throw ERROR_THROW_IN(124, currentLine, 0);
+
+							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name, areaOfVisibilityLexAnaliz);
+							myentryL.idxTI = LexInIT;
 						}
-						if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);
+						else {
+							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
+							myentryL.idxTI = LexInIT;
+						}
 					}
 				}
-				//и в любом случае в лексемы
-				myentryL.lexema = automats.lexema[identifyLex];
-				myentryL.sn = currentLine;
-				LT::Add(myTables.mylextable, myentryL);
-			}
-			else                        //если не идентификатор
-			{
+				else          //передалать нормально!!!!!!!!!!!!!!!область видимости
+				{
+					for (int y = 0; y < myTables.myidtable.size; y++)
+					{
+						bufferi = 0;
+						bufferi1 = 1;
+						buffer = "";
+						for (int w = 0; w < 5; w++)
+							buffer += myTables.myidtable.table[y].id[w];
+						if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
+						{
+							bufferb = false;
+							for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
+							{
+								if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])bufferb = true;
+							}
+						}
+					}
+					if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);
+				}
+				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
+				break;
+			default:        //если не start  {}  id
 				if (identifyLex == 15)
 					myentryL.value = str[0];
-				if (identifyLex == 18) {
-					identifyLex = 18;
-				}
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
-				myentryL.lexema = automats.lexema[identifyLex];
-				myentryL.value = automats.value[identifyLex];
-				myentryL.sn = currentLine;
-				LT::Add(myTables.mylextable, myentryL);
-				myentryL.value = SPACE;
+				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
+				break;
 			}
 		}
 
-		std::string mainFunctionStrName = "main";
+		std::string mainFunctionStrName = "start";
 		if (IT::IsId(myTables.myidtable, (unsigned char*)mainFunctionStrName.c_str()) == TI_NULLIDX) throw ERROR_THROW_IN(123, currentLine, 0);
 		//polishNotation(17,myTables.mylextable,myTables.myidtable);
 		//polishNotation(62,myTables.mylextable,myTables.myidtable);

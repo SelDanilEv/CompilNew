@@ -39,6 +39,8 @@ namespace LT
 				std::setw(8) << lextable.table[i].lexema << std::setw(20);
 			if(lextable.table[i].idxTI != LT_TI_NULLIDX)
 				file<< lextable.table[i].idxTI;
+			else
+				file << ' ';
 			file << std::setw(20) << lextable.table[i].value << std::setw(20);
 			file << std::endl;
 		}
