@@ -76,9 +76,17 @@ namespace LexA
 	IT::IDDATATYPE iddatatype;                            //вспомогательные переменные для добавки в IT
 	IT::IDTYPE idtype;
 
-	bool FindIDByLexAndArea(LT::LexTable &lextable,IT::IdTable&idtable,short* areaOfVis,std::string str) {
-
-
+	bool FindIDByLexAndArea(LT::LexTable &lextable, IT::IdTable&idtable, std::string str) {
+		short* areaOfV = new short[5];
+		for (int i = 0; i < 5; i++)
+			areaOfV[i] = areaOfVisibilityLexAnaliz[i];
+		bufferi = 4;
+		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX) {
+			areaOfV[bufferi--] = 0;
+			if (bufferi < 0)return true;
+		}
+		myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV);
+		return false;
 		//for (int y = 0; y < idtable.size; y++)
 		//{
 		//	bufferi = 0;
@@ -253,7 +261,7 @@ namespace LexA
 		myentryI.idtype = IT::V;
 		myentryI.idxfirstLE = -1;
 		myentryI.value.vint = 0;
-		IT::Add(myTables.myidtable,myentryI);
+		IT::Add(myTables.myidtable, myentryI);
 		for (int i = 0; i < amountOfLex; i++) {
 			while (linesForLex[currentLine] <= i)         // повышение строки
 			{
@@ -485,7 +493,7 @@ namespace LexA
 				{
 					if (!isAStandartFunction)               //если не стандартная функция             
 					{
-						
+						bufferb = FindIDByLexAndArea(myTables.mylextable,myTables.myidtable,str);
 					}
 					else {
 						LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);

@@ -6,9 +6,11 @@ nti;
 nti;
 i=l;
 i=ivi;
+i=i;
 o(i);
 ri;
 };
+
 
 s
 {

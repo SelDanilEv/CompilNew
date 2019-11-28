@@ -4,9 +4,11 @@ new little z;
 new text m;
 m = 'hello world';
 z = x + y;
+buffer = z;
 output(m);
 return z;
 };
+
 
 start 
 {
