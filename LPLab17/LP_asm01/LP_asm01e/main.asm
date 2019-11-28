@@ -10,8 +10,6 @@ SetConsoleTitleA   PROTO :DWORD      ; установить заголовок окна консоли
 GetStdHandle       PROTO :DWORD      ; получить handle вывода на консоль
 WriteConsoleA      PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD ; вывод на консоль
 
-includelib "..\Debug\LP_asm01d.lib"
-includelib LP_asm01d.lib
 
 EXTERN getmin :proc
 EXTERN getmax :proc
@@ -23,7 +21,6 @@ ExitProcess	PROTO   :DWORD
 .CONST													; сегмент констант
 consoletitle   db 'int_to_char',0
 str_pause      db 'pause', 0
-consoletitle   db 'c functions',0
 info		   byte 'max-min=',0	
 minn		   byte 'min=',0
 maxn		   byte 'max=',0	
@@ -31,7 +28,6 @@ space		   db ' ',0
 
 .DATA													; сегмент данных
 array			DWORD	100,11,34,2,123,124,41,7,88,9,44
-result1			byte 40 dup(0)				            ; массив 40 байтов, заполненный нулями
 min				dword	?
 max				dword	?
 result1			byte 40 dup(0)				            ; массив 40 байтов, заполненный нулями
@@ -115,7 +111,7 @@ START:													; метка старта
 	call getmax
 	mov max,eax
 	;------------------вывод----------
-		mov eax,max
+	mov eax,max
 	push  eax            ; исходное число
     push offset result2        ; место для результата
     call int_to_char           ; вызов процедуры преобразования

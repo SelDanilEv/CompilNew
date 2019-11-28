@@ -1,19 +1,7 @@
-integer function fi(integer x, integer y) 
+main 
 {
-declare integer z;
-declare string function substr(string a, integer p,integer n);
-z = substr(x, 1,3)+y*3+5*x-y/(3+5);
-return z;
-};
-
-string function fs (string a, string b) 
-{
-declare string c;
-c = substr(a, 1,3)+ (b-a*b);
-return c;
-};
-
-declare integer x;
+declare string x;
+}
 
 main 
 {
@@ -50,4 +38,14 @@ print sc;
 print strlen (sc);
 return 0;
 };
+
+
+integer function fi(integer x, integer y) 
+{
+declare integer z;
+declare string function substr(string a, integer p,integer n);
+z = substr(x, 1,3)+y*3+5*x-y/(3+5);
+return z;
+};
+
 

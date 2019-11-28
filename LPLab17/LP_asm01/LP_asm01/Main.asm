@@ -11,7 +11,7 @@ ExitProcess PROTO : DWORD								; прототип для завершения процесса виндоус
 .DATA													; сегмент данных
 
 
-array			DWORD	100,11,34,2,123,124,41,7,88,9,44
+array			DWORD	100,11,34,25,163,124,41,7,88,9,44
 maxnumb         DWORD   ?								
 minnumb         DWORD   ?								
 
@@ -21,7 +21,7 @@ main PROC												; точка входа
 START:													; метка старта
 	mov eax,offset array
 	push eax
-	push 10
+	push lengthof array -1
 	call getmin
 
 	push - 1											; код возрата процесса windows
@@ -84,7 +84,6 @@ START:													; метка старта
 
 		ret 
 	getmin ENDP
-
 
 main ENDP												; конец процедуры
 

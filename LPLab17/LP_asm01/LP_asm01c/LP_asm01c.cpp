@@ -6,7 +6,6 @@ extern "C"
 {
 	int __stdcall getmin(int* ar, int n);
 	int __stdcall getmax(int* ar, int n);
-
 }
 
 int main()
