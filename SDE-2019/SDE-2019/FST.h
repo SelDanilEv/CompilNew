@@ -43,7 +43,7 @@ namespace FST
 	int function(char* str);
 	int New(char* str);
 	int Return(char* str);
-	int print(char* str);
+	int output(char* str);
 	int start(char* str);
 	//int Short(char* str);
 	bool literalInt(char* str);

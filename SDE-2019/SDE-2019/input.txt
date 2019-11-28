@@ -1,13 +1,19 @@
-little function fi(little x, little y) 
+little function sum(little x, little  y) 
 {
-new text z;
+new little z;
+new text m;
+m = 'hello world';
+z = x + y;
+output(m);
 return z;
 };
 
 start 
 {
-new text x;
-x = 'new string';
+new little x;
+x = sum(10,5);
+x = sum(x,5);
+output(x);
 return 0;
 }
 

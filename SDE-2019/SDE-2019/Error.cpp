@@ -32,7 +32,7 @@ namespace Error
 		ERROR_ENTRY(125, "Не найден конец строкового литерала"),
 		ERROR_ENTRY(126, "Используется не объявленная переменная"),
 		ERROR_ENTRY(127, "Неправильно объявление числового литерала"),
-		ERROR_ENTRY_NODEF(128),
+		ERROR_ENTRY(128 ,"Неверное объявление переменной"),
 		ERROR_ENTRY_NODEF(129),  ERROR_ENTRY_NODEF10(130), ERROR_ENTRY_NODEF10(140), ERROR_ENTRY_NODEF10(150),
 		ERROR_ENTRY(160, "Превышен максимльный размер таблицы идентификаторов"),
 		ERROR_ENTRY(161, "Таблица идентификаторов переполнена"),

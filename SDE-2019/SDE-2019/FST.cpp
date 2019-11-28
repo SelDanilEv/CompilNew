@@ -93,15 +93,16 @@ namespace FST
 		if (execute(fst))return 5;
 	}
 
-	int print(char* str) {
+	int output(char* str) {
 		FST fst(
 			str,
-			6,
-			NODE(1, RELATION('p', 1)),
-			NODE(1, RELATION('r', 2)),
-			NODE(1, RELATION('i', 3)),
-			NODE(1, RELATION('n', 4)),
-			NODE(1, RELATION('t', 5)),
+			7,
+			NODE(1, RELATION('o', 1)),
+			NODE(1, RELATION('u', 2)),
+			NODE(1, RELATION('t', 3)),
+			NODE(1, RELATION('p', 4)),
+			NODE(1, RELATION('u', 5)),
+			NODE(1, RELATION('t', 6)),
 			NODE()
 		);
 		if (execute(fst))return 6;

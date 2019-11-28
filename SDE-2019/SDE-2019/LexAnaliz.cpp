@@ -20,7 +20,7 @@ namespace LexA
 		char lexema[17] = {
 			LEX_LITTLE,LEX_TEXT,LEX_FUNCTION,
 			LEX_START,LEX_NEW,LEX_RETURN,
-			LEX_PRINT,LEX_ID,LEX_LITERAL,
+			LEX_OUTPUT,LEX_ID,LEX_LITERAL,
 			LEX_SEMICOLON,LEX_COMMA,LEX_LEFTBRACE,
 			LEX_RIGHTBRACE,LEX_LEFTTHESIS,LEX_RIGHTTHESIS,
 			LEX_EQUAL,LEX_OPERATOR,
@@ -48,10 +48,10 @@ namespace LexA
 		automats.automat[3] = FST::start((char*)str.c_str());
 		automats.automat[4] = FST::New((char*)str.c_str());
 		automats.automat[5] = FST::Return((char*)str.c_str());
-		automats.automat[6] = FST::print((char*)str.c_str());
+		automats.automat[6] = FST::output((char*)str.c_str());
 	}
 
-	void addToLT(int identifyLex,int currentLine,LT::LexTable &lextable,LT::Entry entryL)
+	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
 	{
 		entryL.lexema = automats.lexema[identifyLex];
 		entryL.value = automats.value[identifyLex];
@@ -61,7 +61,7 @@ namespace LexA
 
 	unsigned char buff_name[ID_MAXSIZE];            //для идентификаторов
 	unsigned char buff_name_str[ID_MAXSIZE];            //для идентификаторов
-	std::string standartFunction[] = { "strlen","substr" };
+	std::string standartFunction[] = { "copytext","textlenght" };
 	bool isAStandartFunction = false;
 	int counterOfAreaOfVisibility = 0;
 	int counterOfBracket = 0;
@@ -75,6 +75,39 @@ namespace LexA
 
 	IT::IDDATATYPE iddatatype;                            //вспомогательные переменные для добавки в IT
 	IT::IDTYPE idtype;
+
+	bool FindIDByLexAndArea(LT::LexTable &lextable,IT::IdTable&idtable,short* areaOfVis,std::string str) {
+
+
+		//for (int y = 0; y < idtable.size; y++)
+		//{
+		//	bufferi = 0;
+		//	bufferi1 = 1;
+		//	buffer = "";
+		//	for (int w = 0; w < 5; w++)
+		//		buffer += idtable.table[y].id[w];
+		//	if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
+		//	{
+		//		bufferb = false;
+		//		if (idtable.table[y].idtype != IT::F)
+		//		{
+		//			for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
+		//			{
+		//				if (idtable.table[y].areaOfVisibility[q] != areaOfVis[q])
+		//					bufferb = true;
+		//			}
+		//			myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfVis);
+		//		}
+		//		else
+		//		{
+		//			myentryL.idxTI = IT::IsId(idtable, (unsigned char*)str.c_str());
+		//			bufferb = false;
+		//			y = idtable.size;
+		//		}
+		//	}
+		//}
+		//return bufferb;
+	}
 
 	void addNewInIT(IT::IdTable &myidtable, LT::LexTable &mylextable) {
 
@@ -207,6 +240,20 @@ namespace LexA
 		currentLine = 0;
 
 		int identifyLex = 0;         // предопределение автомата
+
+		for (int i = 0; i < 5; i++)
+			myentryI.areaOfVisibility[i] = areaOfVisibilityLexAnaliz[i];
+		myentryI.id[0] = 'b';
+		myentryI.id[1] = 'u';
+		myentryI.id[2] = 'f';
+		myentryI.id[3] = 'f';
+		myentryI.id[4] = 'e';
+		myentryI.id[5] = 'r';
+		myentryI.iddatatype = IT::LIT;
+		myentryI.idtype = IT::V;
+		myentryI.idxfirstLE = -1;
+		myentryI.value.vint = 0;
+		IT::Add(myTables.myidtable,myentryI);
 		for (int i = 0; i < amountOfLex; i++) {
 			while (linesForLex[currentLine] <= i)         // повышение строки
 			{
@@ -238,7 +285,7 @@ namespace LexA
 				case 'r':
 					lex[0] = 5;
 					break;
-				case 'p':
+				case 'o':
 					lex[0] = 6;
 					break;
 				case LEX_SEMICOLON:
@@ -296,7 +343,7 @@ namespace LexA
 			}
 
 			if (lex[0] == -1 && lex[1] == -1 && lex[2] == -1) identifyLex = 7;
-			
+
 
 			isAStandartFunction = false;
 			for (int i = 0; i < standartFunction->length(); i++)
@@ -394,6 +441,8 @@ namespace LexA
 					if (IT::IsId(myTables.myidtable, buff_name) == TI_NULLIDX && IT::IsId(myTables.myidtable, buff_name_str) == TI_NULLIDX)      //было ли уже в таблице идентификаторов   
 					{
 						addNewInIT(myTables.myidtable, myTables.mylextable);
+						if (myentryI.iddatatype == IT::Err || myentryI.idtype == IT::E)
+							throw ERROR_THROW_IN(128, currentLine, 0);
 					}
 					else
 					{
@@ -412,7 +461,10 @@ namespace LexA
 									bufferb = false;
 									for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
 									{
-										if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])bufferb = true;
+										if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])
+										{
+											bufferb = true;
+										}
 									}
 								}
 							}
@@ -431,21 +483,14 @@ namespace LexA
 				}
 				else          //передалать нормально!!!!!!!!!!!!!!!область видимости
 				{
-					for (int y = 0; y < myTables.myidtable.size; y++)
+					if (!isAStandartFunction)               //если не стандартная функция             
 					{
-						bufferi = 0;
-						bufferi1 = 1;
-						buffer = "";
-						for (int w = 0; w < 5; w++)
-							buffer += myTables.myidtable.table[y].id[w];
-						if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
-						{
-							bufferb = false;
-							for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
-							{
-								if (myTables.myidtable.table[y].areaOfVisibility[q] != areaOfVisibilityLexAnaliz[q])bufferb = true;
-							}
-						}
+						
+					}
+					else {
+						LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
+						myentryL.idxTI = LexInIT;
+						bufferb = false;
 					}
 					if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);
 				}
