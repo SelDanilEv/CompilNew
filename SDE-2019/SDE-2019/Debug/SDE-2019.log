@@ -1,4 +1,4 @@
-﻿Сборка начата 28.11.2019 21:12:02.
+﻿Сборка начата 28.11.2019 21:50:47.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
@@ -62,24 +62,24 @@ windir = C:\WINDOWS
 
      1>Проект "E:\Compil\SDE-2019\SDE-2019\SDE-2019.vcxproj" в узле 2 (целевые объекты Build).
      1>InitializeBuildStatus:
-         Обращение к "Debug\SDE-2019.tlog\unsuccessfulbuild".
+         Создание "Debug\SDE-2019.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
          Для всех выходных данных обновления не требуется.
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt LexAnaliz.cpp
          LexAnaliz.cpp
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(165): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(195): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(357): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(362): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(364): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(366): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(368): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(414): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(416): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(420): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(422): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(432): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(434): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(138): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(168): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(330): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(335): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(337): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(339): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(341): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(387): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(389): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(393): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(395): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(405): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(407): warning C4018: >=: несоответствие типов со знаком и без знака
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\SDE-2019\Debug\SDE-2019.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\SDE-2019\Debug\SDE-2019.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\SDE-2019\Debug\SDE-2019.lib" /MACHINE:X86 Debug\Error.obj
          Debug\FST.obj
@@ -104,21 +104,21 @@ windir = C:\WINDOWS
 
        "E:\Compil\SDE-2019\SDE-2019\SDE-2019.vcxproj" (целевой объект Build ) (1) ->
        (ClCompile конечный объект) -> 
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(165): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(195): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(357): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(362): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(364): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(366): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(368): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(414): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(416): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(420): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(422): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(432): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(434): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(138): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(168): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(330): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(335): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(337): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(339): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(341): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(387): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(389): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(393): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(395): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(405): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(407): warning C4018: >=: несоответствие типов со знаком и без знака
 
     Предупреждений: 13
     Ошибок: 0
 
-Прошло времени 00:00:04.94
+Прошло времени 00:00:07.09

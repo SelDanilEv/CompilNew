@@ -3,7 +3,7 @@ little function sum(little x, little  y)
 new little z;
 new text m;
 m = 'hello world';
-z = x + y;
+z = 12+15*11;
 buffer = z;
 output(m);
 return z;

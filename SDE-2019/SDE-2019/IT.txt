@@ -9,9 +9,12 @@
   4         z       variable         little             13                        0              0 1
   5         m       variable           text             17                       NV              0 1
   6        S0        literal           text             21            'hello world'              0 1
-  7     start       function         little             21                        0              0
-  8         x       variable         little             47                        0              0 2
-  9        I0        literal         little             53                       10              0 2
- 10        I1        literal         little             55                        5              0 2
- 11        I2        literal         little             64                        5              0 2
- 12        I3        literal         little             73                        0              0 2
+  7        I0        literal         little             25                       12              0 1
+  8        I1        literal         little             27                       15              0 1
+  9        I2        literal         little             29                       11              0 1
+ 10     start       function         little             29                        0              0
+ 11         x       variable         little             49                        0              0 2
+ 12        I3        literal         little             55                       10              0 2
+ 13        I4        literal         little             57                        5              0 2
+ 14        I5        literal         little             66                        5              0 2
+ 15        I6        literal         little             75                        0              0 2

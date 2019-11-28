@@ -54,6 +54,7 @@ namespace LexA
 	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
 	{
 		entryL.lexema = automats.lexema[identifyLex];
+		if(identifyLex!=16)
 		entryL.value = automats.value[identifyLex];
 		entryL.sn = currentLine;
 		LT::Add(lextable, entryL);
@@ -87,34 +88,6 @@ namespace LexA
 		}
 		myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV);
 		return false;
-		//for (int y = 0; y < idtable.size; y++)
-		//{
-		//	bufferi = 0;
-		//	bufferi1 = 1;
-		//	buffer = "";
-		//	for (int w = 0; w < 5; w++)
-		//		buffer += idtable.table[y].id[w];
-		//	if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
-		//	{
-		//		bufferb = false;
-		//		if (idtable.table[y].idtype != IT::F)
-		//		{
-		//			for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
-		//			{
-		//				if (idtable.table[y].areaOfVisibility[q] != areaOfVis[q])
-		//					bufferb = true;
-		//			}
-		//			myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfVis);
-		//		}
-		//		else
-		//		{
-		//			myentryL.idxTI = IT::IsId(idtable, (unsigned char*)str.c_str());
-		//			bufferb = false;
-		//			y = idtable.size;
-		//		}
-		//	}
-		//}
-		//return bufferb;
 	}
 
 	void addNewInIT(IT::IdTable &myidtable, LT::LexTable &mylextable) {
@@ -505,7 +478,7 @@ namespace LexA
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
 			default:        //если не start  {}  id
-				if (identifyLex == 15)
+				if (identifyLex == 16)
 					myentryL.value = str[0];
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
@@ -515,7 +488,10 @@ namespace LexA
 
 		std::string mainFunctionStrName = "start";
 		if (IT::IsId(myTables.myidtable, (unsigned char*)mainFunctionStrName.c_str()) == TI_NULLIDX) throw ERROR_THROW_IN(123, currentLine, 0);
-		//polishNotation(17,myTables.mylextable,myTables.myidtable);
+
+
+		bufferb =polishNotation(25,myTables.mylextable,myTables.myidtable);
+		std::cout << bufferb << std::endl;
 		//polishNotation(62,myTables.mylextable,myTables.myidtable);
 
 
