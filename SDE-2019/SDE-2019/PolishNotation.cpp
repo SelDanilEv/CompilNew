@@ -40,8 +40,18 @@ LT::Entry findOperator(LT::Entry *entry, short* priority, short count, short max
 	}
 }
 
-
-
+void DoPolish(LexA::Tables tables) {
+	bool bufferb;
+	for (int i = 0; i < tables.myidtable.size; i++) {    //преобразовать в польку где надо
+		if (tables.mylextable.table[i].lexema == LEX_EQUAL)
+		{
+			i++;
+			bufferb = polishNotation(i, tables.mylextable, tables.myidtable);
+			if (!bufferb)
+				std::cout << "Fail polsk";
+		}
+	}
+}
 
 bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable)
 {
@@ -170,7 +180,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		for (int i = 0; i < countOfOperators; i++)
 			if (inputOperEntries[i].index == bufferEntry.index)
 				inputOperEntries[i].used = true;
-		if (AlmostAllEntries[bufferEntry.index + 1].used != true)          
+		if (AlmostAllEntries[bufferEntry.index + 1].used != true)
 		{
 			AlmostAllEntries[bufferEntry.index + 1].used = true;
 			AlmostAllEntries[bufferEntry.index] = AlmostAllEntries[bufferEntry.index + 1];

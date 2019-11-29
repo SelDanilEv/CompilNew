@@ -39,8 +39,8 @@ namespace LexA
 	IT::Entry myentryI;                   //вспомогательные сущности
 	LT::Entry myentryL;
 
-
 	std::string str;                       //буфер для инициализации
+
 	void Update(std::string str) {                   //обновление состояния автоматов
 		automats.automat[0] = FST::little((char*)str.c_str());
 		automats.automat[1] = FST::text((char*)str.c_str());
@@ -110,8 +110,6 @@ namespace LexA
 				iddatatype = IT::LIT;
 			if ((LT::GetEntry(mylextable, mylextable.size - 2)).value == 't')
 				iddatatype = IT::TXT;
-			/*if ((LT::GetEntry(mylextable, mylextable.size - 2)).value == 'q')
-				iddatatype = IT::SHR;*/
 		}
 		else
 		{
@@ -120,11 +118,6 @@ namespace LexA
 				iddatatype = IT::LIT;
 				myentryI.value.vint = 0;
 			}
-			/*if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == 's')
-			{
-				iddatatype = IT::SHR;
-				myentryI.value.vshr = 0;
-			}*/
 			if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == 't')
 			{
 				iddatatype = IT::TXT;
@@ -152,10 +145,8 @@ namespace LexA
 		myentryL.idxTI = myidtable.size - 1;
 	}
 
-	void analyze(int currentLine, char *fulltextch)                         //функция анализа
+	Tables analyze(int currentLine, char *fulltextch)                         //функция анализа
 	{
-		Tables myTables;
-
 		std::string fulltext = fulltextch;                         //исходный текст
 		std::string onelex[300];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
@@ -165,7 +156,7 @@ namespace LexA
 		int LexInIT;                                      // какая строка в IT для лексемы
 
 
-		for (int counter = 0; counter < fulltext.size(); counter++)      //парсер для текста
+		for (int counter = 0; counter < fulltext.size(); counter++)           //парсер для текста
 		{
 			if (!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE)
 			{
@@ -207,9 +198,9 @@ namespace LexA
 					currentLine++;
 				}
 			}
-		}
+		}      
 
-
+		Tables myTables;
 		myTables.myidtable = IT::Create(amountOfLex);                         //создания таблиц
 		myTables.mylextable = LT::Create(amountOfLex);
 
@@ -490,69 +481,6 @@ namespace LexA
 
 
 
-		std::string mainFunctionStrName = "start";           //проверка на существованик функции main
-		if (IT::IsId(myTables.myidtable, (unsigned char*)mainFunctionStrName.c_str()) == TI_NULLIDX) throw ERROR_THROW_IN(123, currentLine, 0);
-
-
-		for (int i = 0; i < myTables.mylextable.size; i++) {    //преобразовать в польку где надо + проверки
-			if (myTables.mylextable.table[i].idxTI != LT_TI_NULLIDX && myTables.mylextable.table[i].lexema != LEX_START)    //!!!!!!Работает тольк после синтаксического анализа!!!!!!!!!!
-			{
-				if (myTables.myidtable.table[myTables.mylextable.table[i].idxTI].idtype == IT::F)
-				{
-					int k = i;
-					int counterMain = 0;
-					int counterObs = 0;
-					IT::IDDATATYPE *typeParamMainFunc = new IT::IDDATATYPE[10];
-					IT::IDDATATYPE *typeParamObsFunc = new IT::IDDATATYPE[10];
-
-					for (int q = 0; q < 10; q++)
-					{
-						typeParamMainFunc[q] = typeParamObsFunc[q] = IT::Err;
-					}
-
-					while (myTables.mylextable.table[++k].lexema != LEX_RIGHTTHESIS)    //наблюдаемая функция
-					{
-						if (myTables.mylextable.table[k].lexema == LEX_LITERAL || myTables.mylextable.table[k].lexema == LEX_ID)
-						{
-							typeParamObsFunc[counterObs++] = myTables.myidtable.table[myTables.mylextable.table[k].idxTI].iddatatype;
-						}
-					}
-
-					k = myTables.myidtable.table[myTables.mylextable.table[i].idxTI].idxfirstLE;  // take numb in lex table
-
-					while (myTables.mylextable.table[++k].lexema != LEX_RIGHTTHESIS)    //главная функция
-					{
-						if (myTables.mylextable.table[k].lexema == LEX_LITERAL || myTables.mylextable.table[k].lexema == LEX_ID)
-						{
-							typeParamMainFunc[counterMain++] = myTables.myidtable.table[myTables.mylextable.table[k].idxTI].iddatatype;
-						}
-					}
-
-					// check
-					bool flag = false;
-					for (int q = 0; q < 10; q++)
-					{
-						if ((typeParamMainFunc[q] != typeParamObsFunc[q]))
-							flag = true;
-					}
-
-					if (flag)
-						throw ERROR_THROW_IN(129, currentLine, 0);
-				}
-			}
-		}
-		for (int i = 0; i < myTables.mylextable.size; i++) {    //преобразовать в польку где надо + проверки
-			if (myTables.mylextable.table[i].lexema == LEX_EQUAL)
-			{
-				i++;
-				bufferb = polishNotation(i, myTables.mylextable, myTables.myidtable);
-				if (!bufferb)
-					std::cout << "Fail polsk";
-			}
-		}
-
-
-
 		/*MFST_TRACE_START
 
 			MFST::Mfst mfst(myTables, GRB::getGreibach());
@@ -581,5 +509,6 @@ namespace LexA
 
 		std::cout << "\nEnd of LexAnaliz\n\n";
 		system("pause");
+		return myTables;
 	}
 }

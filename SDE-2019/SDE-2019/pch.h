@@ -21,5 +21,7 @@
 #include "LexAnaliz.h"
 #include "Greibach.h"
 #include "MFST.h"
+#include "Semantic.h"
+#include "PolishNotation.h"
 
 #endif //PCH_H

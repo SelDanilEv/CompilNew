@@ -14,6 +14,10 @@ int _tmain(int argc, _TCHAR ** argv)
 		Log::WriteLog(log);
 		Log::WriteParm(log, parm);
 		In::IN in = In::getin(parm.in, parm.out);
+		LexA::Tables myTables = LexA::analyze(In::getInfo().currentLine, (char *)In::getInfo().fulltext.c_str());                 //запуск лексического анализатора
+		Semantic::CheckSemantic(myTables);
+		DoPolish(myTables);
+
 		Log::WriteIn(log, in);
 		Log::Close(log);
 	}
