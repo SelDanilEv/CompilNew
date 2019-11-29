@@ -1,4 +1,4 @@
-little function sum(little x, little  y) 
+little function sum(little x, text  y) 
 {
 new little z;
 z=x+y;
@@ -10,7 +10,7 @@ start
 {
 new little x;
 x = 5;
-x = sum(6,x)/12*(sum(x,5)-12);
+x = sum(6,'tt');
 output(x);
 return 0;
 }

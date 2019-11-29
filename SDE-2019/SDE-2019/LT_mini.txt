@@ -12,7 +12,7 @@ s
 {
 nti;
 i=l;
-i=li@2lvil@2lvv;######
+i=ll@2;##
 o(i);
 rl;
 }

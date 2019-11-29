@@ -54,8 +54,8 @@ namespace LexA
 	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
 	{
 		entryL.lexema = automats.lexema[identifyLex];
-		if(identifyLex!=16)
-		entryL.value = automats.value[identifyLex];
+		if (identifyLex != 16)
+			entryL.value = automats.value[identifyLex];
 		entryL.sn = currentLine;
 		LT::Add(lextable, entryL);
 	}
@@ -80,9 +80,9 @@ namespace LexA
 	bool FindIDByLexAndArea(LT::LexTable &lextable, IT::IdTable&idtable, std::string str) {
 		short* areaOfV = new short[5];
 		for (int i = 0; i < 5; i++)
-			areaOfV[i] = areaOfVisibilityLexAnaliz[i];
+			areaOfV[i] = areaOfVisibilityLexAnaliz[i];  //копия области видимости
 		bufferi = 4;
-		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX) {
+		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX) {   //поиск подходящего идентификатора
 			areaOfV[bufferi--] = 0;
 			if (bufferi < 0)return true;
 		}
@@ -464,18 +464,18 @@ namespace LexA
 						}
 					}
 				}
-				else          //передалать нормально!!!!!!!!!!!!!!!область видимости
+				else
 				{
 					if (!isAStandartFunction)               //если не стандартная функция             
 					{
-						bufferb = FindIDByLexAndArea(myTables.mylextable,myTables.myidtable,str);
+						bufferb = FindIDByLexAndArea(myTables.mylextable, myTables.myidtable, str);
 					}
 					else {
 						LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
 						myentryL.idxTI = LexInIT;
 						bufferb = false;
 					}
-					if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);
+					if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);    //необъявленная переменная
 				}
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
@@ -494,7 +494,54 @@ namespace LexA
 		if (IT::IsId(myTables.myidtable, (unsigned char*)mainFunctionStrName.c_str()) == TI_NULLIDX) throw ERROR_THROW_IN(123, currentLine, 0);
 
 
-		for (int i = 0; i < myTables.mylextable.size; i++) {
+		for (int i = 0; i < myTables.mylextable.size; i++) {    //преобразовать в польку где надо + проверки
+			if (myTables.mylextable.table[i].idxTI != LT_TI_NULLIDX && myTables.mylextable.table[i].lexema != LEX_START)    //!!!!!!Работает тольк после синтаксического анализа!!!!!!!!!!
+			{
+				if (myTables.myidtable.table[myTables.mylextable.table[i].idxTI].idtype == IT::F)
+				{
+					int k = i;
+					int counterMain = 0;
+					int counterObs = 0;
+					IT::IDDATATYPE *typeParamMainFunc = new IT::IDDATATYPE[10];
+					IT::IDDATATYPE *typeParamObsFunc = new IT::IDDATATYPE[10];
+
+					for (int q = 0; q < 10; q++)
+					{
+						typeParamMainFunc[q] = typeParamObsFunc[q] = IT::Err;
+					}
+
+					while (myTables.mylextable.table[++k].lexema != LEX_RIGHTTHESIS)    //наблюдаемая функция
+					{
+						if (myTables.mylextable.table[k].lexema == LEX_LITERAL || myTables.mylextable.table[k].lexema == LEX_ID)
+						{
+							typeParamObsFunc[counterObs++] = myTables.myidtable.table[myTables.mylextable.table[k].idxTI].iddatatype;
+						}
+					}
+
+					k = myTables.myidtable.table[myTables.mylextable.table[i].idxTI].idxfirstLE;  // take numb in lex table
+
+					while (myTables.mylextable.table[++k].lexema != LEX_RIGHTTHESIS)    //главная функция
+					{
+						if (myTables.mylextable.table[k].lexema == LEX_LITERAL || myTables.mylextable.table[k].lexema == LEX_ID)
+						{
+							typeParamMainFunc[counterMain++] = myTables.myidtable.table[myTables.mylextable.table[k].idxTI].iddatatype;
+						}
+					}
+
+					// check
+					bool flag = false;
+					for (int q = 0; q < 10; q++)
+					{
+						if ((typeParamMainFunc[q] != typeParamObsFunc[q]))
+							flag = true;
+					}
+
+					if (flag)
+						throw ERROR_THROW_IN(129, currentLine, 0);
+				}
+			}
+		}
+		for (int i = 0; i < myTables.mylextable.size; i++) {    //преобразовать в польку где надо + проверки
 			if (myTables.mylextable.table[i].lexema == LEX_EQUAL)
 			{
 				i++;
@@ -503,7 +550,6 @@ namespace LexA
 					std::cout << "Fail polsk";
 			}
 		}
-		//polishNotation(62,myTables.mylextable,myTables.myidtable);
 
 
 

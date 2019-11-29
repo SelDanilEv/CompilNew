@@ -133,7 +133,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 				AlmostAllEntries[counter1].used = true;
 				counter1++;
 				buffershort++;
-				bufferEntry.idxTI = -1;
+				bufferEntry.idxTI = TI_NULLIDX;
 				bufferEntry.used = true;
 				bufferEntry.index = buffershort;
 				bufferEntry.lexema = intToChar(countOfParameters);
@@ -197,7 +197,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		lextable.table[startLex + i] = AlmostAllEntries[i];
 		buffershort = i;
 	}
-	bufferEntry.idxTI = -1;
+	bufferEntry.idxTI = TI_NULLIDX;
 	bufferEntry.index = -1;
 	bufferEntry.lexema = LATTICE;
 	bufferEntry.used = false;

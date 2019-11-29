@@ -1,4 +1,4 @@
-﻿Сборка начата 29.11.2019 11:56:45.
+﻿Сборка начата 29.11.2019 17:13:00.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
@@ -62,7 +62,7 @@ windir = C:\WINDOWS
 
      1>Проект "E:\Compil\SDE-2019\SDE-2019\SDE-2019.vcxproj" в узле 2 (целевые объекты Build).
      1>InitializeBuildStatus:
-         Обращение к "Debug\SDE-2019.tlog\unsuccessfulbuild".
+         Создание "Debug\SDE-2019.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
          Для всех выходных данных обновления не требуется.
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt LexAnaliz.cpp
@@ -121,4 +121,4 @@ windir = C:\WINDOWS
     Предупреждений: 13
     Ошибок: 0
 
-Прошло времени 00:00:01.81
+Прошло времени 00:00:02.03
