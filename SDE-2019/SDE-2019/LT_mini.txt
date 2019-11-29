@@ -3,20 +3,16 @@
 tfi(ti,ti)
 {
 nti;
-nti;
-i=l;
 i=ivi;
-i=i;
 o(i);
 ri;
 };
 
-
 s
 {
 nti;
+i=l;
 i=i(l,l);
-i=i(i,l);
 o(i);
 rl;
 }

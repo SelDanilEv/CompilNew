@@ -7,5 +7,6 @@
 #include <queue>
 
 bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable);
+void DoPolish(LexA::Tables tables);
 char intToChar(int x);
 

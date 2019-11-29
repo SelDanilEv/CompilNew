@@ -34,4 +34,10 @@ namespace In
 		int code[256]; // таблица проверки
 	};
 	IN getin(wchar_t infile[], wchar_t outfile[]);//Ввести входной поток 
+	struct helpInfo
+	{
+		int currentLine = 0;
+		std::string fulltext;
+	};
+	helpInfo getInfo();
 }

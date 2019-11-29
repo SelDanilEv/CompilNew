@@ -164,6 +164,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PolishNotation.h" />
     <ClInclude Include="Rule.h" />
+    <ClInclude Include="Semantic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Error.cpp" />
@@ -184,6 +185,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PolishNotation.cpp" />
+    <ClCompile Include="Semantic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />

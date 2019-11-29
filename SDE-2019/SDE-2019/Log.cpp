@@ -85,4 +85,5 @@ namespace Log             //формирование файла Log
 			delete log.stream;
 		}
 	}
+
 };

@@ -40,8 +40,18 @@ LT::Entry findOperator(LT::Entry *entry, short* priority, short count, short max
 	}
 }
 
-
-
+void DoPolish(LexA::Tables tables) {
+	bool bufferb;
+	for (int i = 0; i < tables.myidtable.size; i++) {    //преобразовать в польку где надо
+		if (tables.mylextable.table[i].lexema == LEX_EQUAL)
+		{
+			i++;
+			bufferb = polishNotation(i, tables.mylextable, tables.myidtable);
+			if (!bufferb)
+				std::cout << "Fail polsk";
+		}
+	}
+}
 
 bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable)
 {
@@ -92,7 +102,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		case LEX_RIGHTTHESIS:
 			currentPriority = currentPriority - 2;
 			continue;
-		case LEX_PLUS:         // тут все v 
+		case LEX_OPERATOR:         // тут все v 
 			inputOperEntries[counter2] = lextable.table[lextable_pos + i];
 			operatorPriority[counter2] = currentPriority;
 			inputOperEntries[counter2].index = buffershort;
@@ -117,10 +127,9 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 
 				while (lextable.table[lextable_pos + i].lexema != LEX_RIGHTTHESIS)
 				{
-					if (lextable.table[lextable_pos + i].lexema == LEX_ID)
-						countOfParameters++;
 					if (lextable.table[lextable_pos + i].lexema == LEX_LITERAL || lextable.table[lextable_pos + i].lexema == LEX_ID)
 					{
+						countOfParameters++;
 						AlmostAllEntries[counter1] = lextable.table[lextable_pos + i];
 						AlmostAllEntries[counter1].index = buffershort;
 						AlmostAllEntries[counter1].used = true;
@@ -134,7 +143,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 				AlmostAllEntries[counter1].used = true;
 				counter1++;
 				buffershort++;
-				bufferEntry.idxTI = -1;
+				bufferEntry.idxTI = TI_NULLIDX;
 				bufferEntry.used = true;
 				bufferEntry.index = buffershort;
 				bufferEntry.lexema = intToChar(countOfParameters);
@@ -171,7 +180,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		for (int i = 0; i < countOfOperators; i++)
 			if (inputOperEntries[i].index == bufferEntry.index)
 				inputOperEntries[i].used = true;
-		if (AlmostAllEntries[bufferEntry.index + 1].used != true)          // 
+		if (AlmostAllEntries[bufferEntry.index + 1].used != true)
 		{
 			AlmostAllEntries[bufferEntry.index + 1].used = true;
 			AlmostAllEntries[bufferEntry.index] = AlmostAllEntries[bufferEntry.index + 1];
@@ -198,7 +207,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		lextable.table[startLex + i] = AlmostAllEntries[i];
 		buffershort = i;
 	}
-	bufferEntry.idxTI = -1;
+	bufferEntry.idxTI = TI_NULLIDX;
 	bufferEntry.index = -1;
 	bufferEntry.lexema = LATTICE;
 	bufferEntry.used = false;

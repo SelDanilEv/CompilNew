@@ -39,8 +39,8 @@ namespace LexA
 	IT::Entry myentryI;                   //вспомогательные сущности
 	LT::Entry myentryL;
 
-
 	std::string str;                       //буфер для инициализации
+
 	void Update(std::string str) {                   //обновление состояния автоматов
 		automats.automat[0] = FST::little((char*)str.c_str());
 		automats.automat[1] = FST::text((char*)str.c_str());
@@ -54,7 +54,8 @@ namespace LexA
 	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
 	{
 		entryL.lexema = automats.lexema[identifyLex];
-		entryL.value = automats.value[identifyLex];
+		if (identifyLex != 16)
+			entryL.value = automats.value[identifyLex];
 		entryL.sn = currentLine;
 		LT::Add(lextable, entryL);
 	}
@@ -79,42 +80,14 @@ namespace LexA
 	bool FindIDByLexAndArea(LT::LexTable &lextable, IT::IdTable&idtable, std::string str) {
 		short* areaOfV = new short[5];
 		for (int i = 0; i < 5; i++)
-			areaOfV[i] = areaOfVisibilityLexAnaliz[i];
+			areaOfV[i] = areaOfVisibilityLexAnaliz[i];  //копия области видимости
 		bufferi = 4;
-		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX) {
+		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX) {   //поиск подходящего идентификатора
 			areaOfV[bufferi--] = 0;
 			if (bufferi < 0)return true;
 		}
 		myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV);
 		return false;
-		//for (int y = 0; y < idtable.size; y++)
-		//{
-		//	bufferi = 0;
-		//	bufferi1 = 1;
-		//	buffer = "";
-		//	for (int w = 0; w < 5; w++)
-		//		buffer += idtable.table[y].id[w];
-		//	if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
-		//	{
-		//		bufferb = false;
-		//		if (idtable.table[y].idtype != IT::F)
-		//		{
-		//			for (int q = 0; q < 5; q++)        //добавление всех где не совпадает область видимости
-		//			{
-		//				if (idtable.table[y].areaOfVisibility[q] != areaOfVis[q])
-		//					bufferb = true;
-		//			}
-		//			myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfVis);
-		//		}
-		//		else
-		//		{
-		//			myentryL.idxTI = IT::IsId(idtable, (unsigned char*)str.c_str());
-		//			bufferb = false;
-		//			y = idtable.size;
-		//		}
-		//	}
-		//}
-		//return bufferb;
 	}
 
 	void addNewInIT(IT::IdTable &myidtable, LT::LexTable &mylextable) {
@@ -137,8 +110,6 @@ namespace LexA
 				iddatatype = IT::LIT;
 			if ((LT::GetEntry(mylextable, mylextable.size - 2)).value == 't')
 				iddatatype = IT::TXT;
-			/*if ((LT::GetEntry(mylextable, mylextable.size - 2)).value == 'q')
-				iddatatype = IT::SHR;*/
 		}
 		else
 		{
@@ -147,11 +118,6 @@ namespace LexA
 				iddatatype = IT::LIT;
 				myentryI.value.vint = 0;
 			}
-			/*if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == 's')
-			{
-				iddatatype = IT::SHR;
-				myentryI.value.vshr = 0;
-			}*/
 			if ((LT::GetEntry(mylextable, mylextable.size - 1)).value == 't')
 			{
 				iddatatype = IT::TXT;
@@ -179,10 +145,8 @@ namespace LexA
 		myentryL.idxTI = myidtable.size - 1;
 	}
 
-	void analyze(int currentLine, char *fulltextch)                         //функция анализа
+	Tables analyze(int currentLine, char *fulltextch)                         //функция анализа
 	{
-		Tables myTables;
-
 		std::string fulltext = fulltextch;                         //исходный текст
 		std::string onelex[300];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
@@ -192,7 +156,7 @@ namespace LexA
 		int LexInIT;                                      // какая строка в IT для лексемы
 
 
-		for (int counter = 0; counter < fulltext.size(); counter++)      //парсер для текста
+		for (int counter = 0; counter < fulltext.size(); counter++)           //парсер для текста
 		{
 			if (!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE)
 			{
@@ -234,9 +198,9 @@ namespace LexA
 					currentLine++;
 				}
 			}
-		}
+		}      
 
-
+		Tables myTables;
 		myTables.myidtable = IT::Create(amountOfLex);                         //создания таблиц
 		myTables.mylextable = LT::Create(amountOfLex);
 
@@ -267,6 +231,8 @@ namespace LexA
 			{
 				currentLine++;
 			}
+			for (int i = 0; i < 15; i++)
+				myentryI.id[i] = NULL;
 			char temp = onelex[i][0];                          //первая буква лексемы
 			str = onelex[i];
 			identifyLex = 0;
@@ -489,34 +455,29 @@ namespace LexA
 						}
 					}
 				}
-				else          //передалать нормально!!!!!!!!!!!!!!!область видимости
+				else
 				{
 					if (!isAStandartFunction)               //если не стандартная функция             
 					{
-						bufferb = FindIDByLexAndArea(myTables.mylextable,myTables.myidtable,str);
+						bufferb = FindIDByLexAndArea(myTables.mylextable, myTables.myidtable, str);
 					}
 					else {
 						LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
 						myentryL.idxTI = LexInIT;
 						bufferb = false;
 					}
-					if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);
+					if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);    //необъявленная переменная
 				}
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
 			default:        //если не start  {}  id
-				if (identifyLex == 15)
+				if (identifyLex == 16)
 					myentryL.value = str[0];
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
 			}
 		}
-
-		std::string mainFunctionStrName = "start";
-		if (IT::IsId(myTables.myidtable, (unsigned char*)mainFunctionStrName.c_str()) == TI_NULLIDX) throw ERROR_THROW_IN(123, currentLine, 0);
-		//polishNotation(17,myTables.mylextable,myTables.myidtable);
-		//polishNotation(62,myTables.mylextable,myTables.myidtable);
 
 
 
@@ -545,7 +506,9 @@ namespace LexA
 		IT::showTable(myTables.myidtable, fileIT);
 		fileIT.close();
 
+
 		std::cout << "\nEnd of LexAnaliz\n\n";
 		system("pause");
+		return myTables;
 	}
 }
