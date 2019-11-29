@@ -240,6 +240,8 @@ namespace LexA
 			{
 				currentLine++;
 			}
+			for (int i = 0; i < 15; i++)
+				myentryI.id[i] = NULL;
 			char temp = onelex[i][0];                          //первая буква лексемы
 			str = onelex[i];
 			identifyLex = 0;
@@ -486,12 +488,21 @@ namespace LexA
 			}
 		}
 
-		std::string mainFunctionStrName = "start";
+
+
+		std::string mainFunctionStrName = "start";           //проверка на существованик функции main
 		if (IT::IsId(myTables.myidtable, (unsigned char*)mainFunctionStrName.c_str()) == TI_NULLIDX) throw ERROR_THROW_IN(123, currentLine, 0);
 
 
-		bufferb =polishNotation(25,myTables.mylextable,myTables.myidtable);
-		std::cout << bufferb << std::endl;
+		for (int i = 0; i < myTables.mylextable.size; i++) {
+			if (myTables.mylextable.table[i].lexema == LEX_EQUAL)
+			{
+				i++;
+				bufferb = polishNotation(i, myTables.mylextable, myTables.myidtable);
+				if (!bufferb)
+					std::cout << "Fail polsk";
+			}
+		}
 		//polishNotation(62,myTables.mylextable,myTables.myidtable);
 
 
@@ -520,6 +531,7 @@ namespace LexA
 		fileIT.open("IT.txt");
 		IT::showTable(myTables.myidtable, fileIT);
 		fileIT.close();
+
 
 		std::cout << "\nEnd of LexAnaliz\n\n";
 		system("pause");

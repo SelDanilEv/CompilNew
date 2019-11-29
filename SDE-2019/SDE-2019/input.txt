@@ -1,20 +1,16 @@
 little function sum(little x, little  y) 
 {
 new little z;
-new text m;
-m = 'hello world';
-z = 12+15*11;
-buffer = z;
-output(m);
+z=x+y;
+output(z);
 return z;
-};
-
+}; 
 
 start 
 {
 new little x;
-x = sum(10,5);
-x = sum(x,5);
+x = 5;
+x = sum(6,x)/12*(sum(x,5)-12);
 output(x);
 return 0;
 }

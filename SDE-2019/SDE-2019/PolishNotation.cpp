@@ -92,7 +92,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		case LEX_RIGHTTHESIS:
 			currentPriority = currentPriority - 2;
 			continue;
-		case LEX_PLUS:         // тут все v 
+		case LEX_OPERATOR:         // тут все v 
 			inputOperEntries[counter2] = lextable.table[lextable_pos + i];
 			operatorPriority[counter2] = currentPriority;
 			inputOperEntries[counter2].index = buffershort;
@@ -117,10 +117,9 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 
 				while (lextable.table[lextable_pos + i].lexema != LEX_RIGHTTHESIS)
 				{
-					if (lextable.table[lextable_pos + i].lexema == LEX_ID)
-						countOfParameters++;
 					if (lextable.table[lextable_pos + i].lexema == LEX_LITERAL || lextable.table[lextable_pos + i].lexema == LEX_ID)
 					{
+						countOfParameters++;
 						AlmostAllEntries[counter1] = lextable.table[lextable_pos + i];
 						AlmostAllEntries[counter1].index = buffershort;
 						AlmostAllEntries[counter1].used = true;
@@ -171,7 +170,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		for (int i = 0; i < countOfOperators; i++)
 			if (inputOperEntries[i].index == bufferEntry.index)
 				inputOperEntries[i].used = true;
-		if (AlmostAllEntries[bufferEntry.index + 1].used != true)          // 
+		if (AlmostAllEntries[bufferEntry.index + 1].used != true)          
 		{
 			AlmostAllEntries[bufferEntry.index + 1].used = true;
 			AlmostAllEntries[bufferEntry.index] = AlmostAllEntries[bufferEntry.index + 1];
