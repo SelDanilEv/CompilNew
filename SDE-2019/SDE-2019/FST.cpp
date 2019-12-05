@@ -108,6 +108,30 @@ namespace FST
 		if (execute(fst))return 6;
 	}
 
+	int from(char* str) {
+		FST fst(
+			str,
+			5,
+			NODE(1, RELATION('f', 1)),
+			NODE(1, RELATION('r', 2)),
+			NODE(1, RELATION('o', 3)),
+			NODE(1, RELATION('m', 4)),
+			NODE()
+		);
+		if (execute(fst))return 17;
+	}
+
+	int to(char* str) {
+		FST fst(
+			str,
+			3,
+			NODE(1, RELATION('t', 1)),
+			NODE(1, RELATION('o', 2)),
+			NODE()
+		);
+		if (execute(fst))return 18;
+	}
+
 	//int Short(char* str) {
 	//	FST fst(
 	//		str,

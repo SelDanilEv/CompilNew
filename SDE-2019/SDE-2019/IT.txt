@@ -7,9 +7,13 @@
   2         x      parameter         little              5                        0              0 1
   3         y      parameter           text              8                       NV              0 1
   4         z       variable         little             13                        0              0 1
-  5     start       function         little             13                        0              0
-  6         x       variable         little             35                        0              0 2
-  7        I0        literal         little             39                        5              0 2
-  8        I1        literal         little             45                        6              0 2
-  9        S0        literal           text             47                     'tt'              0 2
- 10        I2        literal         little             56                        0              0 2
+  5        I0        literal         little             17                      100              0 1
+  6        I1        literal         little             18                      200              0 1
+  7     start       function         little             19                        0              0
+  8         x       variable         little             35                        0              0 2
+  9        I2        literal         little             39                        5              0 2
+ 10        I3        literal         little             43                        6              0 2
+ 11        S0        literal           text             44                     'tt'              0 2
+ 12        I4        literal         little             53                      100              0 2
+ 13        I5        literal         little             59                        1              0 2 3
+ 14        I6        literal         little             70                        0              0 2

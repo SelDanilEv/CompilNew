@@ -15,23 +15,24 @@ namespace LexA
 {
 	struct MyAutomat                       //структура для автоматов
 	{
-		int automat[7];                        //массив автоматов
+		int automat[20];                        //массив автоматов
 
-		char lexema[17] = {
+		char lexema[20] = {
 			LEX_LITTLE,LEX_TEXT,LEX_FUNCTION,
 			LEX_START,LEX_NEW,LEX_RETURN,
 			LEX_OUTPUT,LEX_ID,LEX_LITERAL,
 			LEX_SEMICOLON,LEX_COMMA,LEX_LEFTBRACE,
 			LEX_RIGHTBRACE,LEX_LEFTTHESIS,LEX_RIGHTTHESIS,
-			LEX_EQUAL,LEX_OPERATOR,
+			LEX_EQUAL,LEX_OPERATOR,LEX_FROM,LEX_TO,LEX_ENDCONDCYCL,
 		};
-		char value[17] = {
+		char value[20] = {
 			'l','t',' ',
 			' ',' ',' ',
 			' ',' ',' ',
 			' ',' ',' ',
 			' ',' ',' ',
-			' ',' ',
+			' ',' ',' ',
+			' ','$'
 		};
 	}automats;
 
@@ -41,14 +42,39 @@ namespace LexA
 
 	std::string str;                       //буфер для инициализации
 
-	void Update(std::string str) {                   //обновление состояния автоматов
-		automats.automat[0] = FST::little((char*)str.c_str());
-		automats.automat[1] = FST::text((char*)str.c_str());
-		automats.automat[2] = FST::function((char*)str.c_str());
-		automats.automat[3] = FST::start((char*)str.c_str());
-		automats.automat[4] = FST::New((char*)str.c_str());
-		automats.automat[5] = FST::Return((char*)str.c_str());
-		automats.automat[6] = FST::output((char*)str.c_str());
+	void Update(std::string str, int numbOfLex) {                   //обновление состояния автоматов
+		switch (numbOfLex)
+		{
+		case 0:
+			automats.automat[0] = FST::little((char*)str.c_str());
+			break;
+		case 1:
+			automats.automat[1] = FST::text((char*)str.c_str());
+			break;
+		case 2:
+			automats.automat[2] = FST::function((char*)str.c_str());
+			break;
+		case 3:
+			automats.automat[3] = FST::start((char*)str.c_str());
+			break;
+		case 4:
+			automats.automat[4] = FST::New((char*)str.c_str());
+			break;
+		case 5:
+			automats.automat[5] = FST::Return((char*)str.c_str());
+			break;
+		case 6:
+			automats.automat[6] = FST::output((char*)str.c_str());
+			break;
+		case 17:
+			automats.automat[17] = FST::from((char*)str.c_str());
+			break;
+		case 18:
+			automats.automat[18] = FST::to((char*)str.c_str());
+			break;
+		default:
+			break;
+		}
 	}
 
 	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
@@ -183,7 +209,7 @@ namespace LexA
 				{
 					if (fulltext[counter] != SPACE)
 					{
-						if (fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1]))
+						if ((fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1]))|| fulltext[counter - 2]==LEX_ENDCONDCYCL)
 							amountOfLex++;
 						onelex[amountOfLex] = fulltext[counter];
 						amountOfLex++;
@@ -198,7 +224,7 @@ namespace LexA
 					currentLine++;
 				}
 			}
-		}      
+		}
 
 		Tables myTables;
 		myTables.myidtable = IT::Create(amountOfLex);                         //создания таблиц
@@ -226,6 +252,7 @@ namespace LexA
 		myentryI.idxfirstLE = -1;
 		myentryI.value.vint = 0;
 		IT::Add(myTables.myidtable, myentryI);
+
 		for (int i = 0; i < amountOfLex; i++) {
 			while (linesForLex[currentLine] <= i)         // повышение строки
 			{
@@ -236,7 +263,7 @@ namespace LexA
 			char temp = onelex[i][0];                          //первая буква лексемы
 			str = onelex[i];
 			identifyLex = 0;
-			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/)
+			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/) 17-from 18-to 19-$
 			lex[0] = -1; lex[1] = -1; lex[2] = -1;
 			if (temp == '1' || temp == '2' || temp == '3' || temp == '4' || temp == '5' || temp == '6' || temp == '7' || temp == '8' || temp == '9' || temp == '0' || temp == '\'')lex[0] = 8; else {
 				switch (temp)       //определение возможного типа лексемы
@@ -246,9 +273,11 @@ namespace LexA
 					break;
 				case 't':
 					lex[0] = 1;      //text
+					lex[1] = 18;
 					break;
 				case 'f':
 					lex[0] = 2;
+					lex[1] = 17;
 					break;
 				case 's':
 					lex[0] = 3;
@@ -295,6 +324,8 @@ namespace LexA
 				case '/':
 					lex[0] = 16;
 					break;
+				case '$':
+					lex[0] = 19;
 				default:
 					break;
 				}      //определение возможного типа лексемы
@@ -302,9 +333,9 @@ namespace LexA
 			for (int i = 0; i < 3; i++)
 			{
 				if (lex[i] != 7 && lex[i] > -1)
-					if (lex[i] < 7)         //если можно разобрать автоматом
+					if (lex[i] < 7 || lex[i]==17|| lex[i]==18)         //если можно разобрать автоматом
 					{
-						Update(str);
+						Update(str, lex[i]);
 						if (automats.automat[lex[i]] == lex[i])          //проверка подошел ли автомат
 							identifyLex = lex[i];
 						else
@@ -357,7 +388,8 @@ namespace LexA
 				myentryI.areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
 				areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
 				bufferi = myTables.mylextable.size;
-				while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_START && myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON)
+				while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_START &&
+					myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON&& myTables.mylextable.table[bufferi].lexema != LEX_ENDCONDCYCL)
 				{
 					if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
 						myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
@@ -491,24 +523,7 @@ namespace LexA
 		mfst.savededucation();
 		mfst.printrules();*/
 
-		std::ofstream fileLT;               //формрирование файлов таблиц
-		fileLT.open("LT.txt");
-		LT::showTable(myTables.mylextable, fileLT);
-		fileLT.close();
 
-		std::ofstream fileLT_mini;
-		fileLT_mini.open("LT_mini.txt");
-		LT::showTable_mini(myTables.mylextable, fileLT_mini);
-		fileLT_mini.close();
-
-		std::ofstream fileIT;
-		fileIT.open("IT.txt");
-		IT::showTable(myTables.myidtable, fileIT);
-		fileIT.close();
-
-
-		std::cout << "\nEnd of LexAnaliz\n\n";
-		system("pause");
 		return myTables;
 	}
 }
