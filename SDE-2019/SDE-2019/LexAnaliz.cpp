@@ -409,11 +409,12 @@ namespace LexA
 				if (str[0] == '\'')                         //строковые
 				{
 					if (str[str.length() - 1] != '\'')throw ERROR_THROW_IN(125, currentLine, 0);
+					myentryI.value.vstr.len = str.length();
 					for (int i = 0; i < str.length(); i++)
 						myentryI.value.vstr.str[i] = str[i];
 					for (int i = ID_MAXSIZE; i >= str.length(); i--)
 						myentryI.value.vstr.str[i] = NULL;
-					myentryI.id[0] = 'S';
+					myentryI.id[0] = 'T';
 					buffer = std::to_string(counterOfStringLiteral++);
 					for (int i = 0; i < buffer.length(); i++)
 						myentryI.id[i + 1] = buffer[i];
@@ -425,7 +426,7 @@ namespace LexA
 				{
 					if (!FST::literalInt((char*)str.c_str())) throw ERROR_THROW_IN(127, currentLine, 0);
 					myentryI.value.vint = std::stoi(str);
-					myentryI.id[0] = 'I';
+					myentryI.id[0] = 'L';
 					buffer = std::to_string(counterOfIntegerLiteral++);
 					for (int i = 0; i < buffer.length(); i++)
 						myentryI.id[i + 1] = buffer[i];

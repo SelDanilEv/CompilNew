@@ -25,5 +25,6 @@
 #include "PolishNotation.h"
 #include "LexAnaliz.h"
 #include "FilesManager.h"
+#include "Generation.h"
 
 #endif //PCH_H

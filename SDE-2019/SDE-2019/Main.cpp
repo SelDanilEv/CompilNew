@@ -18,6 +18,7 @@ int _tmain(int argc, _TCHAR ** argv)
 		Semantic::CheckSemantic(myTables);
 		myTables = DoPolish(myTables);
 		FilesManager::WriteFiles(myTables);
+		Generation::Generate(myTables);
 		Log::WriteIn(log, in);
 		Log::Close(log);
 	}

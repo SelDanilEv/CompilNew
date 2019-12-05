@@ -21,6 +21,5 @@ namespace FilesManager
 		fileIT.close();
 
 		std::cout << "\nFiles created\n\n";
-		system("pause");
 	}
 }
