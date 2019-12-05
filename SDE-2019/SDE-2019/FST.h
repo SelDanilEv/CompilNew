@@ -45,6 +45,8 @@ namespace FST
 	int Return(char* str);
 	int output(char* str);
 	int start(char* str);
+	int from(char* str);
+	int to(char* str);
 	//int Short(char* str);
 	bool literalInt(char* str);
 }

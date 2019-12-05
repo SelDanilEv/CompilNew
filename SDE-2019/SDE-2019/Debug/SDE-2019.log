@@ -1,4 +1,4 @@
-﻿Сборка начата 29.11.2019 21:19:03.
+﻿Сборка начата 05.12.2019 23:03:58.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
@@ -62,52 +62,16 @@ windir = C:\WINDOWS
 
      1>Проект "E:\Compil\SDE-2019\SDE-2019\SDE-2019.vcxproj" в узле 2 (целевые объекты Build).
      1>InitializeBuildStatus:
-         Обращение к "Debug\SDE-2019.tlog\unsuccessfulbuild".
+         Создание "Debug\SDE-2019.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt pch.cpp
-         pch.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Error.cpp FST.cpp Greibach.cpp IT.cpp In.cpp LT.cpp LexAnaliz.cpp Log.cpp MFST.cpp Main.cpp Parm.cpp PolishNotation.cpp Semantic.cpp
-         Error.cpp
-         FST.cpp
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(198): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-         Greibach.cpp
-         IT.cpp
-         In.cpp
-     1>e:\compil\sde-2019\sde-2019\in.cpp(41): warning C4018: <: несоответствие типов со знаком и без знака
-         LT.cpp
-         LexAnaliz.cpp
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(131): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(159): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(323): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(328): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(330): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(332): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(334): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(380): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(382): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(386): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(388): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(398): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(400): warning C4018: >=: несоответствие типов со знаком и без знака
-         Log.cpp
-         MFST.cpp
-     1>e:\compil\sde-2019\sde-2019\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
-         Main.cpp
-         Parm.cpp
-         PolishNotation.cpp
-         Semantic.cpp
-         Создание кода...
-     1>e:\compil\sde-2019\sde-2019\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(36): warning C4715: FST::text: значение возвращается не при всех путях выполнения
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(53): warning C4715: FST::function: значение возвращается не при всех путях выполнения
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(23): warning C4715: FST::little: значение возвращается не при всех путях выполнения
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(79): warning C4715: FST::New: значение возвращается не при всех путях выполнения
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(94): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(109): warning C4715: FST::output: значение возвращается не при всех путях выполнения
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(67): warning C4715: FST::start: значение возвращается не при всех путях выполнения
+         Для всех выходных данных обновления не требуется.
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Generation.cpp
+         Generation.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\SDE-2019\Debug\SDE-2019.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\SDE-2019\Debug\SDE-2019.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\SDE-2019\Debug\SDE-2019.lib" /MACHINE:X86 Debug\Error.obj
+         Debug\FilesManager.obj
          Debug\FST.obj
+         Debug\Generation.obj
          Debug\Greibach.obj
          Debug\In.obj
          Debug\IT.obj
@@ -127,35 +91,7 @@ windir = C:\WINDOWS
      1>Сборка проекта "E:\Compil\SDE-2019\SDE-2019\SDE-2019.vcxproj" завершена (целевые объекты Build).
 
 Сборка успешно завершена.
-
-       "E:\Compil\SDE-2019\SDE-2019\SDE-2019.vcxproj" (целевой объект Build ) (1) ->
-       (ClCompile конечный объект) -> 
-         e:\compil\sde-2019\sde-2019\fst.cpp(198): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-         e:\compil\sde-2019\sde-2019\in.cpp(41): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(131): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(159): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(323): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(328): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(330): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(332): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(334): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(380): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(382): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(386): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(388): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(398): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(400): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\mfst.cpp(235): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
-         e:\compil\sde-2019\sde-2019\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
-         e:\compil\sde-2019\sde-2019\fst.cpp(36): warning C4715: FST::text: значение возвращается не при всех путях выполнения
-         e:\compil\sde-2019\sde-2019\fst.cpp(53): warning C4715: FST::function: значение возвращается не при всех путях выполнения
-         e:\compil\sde-2019\sde-2019\fst.cpp(23): warning C4715: FST::little: значение возвращается не при всех путях выполнения
-         e:\compil\sde-2019\sde-2019\fst.cpp(79): warning C4715: FST::New: значение возвращается не при всех путях выполнения
-         e:\compil\sde-2019\sde-2019\fst.cpp(94): warning C4715: FST::Return: значение возвращается не при всех путях выполнения
-         e:\compil\sde-2019\sde-2019\fst.cpp(109): warning C4715: FST::output: значение возвращается не при всех путях выполнения
-         e:\compil\sde-2019\sde-2019\fst.cpp(67): warning C4715: FST::start: значение возвращается не при всех путях выполнения
-
-    Предупреждений: 24
+    Предупреждений: 0
     Ошибок: 0
 
-Прошло времени 00:00:07.51
+Прошло времени 00:00:04.42

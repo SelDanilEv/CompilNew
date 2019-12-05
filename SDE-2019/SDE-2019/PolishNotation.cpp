@@ -40,9 +40,9 @@ LT::Entry findOperator(LT::Entry *entry, short* priority, short count, short max
 	}
 }
 
-void DoPolish(LexA::Tables tables) {
+LexA::Tables DoPolish(LexA::Tables tables) {
 	bool bufferb;
-	for (int i = 0; i < tables.myidtable.size; i++) {    //преобразовать в польку где надо
+	for (int i = 0; i < tables.mylextable.size; i++) {    //преобразовать в польку где надо
 		if (tables.mylextable.table[i].lexema == LEX_EQUAL)
 		{
 			i++;
@@ -51,6 +51,7 @@ void DoPolish(LexA::Tables tables) {
 				std::cout << "Fail polsk";
 		}
 	}
+	return tables;
 }
 
 bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable)
@@ -77,6 +78,9 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	short counter1 = 0;
 	LT::Entry *inputOperEntries = new LT::Entry[16];
 	short counter2 = 0;
+	short* litPositions = new short[32];
+	short counter3 = 0;
+
 	short *operatorPriority = new short[16];
 	short currentPriority = 0;
 	short maxPriority = 1;
@@ -122,7 +126,6 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 				countOfParameters = 0;
 				bufferEntry = lextable.table[startLex + i];
 				bufferEntry.lexema = '@';
-
 				i++;
 
 				while (lextable.table[lextable_pos + i].lexema != LEX_RIGHTTHESIS)
@@ -171,7 +174,9 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		delete[] operatorPriority;
 		return false;
 	}
+
 	int r = 0;
+
 	while (r < countOfOperators)
 	{
 		bufferEntry = findOperator(inputOperEntries, operatorPriority, countOfOperators, maxPriority);
@@ -203,6 +208,8 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 
 	for (int i = 0; (i < counter + 1) && AlmostAllEntries[i - 1].lexema != LEX_SEMICOLON; i++)
 	{
+		if (AlmostAllEntries[i].lexema == LEX_LITERAL)
+			litPositions[counter3++] = i;
 		std::cout << AlmostAllEntries[i].lexema << AlmostAllEntries[i].value;
 		lextable.table[startLex + i] = AlmostAllEntries[i];
 		buffershort = i;
@@ -217,6 +224,17 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 		AlmostAllEntries[k] = bufferEntry;
 		lextable.table[startLex + k] = bufferEntry;
 	}
+
+	//изменения в idtable
+	int k = 0;
+	for (int i = 0; i < counter1; i++) 
+	{
+		if (AlmostAllEntries[i].lexema == LEX_LITERAL) 
+		{
+			idtable.table[AlmostAllEntries[i].idxTI].idxfirstLE = lextable_pos + litPositions[k++];
+		}
+	}
+
 	delete[] AlmostAllEntries;
 	delete[] inputOperEntries;
 	delete[] operatorPriority;

@@ -12,6 +12,8 @@
 #define LEX_RETURN		'r'	// лексема для return
 #define LEX_OUTPUT		'o'	// лексема для print
 #define LEX_START		's'	// лексема для start
+#define LEX_FROM		'm'	// лексема для from
+#define LEX_TO			'e'	// лексема для to
 #define LEX_SEMICOLON	';'	// лексема для ;
 #define LEX_COMMA		','	// лексема для ,
 #define LEX_LEFTBRACE	'{'	// лексема для {
@@ -22,6 +24,7 @@
 #define LEX_MINUS		'v'	// лексема для -
 #define LEX_STAR		'v'	// лексема для *
 #define LEX_DIRSLASH	'v'	// лексема для /
+#define LEX_ENDCONDCYCL	'$'	// лексема для $
 #define LEX_OPERATOR	'v'	// лексема для операторов
 #define LEX_EQUAL		'=' // лексема для =
 #define NEWLINE			'\n'// новая строка
