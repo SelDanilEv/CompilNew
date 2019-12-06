@@ -378,6 +378,7 @@ namespace LexA
 				myentryI.iddatatype = IT::LIT;
 				myentryI.idtype = IT::F;
 				myentryI.value.vint = 0;
+				myentryI.idxfirstLE = myTables.mylextable.size;
 				IT::Add(myTables.myidtable, myentryI);
 				myentryL.idxTI = myTables.myidtable.size - 1;
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);

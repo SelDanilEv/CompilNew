@@ -1,7 +1,7 @@
 little function sum(little x, text  y) 
 {
 new little z;
-z=100+200;
+z=100+200-x;
 output(z);
 return z;
 }; 
@@ -11,10 +11,6 @@ start
 new little x;
 x = 5;
 x = sum(6,'tt');
-from x to 100 $
-{
- x=x+1;
-};
 output(x);
 return 0;
 }
