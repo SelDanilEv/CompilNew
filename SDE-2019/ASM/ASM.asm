@@ -23,3 +23,4 @@ ExitProcess PROTO : DWORD
 	x02000 dword 0
 
 .code
+proc_sum proc, parameter_s : dword, parameter_s : byte

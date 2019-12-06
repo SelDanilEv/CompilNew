@@ -11,10 +11,6 @@ start
 new little x;
 x = 5;
 x = sum(6,'tt');
-from x to 100 $
-{
- x=x+1;
-};
 output(x);
 return 0;
 }
