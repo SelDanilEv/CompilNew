@@ -11,23 +11,31 @@ namespace Generation
 	};
 	std::string WriteSegment(OneSegment segment);
 
+
+	enum exprvalue {
+		o = 0,
+		i,
+	};
+
 	void Generate(LexA::Tables);
 
 	struct ForExpression {
 		short index;
-		std::string name;
-		exprvalue cvalue; 
+		std::string name=" ";
+		exprvalue cvalue;
 	};
 
-	enum exprvalue{
-		o,
-		i
-	};
 
 	struct Expressions {
-		ForExpression Elements[32];
+		ForExpression *Elements = new ForExpression[32];
 		int size;
 	};
+
+	void GenerateBody(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
+	ForExpression doTreade(Expressions expr, int k);
+	void GenerateExpression(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable);
+	void GenerateHat(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
+	void GenerateFunction(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
 
 	//enum INSTRUCTIONTYPE
 	//{                   // Типы инструкций

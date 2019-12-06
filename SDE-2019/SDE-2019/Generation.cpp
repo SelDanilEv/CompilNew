@@ -3,6 +3,7 @@
 
 namespace Generation
 {
+
 	std::string WriteSegment(OneSegment segment)
 	{
 		return ("\n." + segment.Name + '\n' + segment.Code);
@@ -16,6 +17,9 @@ namespace Generation
 	std::string helpstr = "";
 	std::string helpstr1 = "";
 	std::string helpstr2 = "";  //
+	std::string functionName = "";  //
+	LT::Entry* LEntries = new LT::Entry[32];
+	LT::Entry Empty;
 
 	void Generate(LexA::Tables tables)
 	{
@@ -105,6 +109,7 @@ namespace Generation
 		{
 			helpstr += helpIEntry.id[buffer++];
 		}
+		functionName = helpstr;
 		helpstr += " proc";
 		buffer = i + 2;
 		while (lextable.table[buffer].lexema != LEX_RIGHTTHESIS)
@@ -112,12 +117,14 @@ namespace Generation
 			if (lextable.table[buffer].lexema == LEX_ID)
 			{
 				if (buffer != i + 3)helpstr += ", ";
-				helpstr += "parameter_";
 				int m = 0;
-				while (idtable.table[lextable.table[buffer].idxTI].id[m] != NULL)
+				while (idtable.table[lextable.table[buffer].idxTI].id[m] != NULL && idtable.table[lextable.table[buffer].idxTI].id[m] != '\0')
 				{
-					helpstr += helpIEntry.id[m++];
+					helpstr += idtable.table[lextable.table[buffer].idxTI].id[m++];
 				}
+				for (int k = 0; k < 5; k++)
+					helpstr += std::to_string(idtable.table[lextable.table[buffer].idxTI].areaOfVisibility[k]);
+
 				helpstr += " : ";
 				if (idtable.table[lextable.table[buffer].idxTI].iddatatype == IT::LIT)
 					helpstr += "dword";
@@ -131,8 +138,7 @@ namespace Generation
 	}
 
 	void GenerateBody(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i) {
-		LT::Entry* LEntries;
-		LT::Entry Empty;
+		helpstr = "";
 		int counterLEntries = 0;
 		int exit = 1;
 		int startLex = idtable.table[i].idxfirstLE;
@@ -151,7 +157,7 @@ namespace Generation
 				exit++;
 				break;
 			default:
-				currentLine = lextable.table[++currentLex].sn;
+				currentLine = lextable.table[currentLex].sn;
 				if (lastLine == currentLine)
 				{
 					helpstr += lextable.table[currentLex].lexema;
@@ -170,12 +176,16 @@ namespace Generation
 						break;
 					}
 					for (int k = counterLEntries - 1; k >= 0; k--) LEntries[k] = Empty;
+					counterLEntries = 0;
 					helpstr.clear();
+					lastLine = currentLine;
+					currentLex--;
 				}
 				break;
 			}
 			currentLex++;
 		}
+		Code.Code += functionName + " endp";
 	}
 
 	void GenerateExpression(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable)
@@ -183,6 +193,7 @@ namespace Generation
 		helpstr2 = "";
 		helpstr.clear();
 		Expressions newExpressions;
+		ForExpression EmptyForEx;
 		ForExpression tempexpr;
 		std::string object = "";
 		buffer = 0;
@@ -194,11 +205,12 @@ namespace Generation
 			object += std::to_string(idtable.table[LEntries[0].idxTI].areaOfVisibility[m]);
 
 		for (int k = 0; k < counterLEntries - 1; k++) {
-			if (LEntries[k].lexema = LATTICE)counterLEntries--;
+			if (LEntries[k].lexema == LATTICE)counterLEntries--;
 		}
-		newExpressions.size = counterLEntries - 1;
 
-		for (int k = 2; k < counterLEntries - 1; k++) {
+		newExpressions.size = counterLEntries - 1;
+		int k;
+		for (k = 2; k < counterLEntries + 1; k++) {
 			switch (LEntries[k].lexema)
 			{
 			case LEX_OPERATOR:
@@ -232,45 +244,51 @@ namespace Generation
 				break;
 			}
 		}
-		while (newExpressions.size != 1) {
+		while (newExpressions.size != 3) {
 			int k = newExpressions.size;
 			while (newExpressions.Elements[k].cvalue != o || newExpressions.Elements[k - 1].cvalue != i || newExpressions.Elements[k - 2].cvalue != i)
 			{
 				k--;
 			}
 			tempexpr = doTreade(newExpressions, k);
-
+			newExpressions.Elements[k - 2] = tempexpr;
+			while (newExpressions.Elements[++k].name[0] != ' ')
+				newExpressions.Elements[k - 2] = newExpressions.Elements[k];
+			newExpressions.Elements[k] = newExpressions.Elements[k] = EmptyForEx;
+			newExpressions.size -= 2;
 		}
-
+		helpstr2 += "\tmov "+object+", eax;\n";
+		Code.Code += helpstr2;
 	}
 
 	ForExpression doTreade(Expressions expr, int k) {
 		ForExpression rc;
-		helpstr2 += "\tmov eax,"+expr.Elements[k-1].name+'\n';
-		helpstr2 += "\tmov ebx,"+expr.Elements[k-2].name+'\n';
+		helpstr2 += "\tmov ebx,"+expr.Elements[k-1].name+'\n';
+		helpstr2 += "\tmov eax,"+expr.Elements[k-2].name+'\n';
 		switch (expr.Elements[k].name[0])
 		{
 		case '+':
-			break;
 			helpstr2 += "\tadd eax,ebx\n";
+			break;
 		case '-':
-			break;
 			helpstr2 += "\tsub eax,ebx\n";
+			break;
 		case '/':
-			break;
 			helpstr2 += "\tdiv ebx\n";
-		case '%':
 			break;
+		case '%':
 			helpstr2 += "\tdiv ebx\n";
 			helpstr2 += "\tmov eax,edx\n";
+			break;
 		case '*':
 			helpstr2 += "\tmul eax,ebx\n";
 			break;
 		default:
 			break;
 		}
-
-
+		rc.cvalue = i;
+		rc.index = expr.Elements[k - 2].index;
+		rc.name = "eax";
 		return rc;
 	}
 
