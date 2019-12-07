@@ -1,19 +1,20 @@
 .586
 .model flat, stdcall
-includelib SDElib.lib
 includelib kernel32.lib
+includelib SDElib.lib
+includelib libucrt.lib
 
 ExitProcess PROTO : DWORD
 
-.stack
-4096
+EXTERN outlit :proc
+EXTERN outtxt :proc
+
+.stack 4096
+
 .const
-	L0 dword 100
-	L1 dword 200
-	L2 dword 5
-	L3 dword 6
-	T0 byte 'tt', 0
-	L4 dword 0
+	L0 dword 0
+	L1 dword 5
+	L2 dword 0
 
 .data
 	buffer00000 dword 0
@@ -21,12 +22,19 @@ ExitProcess PROTO : DWORD
 	x02000 dword 0
 
 .code
-proc_sum proc, x01000 : dword, y01000 : byte
-	mov ebx,L1
-	mov eax,L0
-	add eax,ebx
+proc_sum proc, x01000 : dword
 	mov ebx,x01000
-	mov eax,eax
+	mov eax,L0
 	sub eax,ebx
 	mov z01000, eax;
+	ret
 proc_sum endp
+main proc
+	START : 
+	mov x02000, eax;
+	push(10)
+	call outlit
+	push - 1
+	call ExitProcess
+main endp
+end main

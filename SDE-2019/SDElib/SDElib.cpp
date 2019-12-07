@@ -31,14 +31,14 @@ extern "C"
 		return stri.length();
 	}
 
-	void _stdcall outstr(char* s)
+	void _stdcall outtxt(char* s)
 	{
 		if (s != nullptr)
 			std::cout << s << std::endl;
 		else
 			std::cout << "Empty line!";
 	}
-	void _stdcall outint(int i)
+	void _stdcall outlit(int i)
 	{
 		std::cout << i << std::endl;
 	}

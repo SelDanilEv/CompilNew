@@ -8,6 +8,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDElib", "SDElib\SDElib.vcxproj", "{D84137D7-4B52-41EA-AC08-367C5053B714}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ASM", "ASM\ASM.vcxproj", "{6DE6F1D2-F122-4A60-8171-C2A70187E577}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D84137D7-4B52-41EA-AC08-367C5053B714} = {D84137D7-4B52-41EA-AC08-367C5053B714}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

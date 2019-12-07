@@ -3,14 +3,14 @@
 
 namespace Generation
 {
-
 	std::string WriteSegment(OneSegment segment)
 	{
 		return ("\n." + segment.Name + '\n' + segment.Code);
 	}
 
 	int buffer = 0;
-	OneSegment Stack = { "stack","4096" };
+	bool isMain = false;
+	OneSegment Stack = { "stack 4096" };
 	OneSegment Const = { "const" };
 	OneSegment Data = { "data" };
 	OneSegment Code = { "code" };
@@ -80,10 +80,10 @@ namespace Generation
 			}
 			else   //если функция
 			{
-				if (lextable.table[idtable.table[i].idxfirstLE].lexema != LEX_START)
-				{
-					GenerateFunction(idtable, lextable, helpIEntry, i);
-				}
+				if (lextable.table[idtable.table[i].idxfirstLE].lexema == LEX_START)
+					isMain = true;
+				GenerateFunction(idtable, lextable, helpIEntry, i);
+
 			}
 		}
 
@@ -102,39 +102,45 @@ namespace Generation
 	}
 
 	void GenerateHat(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i) {
-		helpIEntry = idtable.table[i];
-		buffer = 0;
-		helpstr = "proc_";
-		while (helpIEntry.id[buffer] != NULL)
+		if (!isMain)
 		{
-			helpstr += helpIEntry.id[buffer++];
-		}
-		functionName = helpstr;
-		helpstr += " proc";
-		buffer = i + 2;
-		while (lextable.table[buffer].lexema != LEX_RIGHTTHESIS)
-		{
-			if (lextable.table[buffer].lexema == LEX_ID)
+			helpIEntry = idtable.table[i];
+			buffer = 0;
+			helpstr = "proc_";
+			while (helpIEntry.id[buffer] != NULL)
 			{
-				if (buffer != i + 3)helpstr += ", ";
-				int m = 0;
-				while (idtable.table[lextable.table[buffer].idxTI].id[m] != NULL && idtable.table[lextable.table[buffer].idxTI].id[m] != '\0')
-				{
-					helpstr += idtable.table[lextable.table[buffer].idxTI].id[m++];
-				}
-				for (int k = 0; k < 5; k++)
-					helpstr += std::to_string(idtable.table[lextable.table[buffer].idxTI].areaOfVisibility[k]);
-
-				helpstr += " : ";
-				if (idtable.table[lextable.table[buffer].idxTI].iddatatype == IT::LIT)
-					helpstr += "dword";
-				else
-					helpstr += "byte";
+				helpstr += helpIEntry.id[buffer++];
 			}
-			buffer++;
+			functionName = helpstr;
+			helpstr += " proc";
+			buffer = i + 2;
+			while (lextable.table[buffer].lexema != LEX_RIGHTTHESIS)
+			{
+				if (lextable.table[buffer].lexema == LEX_ID)
+				{
+					if (buffer != i + 3)helpstr += ", ";
+					int m = 0;
+					while (idtable.table[lextable.table[buffer].idxTI].id[m] != NULL && idtable.table[lextable.table[buffer].idxTI].id[m] != '\0')
+					{
+						helpstr += idtable.table[lextable.table[buffer].idxTI].id[m++];
+					}
+					for (int k = 0; k < 5; k++)
+						helpstr += std::to_string(idtable.table[lextable.table[buffer].idxTI].areaOfVisibility[k]);
+
+					helpstr += " : ";
+					if (idtable.table[lextable.table[buffer].idxTI].iddatatype == IT::LIT)
+						helpstr += "dword";
+					else
+						helpstr += "byte";
+				}
+				buffer++;
+			}
+			helpstr += '\n';
+			Code.Code += helpstr;
 		}
-		helpstr += '\n';
-		Code.Code += helpstr;
+		else {
+			Code.Code += "\nmain proc\n\tSTART : \n";
+		}
 	}
 
 	void GenerateBody(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i) {
@@ -172,6 +178,9 @@ namespace Generation
 					case LEX_ID:
 						GenerateExpression(LEntries, counterLEntries, idtable);
 						break;
+					case LEX_OUTPUT:
+						GenerateOutput(LEntries, counterLEntries, idtable);
+						break;
 					default:
 						break;
 					}
@@ -185,8 +194,57 @@ namespace Generation
 			}
 			currentLex++;
 		}
-		Code.Code += functionName + " endp";
+		if (!isMain) {
+			Code.Code += "\tret\n";
+			Code.Code += functionName + " endp";
+		}
+		else {
+			Code.Code += "\tpush - 1\n\tcall ExitProcess\nmain endp\nend main";
+		}
 	}
+
+	void GenerateOutput(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable) {
+		helpstr2 = "";
+		if (idtable.table[LEntries[2].idxTI].iddatatype == IT::LIT) {
+			if (idtable.table[LEntries[2].idxTI].idtype == IT::V) {
+				buffer = 0;
+				while (idtable.table[LEntries[2].idxTI].id[buffer] != NULL && idtable.table[LEntries[2].idxTI].id[buffer])
+				{
+					helpstr2 += idtable.table[LEntries[2].idxTI].id[buffer++];
+				}
+				for (int m = 0; m < 5; m++)
+					helpstr2 += std::to_string(idtable.table[LEntries[2].idxTI].areaOfVisibility[m]);
+			}
+			else {
+				buffer = 0;
+				while (idtable.table[LEntries[2].idxTI].id[buffer] != NULL && idtable.table[LEntries[2].idxTI].id[buffer])
+				{
+					helpstr2 += idtable.table[LEntries[2].idxTI].id[buffer++];
+				}
+			}
+			Code.Code += "\tpush " + helpstr2+'\n'+"\tcall outlit\n";
+		}
+		else {
+			if (idtable.table[LEntries[2].idxTI].idtype == IT::V) {
+				buffer = 0;
+				while (idtable.table[LEntries[2].idxTI].id[buffer] != NULL && idtable.table[LEntries[2].idxTI].id[buffer])
+				{
+					helpstr2 += idtable.table[LEntries[2].idxTI].id[buffer++];
+				}
+				for (int m = 0; m < 5; m++)
+					helpstr2 += std::to_string(idtable.table[LEntries[2].idxTI].areaOfVisibility[m]);
+			}
+			else {
+				buffer = 0;
+				while (idtable.table[LEntries[2].idxTI].id[buffer] != NULL && idtable.table[LEntries[2].idxTI].id[buffer])
+				{
+					helpstr2 += idtable.table[LEntries[2].idxTI].id[buffer++];
+				}
+			}
+			Code.Code += "\tpush offset " + helpstr2 + '\n'+"\tcall outtxt";
+		}
+	}
+
 
 	void GenerateExpression(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable)
 	{
@@ -204,7 +262,7 @@ namespace Generation
 		for (int m = 0; m < 5; m++)
 			object += std::to_string(idtable.table[LEntries[0].idxTI].areaOfVisibility[m]);
 
-		for (int k = 0; k < counterLEntries - 1; k++) {
+		for (int k = 0; k < counterLEntries + 1; k++) {
 			if (LEntries[k].lexema == LATTICE)counterLEntries--;
 		}
 
@@ -257,14 +315,15 @@ namespace Generation
 			newExpressions.Elements[k] = newExpressions.Elements[k] = EmptyForEx;
 			newExpressions.size -= 2;
 		}
-		helpstr2 += "\tmov "+object+", eax;\n";
+		helpstr2 += "\tmov " + object + ", eax;\n";
 		Code.Code += helpstr2;
 	}
 
 	ForExpression doTreade(Expressions expr, int k) {
 		ForExpression rc;
-		helpstr2 += "\tmov ebx,"+expr.Elements[k-1].name+'\n';
-		helpstr2 += "\tmov eax,"+expr.Elements[k-2].name+'\n';
+		helpstr2 += "\tmov ebx," + expr.Elements[k - 1].name + '\n';
+		if (expr.Elements[k - 2].name != "eax")
+			helpstr2 += "\tmov eax," + expr.Elements[k - 2].name + '\n';
 		switch (expr.Elements[k].name[0])
 		{
 		case '+':
@@ -281,7 +340,7 @@ namespace Generation
 			helpstr2 += "\tmov eax,edx\n";
 			break;
 		case '*':
-			helpstr2 += "\tmul eax,ebx\n";
+			helpstr2 += "\tmul ebx\n";
 			break;
 		default:
 			break;

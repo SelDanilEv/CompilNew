@@ -34,6 +34,7 @@ namespace Generation
 	void GenerateBody(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
 	ForExpression doTreade(Expressions expr, int k);
 	void GenerateExpression(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable);
+	void GenerateOutput(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable);
 	void GenerateHat(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
 	void GenerateFunction(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
 

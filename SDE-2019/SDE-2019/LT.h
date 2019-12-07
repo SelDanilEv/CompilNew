@@ -10,7 +10,7 @@
 #define LEX_FUNCTION	'f'	// лексема для function
 #define LEX_NEW			'n'	// лексема для new
 #define LEX_RETURN		'r'	// лексема для return
-#define LEX_OUTPUT		'o'	// лексема для print
+#define LEX_OUTPUT		'o'	// лексема для output
 #define LEX_START		's'	// лексема для start
 #define LEX_FROM		'm'	// лексема для from
 #define LEX_TO			'e'	// лексема для to

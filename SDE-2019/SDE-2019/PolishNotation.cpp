@@ -56,6 +56,7 @@ LexA::Tables DoPolish(LexA::Tables tables) {
 
 bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable)
 {
+	short Line = 0;
 	short counter = 0;
 	short buffershort;
 	short countOfAllInputLex = 0;
@@ -127,6 +128,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 				bufferEntry = lextable.table[startLex + i];
 				bufferEntry.lexema = '@';
 				i++;
+				Line = lextable.table[lextable_pos + i].sn;
 
 				while (lextable.table[lextable_pos + i].lexema != LEX_RIGHTTHESIS)
 				{
@@ -219,6 +221,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	bufferEntry.lexema = LATTICE;
 	bufferEntry.used = false;
 	bufferEntry.value = NULL;
+	bufferEntry.sn= Line;
 	for (int k = buffershort + 1; k < countOfAllInputLex + 1; k++)
 	{
 		AlmostAllEntries[k] = bufferEntry;

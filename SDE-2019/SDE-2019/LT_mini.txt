@@ -1,9 +1,9 @@
 ===========LEX TABLE mini==============
 
-tfi(ti,ti)
+tfi(ti)
 {
 nti;
-i=llviv;
+i=liv;
 o(i);
 ri;
 };
@@ -12,7 +12,6 @@ s
 {
 nti;
 i=l;
-i=ll@2;##
 o(i);
 rl;
 }

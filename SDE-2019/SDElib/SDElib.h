@@ -3,6 +3,7 @@
 extern "C"
 {
 	char* _stdcall copystr(char*, char*);
-	void _stdcall outstr(char*);
-	void _stdcall outint(int);
+	int _stdcall textlenght(char* str);
+	void _stdcall outtxt(char*);
+	void _stdcall outlit(int);
 }
