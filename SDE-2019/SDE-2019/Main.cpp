@@ -3,7 +3,7 @@
 #include <locale>
 
 int _tmain(int argc, _TCHAR ** argv)
-{
+	{
 	setlocale(LC_CTYPE, "Russian");
 	Log::LOG log = Log::INITLOG;
 	try

@@ -6,8 +6,10 @@
   1       sum       function         little              2                        0              0
   2         x      parameter         little              5                        0              0 1
   3         z       variable         little             10                        0              0 1
-  4        L0        literal         little             14                        0              0 1
-  5     start       function         little             28                        0              0
-  6         x       variable         little             32                        0              0 2
-  7        L1        literal         little             36                        5              0 2
-  8        L2        literal         little             44                        0              0 2
+  4     start       function         little             28                        0              0
+  5         x       variable         little             32                        0              0 2
+  6      tema       variable           text             36                       NV              0 2
+  7        L0        literal         little             40                        5              0 2
+  8        L1        literal         little             43                        5              0 2
+  9        T0        literal           text             49                  'Hello'              0 2
+ 10        L2        literal         little             62                        0              0 2

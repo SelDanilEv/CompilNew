@@ -28,6 +28,7 @@
 #define LEX_OPERATOR	'v'	// лексема для операторов
 #define LEX_EQUAL		'=' // лексема для =
 #define NEWLINE			'\n'// новая строка
+#define POLISHFUNCTION  '@'
 #define LATTICE 		'#'// #
 #define SPACE	 		' '// space
 

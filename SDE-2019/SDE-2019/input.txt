@@ -1,7 +1,7 @@
 little function sum(little x) 
 {
 new little z;
-z= 0 - x;
+z= x*x;
 output(z);
 return z;
 }; 
@@ -9,9 +9,12 @@ return z;
 start 
 {
 new little x;
-x = 5;
+new text tema;
+x=sum(5)+5;
+tema = 'Hello';
 output(x);
+output(tema);
 return 0;
-}
+};
 
 
