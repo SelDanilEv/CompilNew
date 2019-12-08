@@ -48,7 +48,7 @@ LexA::Tables DoPolish(LexA::Tables tables) {
 			i++;
 			bufferb = polishNotation(i, tables.mylextable, tables.myidtable);
 			if (!bufferb)
-				std::cout << "Fail polsk";
+				throw ERROR_THROW_IN(199, tables.mylextable.table[i].sn, 0);
 		}
 	}
 	return tables;
@@ -212,7 +212,6 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	{
 		if (AlmostAllEntries[i].lexema == LEX_LITERAL)
 			litPositions[counter3++] = i;
-		std::cout << AlmostAllEntries[i].lexema << AlmostAllEntries[i].value;
 		lextable.table[startLex + i] = AlmostAllEntries[i];
 		buffershort = i;
 	}
@@ -241,8 +240,6 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	delete[] AlmostAllEntries;
 	delete[] inputOperEntries;
 	delete[] operatorPriority;
-
-	std::cout << NEWLINE;
 
 	return true;
 }

@@ -2,7 +2,7 @@
 #define BEFORE_DATA ".586\n.model flat, stdcall\n\nincludelib kernel32.lib\nincludelib libucrt.lib\nincludelib ../Debug/mylib.lib\n"
 #define TEXTMAXSIZE 255
 #define ASM_FILE_PATH "../ASM/ASM.asm"
-
+#define ASMCYCLE "MARK"
 
 namespace Generation
 {

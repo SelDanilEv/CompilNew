@@ -15,9 +15,19 @@ int _tmain(int argc, _TCHAR ** argv)
 		Log::WriteParm(log, parm);
 		In::IN in = In::getin(parm.in, parm.out);
 		LexA::Tables myTables = LexA::analyze(In::getInfo().currentLine, (char *)In::getInfo().fulltext.c_str());                 //запуск лексического анализатора
-		Semantic::CheckSemantic(myTables);
+		
+		FilesManager::WriteFiles(myTables,log);
+
+		MFST_TRACE_START
+		MFST::Mfst mfst(myTables, GRB::getGreibach());
+		mfst.start(log);
+		*log.stream << "\n\n";
+		mfst.savededucation();
+		mfst.printrules(log);
+
+		Semantic::CheckSemanticBeforePolish(myTables);
 		myTables = DoPolish(myTables);
-		FilesManager::WriteFiles(myTables);
+		Semantic::CheckSemanticAfterPolish(myTables);
 		Generation::Generate(myTables);
 		Log::WriteIn(log, in);
 		Log::Close(log);
@@ -26,6 +36,6 @@ int _tmain(int argc, _TCHAR ** argv)
 	{
 		Log::WriteError(log, e);
 	}
-
+	system("start ..\\compilation.bat");
 	return 0;
 }

@@ -5,7 +5,7 @@ namespace IT
 {
 	IdTable Create(int size)
 	{
-		if (size > TI_MAXSIZE) throw ERROR_THROW(160);
+		if (size > TI_MAXSIZE) throw ERROR_THROW(114);
 		IdTable Table;
 		Table.maxsize = size;
 		Table.size = 0;
@@ -15,7 +15,7 @@ namespace IT
 
 	void Add(IdTable& idtable, Entry entry)
 	{
-		if (idtable.size > idtable.maxsize) throw ERROR_THROW(161);
+		if (idtable.size > idtable.maxsize) throw ERROR_THROW(115);
 		idtable.table[idtable.size] = entry;
 		idtable.size++;
 	}
@@ -72,8 +72,8 @@ namespace IT
 		int counter = 0;
 
 		file << std::setfill('=') << std::setw(25) << "ID TABLE" << std::setw(16) << "\n\n";              //вывод преамбулы
-		file << std::setfill(' ') << std::setw(10) << "Name" << std::setw(15) << "Type" << std::setw(15) << "Data type" <<
-			std::setw(19) << "First in LT" << std::setw(21) << "Value" << "\n\n";
+		file << std::setfill(' ') << std::setw(10) << "Name" << std::setw(15) << "Type" << std::setw(18) << "Data type" <<
+			std::setw(19) << "First in LT" << std::setw(21) << "Value"  << std::setw(19) << "Visibility" << "\n\n";
 
 		for (int i = 0; i < idtable.size; i++)                                 //вывод таблицы
 		{

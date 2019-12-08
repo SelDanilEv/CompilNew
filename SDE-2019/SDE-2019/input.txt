@@ -1,20 +1,18 @@
-little function sum(little x) 
+little function sum(little x,text q) 
 {
-new little z;
-z= x*x;
-output(z);
-return z;
+x = 6-!110+buffer;
+q = q+'new Year';
+output(x);
+output(q);
+return 0;
 }; 
 
 start 
 {
 new little x;
-new text tema;
-x=sum(5)+5;
-tema = 'Hello';
-output(x);
-output(tema);
+from (0) to (15)$
+{
+x = sum(4,'Happy ');
+}
 return 0;
 };
-
-

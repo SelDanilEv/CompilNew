@@ -9,7 +9,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
+#include <math.h>
 
 namespace LexA
 {
@@ -209,7 +209,7 @@ namespace LexA
 				{
 					if (fulltext[counter] != SPACE)
 					{
-						if ((fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1]))|| fulltext[counter - 2]==LEX_ENDCONDCYCL)
+						if ((fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1])) || fulltext[counter - 2] == LEX_ENDCONDCYCL)
 							amountOfLex++;
 						onelex[amountOfLex] = fulltext[counter];
 						amountOfLex++;
@@ -291,6 +291,9 @@ namespace LexA
 				case 'o':
 					lex[0] = 6;
 					break;
+				case '!':
+					lex[0] = 8;
+					break;
 				case LEX_SEMICOLON:
 					lex[0] = 9;
 					break;
@@ -333,7 +336,7 @@ namespace LexA
 			for (int i = 0; i < 3; i++)
 			{
 				if (lex[i] != 7 && lex[i] > -1)
-					if (lex[i] < 7 || lex[i]==17|| lex[i]==18)         //если можно разобрать автоматом
+					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18)         //если можно разобрать автоматом
 					{
 						Update(str, lex[i]);
 						if (automats.automat[lex[i]] == lex[i])          //проверка подошел ли автомат
@@ -370,7 +373,7 @@ namespace LexA
 			case 3:
 				if (IT::IsId(myTables.myidtable, buff_name) != TI_NULLIDX)
 				{
-					throw ERROR_THROW_IN(122, currentLine, 0);
+					throw ERROR_THROW_IN(150, currentLine, 0);
 				}
 				myentryI.areaOfVisibility[0] = 0;
 				for (int q = 0; q < 5; q++)
@@ -390,7 +393,7 @@ namespace LexA
 				areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
 				bufferi = myTables.mylextable.size;
 				while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_START &&
-					myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON&& myTables.mylextable.table[bufferi].lexema != LEX_ENDCONDCYCL)
+					myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON && myTables.mylextable.table[bufferi].lexema != LEX_ENDCONDCYCL)
 				{
 					if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
 						myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
@@ -409,7 +412,7 @@ namespace LexA
 				myentryI.idxfirstLE = myTables.mylextable.size;
 				if (str[0] == '\'')                         //строковые
 				{
-					if (str[str.length() - 1] != '\'')throw ERROR_THROW_IN(125, currentLine, 0);
+					if (str[str.length() - 1] != '\'')throw ERROR_THROW_IN(112, currentLine, 0);
 					myentryI.value.vstr.len = str.length();
 					for (int i = 0; i < str.length(); i++)
 						myentryI.value.vstr.str[i] = str[i];
@@ -425,8 +428,27 @@ namespace LexA
 				}
 				else                               //целочисленные
 				{
-					if (!FST::literalInt((char*)str.c_str())) throw ERROR_THROW_IN(127, currentLine, 0);
-					myentryI.value.vint = std::stoi(str);
+					if (!FST::literalInt((char*)str.c_str())) throw ERROR_THROW_IN(113, currentLine, 0);
+					if (str[0] == '!')
+					{
+						int n = 0;
+						int numb = 0;
+						int counter = 0;
+						while (str[n] != NULL)
+						{
+							str[n] = str[n + 1];
+							n++;
+						}
+						for (int p = n - 2; p >= 0; p--)
+						{
+							if (str[p] == '1')
+								numb += pow(2, counter);
+							counter++;
+						}
+						myentryI.value.vint = numb;
+					}
+					else
+						myentryI.value.vint = std::stoi(str);
 					myentryI.id[0] = 'L';
 					buffer = std::to_string(counterOfIntegerLiteral++);
 					for (int i = 0; i < buffer.length(); i++)
@@ -450,7 +472,7 @@ namespace LexA
 					{
 						addNewInIT(myTables.myidtable, myTables.mylextable);
 						if (myentryI.iddatatype == IT::Err || myentryI.idtype == IT::E)
-							throw ERROR_THROW_IN(128, currentLine, 0);
+							throw ERROR_THROW_IN(154, currentLine, 0);
 					}
 					else
 					{
@@ -478,7 +500,7 @@ namespace LexA
 							}
 							if (bufferb)
 								addNewInIT(myTables.myidtable, myTables.mylextable);
-							else throw ERROR_THROW_IN(124, currentLine, 0);
+							else throw ERROR_THROW_IN(152, currentLine, 0);
 
 							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name, areaOfVisibilityLexAnaliz);
 							myentryL.idxTI = LexInIT;
@@ -500,7 +522,7 @@ namespace LexA
 						myentryL.idxTI = LexInIT;
 						bufferb = false;
 					}
-					if (bufferb)throw ERROR_THROW_IN(126, currentLine, 0);    //необъявленная переменная
+					if (bufferb)throw ERROR_THROW_IN(153, currentLine, 0);    //необъявленная переменная
 				}
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
@@ -512,19 +534,6 @@ namespace LexA
 				break;
 			}
 		}
-
-
-
-		/*MFST_TRACE_START
-
-			MFST::Mfst mfst(myTables, GRB::getGreibach());
-
-		mfst.start();
-		std::cout << "\n\n";
-
-		mfst.savededucation();
-		mfst.printrules();*/
-
 
 		return myTables;
 	}

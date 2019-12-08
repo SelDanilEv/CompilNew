@@ -3,14 +3,42 @@
 
 extern "C"
 {
-	char*  _stdcall copytxt(char* str1, char* str2)
+	char* _stdcall cleartxt(char* str1)
 	{
-			return strcpy(str1, str2);
+		short i = 0;
+		while (*(str1 + i) != NULL)
+		{
+			*(str1 + i) = NULL;
+			i++;
+		}
+		return str1;
 	}
 
-	char* _stdcall txtcon(char* str1, char* str2)
+	int _stdcall textlenght(char* str1) {
+		std::string rc;
+		rc = str1;
+		return rc.length();
+	}
+
+	int _stdcall sleep() {
+		system("pause");
+		return 0;
+	}
+
+	char* _stdcall copytxt(char* str1, char* str2)
 	{
-		char* buf = new char[255];
+		cleartxt(str1);
+		return strcpy(str1, str2);
+	}
+
+	char* _stdcall txtcon(char* str1, char* str2, char*buf)
+	{
+		short i = 0;
+		while (*(buf + i) != NULL)
+		{
+			*(buf + i) = NULL;
+			i++;
+		}
 		strcpy(buf, str2);
 		strcat(buf, str1);
 		return buf;

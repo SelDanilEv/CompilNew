@@ -2,5 +2,5 @@
 
 namespace FilesManager 
 {
-	void WriteFiles(LexA::Tables tables);
+	void WriteFiles(LexA::Tables tables,Log::LOG&);
 }

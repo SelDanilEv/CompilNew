@@ -11,7 +11,7 @@ namespace Log             //формирование файла Log
 		res.stream = new std::ofstream;   //выделяем память
 		res.stream->open(logfile);
 		if (!res.stream)
-			throw ERROR_THROW(112);
+			throw ERROR_THROW(103);
 		wcscpy_s(res.logfile, logfile);    //копируем в лог
 		return res;
 	}

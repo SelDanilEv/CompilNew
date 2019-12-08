@@ -1,15 +1,19 @@
 =================ID TABLE==============
 
-      Name           Type      Data type        First in LT                Value
+      Name           Type         Data type        First in LT                Value         Visibility
 
   0    buffer       variable         little             -1                        0              0
   1       sum       function         little              2                        0              0
   2         x      parameter         little              5                        0              0 1
-  3         z       variable         little             10                        0              0 1
-  4     start       function         little             28                        0              0
-  5         x       variable         little             32                        0              0 2
-  6      tema       variable           text             36                       NV              0 2
-  7        L0        literal         little             40                        5              0 2
-  8        L1        literal         little             43                        5              0 2
-  9        T0        literal           text             49                  'Hello'              0 2
- 10        L2        literal         little             62                        0              0 2
+  3         q      parameter           text              8                       NV              0 1
+  4        L0        literal         little             13                        6              0 1
+  5        L1        literal         little             15                        6              0 1
+  6        T0        literal           text             23               'new Year'              0 1
+  7        L2        literal         little             36                        0              0 1
+  8     start       function         little             40                        0              0
+  9         x       variable         little             44                        0              0 2
+ 10        L3        literal         little             48                        0              0 2
+ 11        L4        literal         little             52                       15              0 2
+ 12        L5        literal         little             60                        4              0 2 3
+ 13        T1        literal           text             62                 'Happy '              0 2 3
+ 14        L6        literal         little             67                        0              0 2

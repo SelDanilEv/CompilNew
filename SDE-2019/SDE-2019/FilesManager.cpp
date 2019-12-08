@@ -1,23 +1,28 @@
 #include "pch.h"
 #include "LexAnaliz.h"
+#include "Log.h"
 
 namespace FilesManager
 {
-	void WriteFiles(LexA::Tables tables)
+	void WriteFiles(LexA::Tables tables, Log::LOG& log)
 	{
+		*log.stream << "\n\n";
 		std::ofstream fileLT;               //формрирование файлов таблиц
 		fileLT.open("LT.txt");
 		LT::showTable(tables.mylextable, fileLT);
+		LT::showTable(tables.mylextable,*log.stream);
 		fileLT.close();
-
+		*log.stream << "\n\n";
 		std::ofstream fileLT_mini;
 		fileLT_mini.open("LT_mini.txt");
 		LT::showTable_mini(tables.mylextable, fileLT_mini);
+		LT::showTable_mini(tables.mylextable, *log.stream);
 		fileLT_mini.close();
-
+		*log.stream << "\n\n";
 		std::ofstream fileIT;
 		fileIT.open("IT.txt");
 		IT::showTable(tables.myidtable, fileIT);
+		IT::showTable(tables.myidtable, *log.stream);
 		fileIT.close();
 
 		std::cout << "\nFiles created\n\n";

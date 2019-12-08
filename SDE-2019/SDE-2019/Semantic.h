@@ -2,6 +2,7 @@
 
 namespace Semantic 
 {
-	void CheckSemantic(LexA::Tables tables);
+	void CheckSemanticAfterPolish(LexA::Tables tables);
+	void CheckSemanticBeforePolish(LexA::Tables tables);
 }
 
