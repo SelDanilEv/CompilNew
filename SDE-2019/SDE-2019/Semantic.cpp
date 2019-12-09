@@ -7,25 +7,44 @@ namespace Semantic
 		for (int i = 0; i < myTables.mylextable.size; i++) {       // семантика проверки
 			switch (myTables.mylextable.table[i].lexema)
 			{
+			case LEX_FROM:
+				if (myTables.myidtable.table[myTables.mylextable.table[i + 2].idxTI].iddatatype != IT::LIT || myTables.myidtable.table[myTables.mylextable.table[i + 6].idxTI].iddatatype != IT::LIT)
+					throw ERROR_THROW_IN(163, myTables.mylextable.table[i].sn, 0);
+				break;
 			case LEX_EQUAL:            //проверка на соответсвие типов в выражении
 			{
 				int j = i;
-				IT::IDDATATYPE mainType = myTables.myidtable.table[myTables.mylextable.table[i - 1].idxTI].iddatatype;
+				IT::IDDATATYPE mainType;
+				//if (myTables.mylextable.table[i - 1].value == LEX_LIBFUNCTION) 
+				
+				mainType= myTables.myidtable.table[myTables.mylextable.table[i - 1].idxTI].iddatatype;
 				std::stack<IT::IDDATATYPE> tempStack;
 				IT::IDDATATYPE tempType;
 				while (myTables.mylextable.table[++j].lexema != LEX_SEMICOLON)
 				{
-					bool correct = false;
 					if (myTables.mylextable.table[j].lexema == POLISHFUNCTION)
 					{
 						std::string tempstr = ""; tempstr += myTables.mylextable.table[j + 1].lexema;
 						int x = atoi(tempstr.c_str());
 						for (int q = 0; q < x; q++)
 							tempStack.pop();
-						correct = true;
 					}
-					if (myTables.mylextable.table[j].idxTI != LT_TI_NULLIDX&& myTables.mylextable.table[j].idxTI != -1)
+					switch (myTables.mylextable.table[j].idxTI)
+					{
+					case -1:
+					case LT_TI_NULLIDX:
+						break;
+					case -2:
+						tempStack.push(IT::LIT);
+						break;
+					case -3:
+						tempStack.push(IT::TXT);
+						break;
+					default:
 						tempStack.push(myTables.myidtable.table[myTables.mylextable.table[j].idxTI].iddatatype);
+						break;
+					}
+					
 				}
 				for (int q = 0; q < tempStack.size(); q++)
 				{
@@ -51,19 +70,50 @@ namespace Semantic
 			{
 				int k = i;
 				int counter = 0;
+				bool isCheckLibFunction = false;
+				int stateCheckLibFunction = -1;
+				int neededParams = 0;
 				while (myTables.mylextable.table[k++].lexema != LEX_SEMICOLON) {
-					if (myTables.mylextable.table[k].lexema == LEX_ID || myTables.mylextable.table[k].lexema == LEX_LITERAL)
+					if (myTables.mylextable.table[k].value == LEX_LIBFUNCTION) {
+						if (myTables.mylextable.table[k].idxTI == -2) {
+							stateCheckLibFunction = 0;
+							neededParams = 1;
+						}
+						else {
+							stateCheckLibFunction = 1;
+							neededParams = 2;
+						}
+						isCheckLibFunction = true;
+					}
+					if (myTables.mylextable.table[k].lexema == LEX_RIGHTTHESIS)isCheckLibFunction = false;
+					if ((myTables.mylextable.table[k].lexema == LEX_ID || myTables.mylextable.table[k].lexema == LEX_LITERAL)&& myTables.mylextable.table[k].value != LEX_LIBFUNCTION)
+					{
+						if (isCheckLibFunction) {
+							neededParams--;
+							if (stateCheckLibFunction == 0) {
+								if (myTables.myidtable.table[myTables.mylextable.table[k].idxTI].iddatatype != IT::TXT)
+									throw ERROR_THROW_IN(155, myTables.mylextable.table[k].sn, 0);
+							}
+							else {
+								if (myTables.myidtable.table[myTables.mylextable.table[k].idxTI].iddatatype != IT::TXT)
+									throw ERROR_THROW_IN(155, myTables.mylextable.table[k].sn, 0);
+							}
+						}
 						counter++;
+					}
 				}
+				if(neededParams!=0)
+					throw ERROR_THROW_IN(156, myTables.mylextable.table[i].sn, 0);
 				if (counter > 8)
 					throw ERROR_THROW_IN(162, myTables.mylextable.table[i].sn, 0);
 			}
+
 
 			if (myTables.mylextable.table[i].idxTI != LT_TI_NULLIDX)    //!!!!!!Работает тольк после синтаксического анализа!!!!!!!!!!
 			{
 				if (myTables.myidtable.table[myTables.mylextable.table[i].idxTI].idtype == IT::F)
 				{
-					if(myTables.myidtable.table[myTables.mylextable.table[i].idxTI].idxfirstLE==i){
+					if (myTables.myidtable.table[myTables.mylextable.table[i].idxTI].idxfirstLE == i) {
 						int k = i;
 						IT::IDDATATYPE funcType = myTables.myidtable.table[myTables.mylextable.table[i].idxTI].iddatatype;
 						IT::IDDATATYPE returnedType;

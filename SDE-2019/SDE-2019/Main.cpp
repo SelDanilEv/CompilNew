@@ -27,6 +27,8 @@ int _tmain(int argc, _TCHAR ** argv)
 
 		Semantic::CheckSemanticBeforePolish(myTables);
 		myTables = DoPolish(myTables);
+		FilesManager::WriteFiles(myTables);
+
 		Semantic::CheckSemanticAfterPolish(myTables);
 		Generation::Generate(myTables);
 		Log::WriteIn(log, in);
@@ -36,6 +38,5 @@ int _tmain(int argc, _TCHAR ** argv)
 	{
 		Log::WriteError(log, e);
 	}
-	system("start ..\\compilation.bat");
 	return 0;
 }

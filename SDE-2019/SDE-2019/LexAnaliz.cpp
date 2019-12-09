@@ -36,6 +36,22 @@ namespace LexA
 		};
 	}automats;
 
+	unsigned char buff_name[ID_MAXSIZE];            //дл€ идентификаторов
+	unsigned char buff_name_str[ID_MAXSIZE];            //дл€ идентификаторов
+	std::string standartFunction[] = { "copytxt","textlenght" };
+	bool isAStandartFunction = false;
+	int counterOfAreaOfVisibility = 0;
+	int counterOfBracket = 0;
+	short areaOfVisibilityLexAnaliz[5];
+	short counterOfIntegerLiteral = 0;
+	short counterOfStringLiteral = 0;
+	std::string buffer;
+	int bufferi;
+	int bufferi1;
+	bool bufferb;
+
+	IT::IDDATATYPE iddatatype;                            //вспомогательные переменные дл€ добавки в IT
+	IT::IDTYPE idtype;
 
 	IT::Entry myentryI;                   //вспомогательные сущности
 	LT::Entry myentryL;
@@ -82,26 +98,12 @@ namespace LexA
 		entryL.lexema = automats.lexema[identifyLex];
 		if (identifyLex != 16)
 			entryL.value = automats.value[identifyLex];
+		if(isAStandartFunction)
+			entryL.value = LEX_LIBFUNCTION;
 		entryL.sn = currentLine;
 		LT::Add(lextable, entryL);
 	}
 
-	unsigned char buff_name[ID_MAXSIZE];            //дл€ идентификаторов
-	unsigned char buff_name_str[ID_MAXSIZE];            //дл€ идентификаторов
-	std::string standartFunction[] = { "copytext","textlenght" };
-	bool isAStandartFunction = false;
-	int counterOfAreaOfVisibility = 0;
-	int counterOfBracket = 0;
-	short areaOfVisibilityLexAnaliz[5];
-	short counterOfIntegerLiteral = 0;
-	short counterOfStringLiteral = 0;
-	std::string buffer;
-	int bufferi;
-	int bufferi1;
-	bool bufferb;
-
-	IT::IDDATATYPE iddatatype;                            //вспомогательные переменные дл€ добавки в IT
-	IT::IDTYPE idtype;
 
 	bool FindIDByLexAndArea(LT::LexTable &lextable, IT::IdTable&idtable, std::string str) {
 		short* areaOfV = new short[5];
@@ -354,7 +356,7 @@ namespace LexA
 
 
 			isAStandartFunction = false;
-			for (int i = 0; i < standartFunction->length(); i++)
+			for (int i = 0; i <2; i++)
 			{
 				if (str == standartFunction[i]) isAStandartFunction = true;
 			}
@@ -505,10 +507,6 @@ namespace LexA
 							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name, areaOfVisibilityLexAnaliz);
 							myentryL.idxTI = LexInIT;
 						}
-						else {
-							LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
-							myentryL.idxTI = LexInIT;
-						}
 					}
 				}
 				else
@@ -517,10 +515,10 @@ namespace LexA
 					{
 						bufferb = FindIDByLexAndArea(myTables.mylextable, myTables.myidtable, str);
 					}
-					else {
-						LexInIT = IT::IsIdWithAreaOfVisibility(myTables.myidtable, buff_name_str, areaOfVisibilityLexAnaliz);
-						myentryL.idxTI = LexInIT;
-						bufferb = false;
+					else 
+					{
+						if (str == "textlenght")myentryL.idxTI = -2;
+						else myentryL.idxTI = -3;
 					}
 					if (bufferb)throw ERROR_THROW_IN(153, currentLine, 0);    //необъ€вленна€ переменна€
 				}

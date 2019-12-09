@@ -49,7 +49,7 @@ namespace Generation
 		IT::Entry helpIEntry;
 
 
-		Proto = "\nExitProcess PROTO : DWORD\nouttxt PROTO : DWORD\noutlit PROTO : SDWORD\ncopytxt PROTO : DWORD,:DWORD\ntxtcon PROTO : DWORD,:DWORD,:DWORD\ncleartxt PROTO : DWORD\nsleep PROTO\n";//дописать 
+		Proto = "\nExitProcess PROTO : DWORD\nouttxt PROTO : DWORD\noutlit PROTO : SDWORD\ncopytxt PROTO : DWORD,:DWORD\ntxtcon PROTO : DWORD,:DWORD,:DWORD\ncleartxt PROTO : DWORD\nsleep PROTO\ntextlenght PROTO : DWORD\n";//дописать 
 		Data.Code += "\tbuf byte 255 dup(0)\n\tcycleisneg dword 0\n";
 		for (int i = 0; i < idtable.size; i++)
 		{
@@ -162,7 +162,7 @@ namespace Generation
 				//buffstr += "\tpop eax\n\tpop ebx\n\tmov buffer00000,ebx\n\tsub eax,ebx\n\tmov ecx,eax\n";
 				buffstr += "\tpop eax\n\tpop ebx\n\tmov edx,eax\n\tsub eax,ebx\n\tcmp eax,0\n\tjl negative" + std::to_string(countOfCycles) + "\n" +
 					"\tmov buffer00000,ebx\n\tmov ecx,eax\n\tmov eax,0\n\tmov cycleisneg,eax\n\tjmp endcondcycle" + std::to_string(countOfCycles) +
-					"\nnegative" + std::to_string(countOfCycles) + " :\n\tmov buffer00000,edx\n\tneg eax\n\tmov ecx,eax\n" +
+					"\nnegative" + std::to_string(countOfCycles) + " :\n\tmov buffer00000,ebx\n\tneg eax\n\tmov ecx,eax\n\tadd ecx,1\n" +
 					"\tmov eax,1\n\tmov cycleisneg,eax\nendcondcycle" + std::to_string(countOfCycles) + " :\n";
 				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":\n";
 				break;
@@ -181,6 +181,21 @@ namespace Generation
 						isID = true;
 					case LEX_LITERAL:
 					{
+						if (lextable.table[i].value == LEX_LIBFUNCTION) {
+							switch (lextable.table[i].idxTI)
+							{
+							case -2:
+								buffstr += "\tpush textlenght\n";
+								MainStack.push("textlenght");
+								break;
+							case -3:
+								buffstr += "\tpush copytxt\n";
+								MainStack.push("copytxt");
+							default:
+								break;
+							}
+							break;
+						}
 						if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::LIT)
 						{
 							buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
@@ -208,7 +223,6 @@ namespace Generation
 						std::stack<std::string> temp;
 						std::string buf;
 						std::string mainstacktop;
-
 						int numbOfParameters = atoi(x.c_str());
 						for (j = 0; j < numbOfParameters; j++)
 						{
@@ -229,7 +243,18 @@ namespace Generation
 								MainStack.pop();
 							}
 						}
-						buffstr += "\tcall proc_" + GetName(lextable.table[i].idxTI, false) + "\n\tpush eax\n";
+						switch (lextable.table[i].idxTI)
+						{
+						case -2:
+							buffstr += "\tcall textlenght\n\tpush eax\n";
+							break;
+						case -3:
+							buffstr += "\tcall copytxt\n\tpush eax\n";
+							break;
+						default:
+							buffstr += "\tcall proc_" + GetName(lextable.table[i].idxTI, false) + "\n\tpush eax\n";
+							break;
+						}
 						i++;
 						break;
 					}
@@ -315,7 +340,7 @@ namespace Generation
 					if (!isMain || isID == false)
 						buffstr += "\tpush ecx\n\tpush " + returned + "\n\tcall outtxt\n\tpop ecx\n";
 					else
-						buffstr += "\tpush ecx\n\tpush offset" + returned + "\n\tcall outtxt\n\tpop ecx\n";
+						buffstr += "\tpush ecx\n\tpush offset " + returned + "\n\tcall outtxt\n\tpop ecx\n";
 				}
 				break;
 			}

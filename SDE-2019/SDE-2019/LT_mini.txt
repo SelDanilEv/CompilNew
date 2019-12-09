@@ -2,19 +2,22 @@
 
 tfi(ti,ti)
 {
-i=lvlvi;
-i=ivl;
-o(i);
-o(i);
-rl;
+nti;
+i=iiv;
+ri;
 };
 
 s
 {
 nti;
+i=l;
+nti;
 m(l)e(l)
 ${
-i=i(l,l);
+i=il@2;#;
+o(i);
 }
+i=llvlv;
+o(i);
 rl;
 };

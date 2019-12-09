@@ -15,9 +15,13 @@ extern "C"
 	}
 
 	int _stdcall textlenght(char* str1) {
-		std::string rc;
-		rc = str1;
-		return rc.length();
+		int i=0;
+		while (*(str1 + i) != NULL)
+		{
+			
+			i++;
+		}
+		return i;
 	}
 
 	int _stdcall sleep() {
@@ -33,12 +37,12 @@ extern "C"
 
 	char* _stdcall txtcon(char* str1, char* str2, char*buf)
 	{
-		short i = 0;
-		while (*(buf + i) != NULL)
+		//short i = 0;
+		/*while (*(buf + i) != NULL)
 		{
 			*(buf + i) = NULL;
 			i++;
-		}
+		}*/
 		strcpy(buf, str2);
 		strcat(buf, str1);
 		return buf;

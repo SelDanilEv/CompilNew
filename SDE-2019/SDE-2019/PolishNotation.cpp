@@ -95,8 +95,11 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	for (int i = 0; (i < countOfAllInputLex + 1) || lextable.table[startLex + i - 1].lexema == LEX_SEMICOLON; i++)
 	{
 		if (lextable.table[startLex + i].lexema == LEX_ID)
-			if (idtable.table[lextable.table[startLex + i].idxTI].idtype == IT::F)
+			if (lextable.table[startLex + i].value == LEX_LIBFUNCTION)
 				isAFunction = true;
+			else
+				if (idtable.table[lextable.table[startLex + i].idxTI].idtype == IT::F)
+					isAFunction = true;
 		switch (lextable.table[lextable_pos + i].lexema)
 		{
 		case LEX_LEFTTHESIS:
@@ -220,8 +223,8 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	bufferEntry.lexema = LATTICE;
 	bufferEntry.used = false;
 	bufferEntry.value = NULL;
-	bufferEntry.sn= Line;
-	for (int k = buffershort + 1; k < countOfAllInputLex + 1; k++)
+	bufferEntry.sn = Line;
+	for (int k = buffershort + 1; k < countOfAllInputLex; k++)
 	{
 		AlmostAllEntries[k] = bufferEntry;
 		lextable.table[startLex + k] = bufferEntry;
@@ -229,9 +232,9 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 
 	//изменения в idtable
 	int k = 0;
-	for (int i = 0; i < counter1; i++) 
+	for (int i = 0; i < counter1; i++)
 	{
-		if (AlmostAllEntries[i].lexema == LEX_LITERAL) 
+		if (AlmostAllEntries[i].lexema == LEX_LITERAL)
 		{
 			idtable.table[AlmostAllEntries[i].idxTI].idxfirstLE = lextable_pos + litPositions[k++];
 		}
