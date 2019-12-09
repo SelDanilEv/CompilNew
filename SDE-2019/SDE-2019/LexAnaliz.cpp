@@ -15,24 +15,27 @@ namespace LexA
 {
 	struct MyAutomat                       //структура для автоматов
 	{
-		int automat[20];                        //массив автоматов
+		int automat[21];                        //массив автоматов
 
-		char lexema[20] = {
+		char lexema[22] = {
 			LEX_LITTLE,LEX_TEXT,LEX_FUNCTION,
 			LEX_START,LEX_NEW,LEX_RETURN,
 			LEX_OUTPUT,LEX_ID,LEX_LITERAL,
 			LEX_SEMICOLON,LEX_COMMA,LEX_LEFTBRACE,
 			LEX_RIGHTBRACE,LEX_LEFTTHESIS,LEX_RIGHTTHESIS,
-			LEX_EQUAL,LEX_OPERATOR,LEX_FROM,LEX_TO,LEX_ENDCONDCYCL,
+			LEX_EQUAL,LEX_OPERATOR,LEX_FROM,
+			LEX_TO,LEX_ENDCONDCYCL,LEX_CHECK,
+			LEX_ENDCHECK
 		};
-		char value[20] = {
+		char value[22] = {
 			'l','t',' ',
 			' ',' ',' ',
 			' ',' ',' ',
 			' ',' ',' ',
 			' ',' ',' ',
 			' ',' ',' ',
-			' ','$'
+			' ','$',' ',
+			'?'
 		};
 	}automats;
 
@@ -82,11 +85,17 @@ namespace LexA
 		case 6:
 			automats.automat[6] = FST::output((char*)str.c_str());
 			break;
+		case 7:
+			automats.automat[7] = FST::id((char*)str.c_str());
+			break;
 		case 17:
 			automats.automat[17] = FST::from((char*)str.c_str());
 			break;
 		case 18:
 			automats.automat[18] = FST::to((char*)str.c_str());
+			break;
+		case 20:
+			automats.automat[20] = FST::check((char*)str.c_str());
 			break;
 		default:
 			break;
@@ -98,7 +107,7 @@ namespace LexA
 		entryL.lexema = automats.lexema[identifyLex];
 		if (identifyLex != 16)
 			entryL.value = automats.value[identifyLex];
-		if(isAStandartFunction)
+		if (isAStandartFunction)
 			entryL.value = LEX_LIBFUNCTION;
 		entryL.sn = currentLine;
 		LT::Add(lextable, entryL);
@@ -178,7 +187,7 @@ namespace LexA
 		std::string fulltext = fulltextch;                         //исходный текст
 		std::string onelex[300];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
-		char symvols[] = ";,{}()+-*/=\n\t";                        //символы сепараторы
+		char symvols[] = "?$;,{}()+-*/=\n\t";                        //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
 		currentLine = 0;
 		int LexInIT;                                      // какая строка в IT для лексемы
@@ -186,7 +195,7 @@ namespace LexA
 
 		for (int counter = 0; counter < fulltext.size(); counter++)           //парсер для текста
 		{
-			if (!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE)
+			if (!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE && fulltext[counter] != '\t')
 			{
 				if (fulltext[counter] == '\'')
 				{
@@ -209,15 +218,15 @@ namespace LexA
 			{
 				if (fulltext[counter] != NEWLINE)            //новая строка
 				{
-					if (fulltext[counter] != SPACE)
+					if (fulltext[counter] != SPACE && fulltext[counter] != '\t')
 					{
-						if ((fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1])) || fulltext[counter - 2] == LEX_ENDCONDCYCL)
+						if ((fulltext[counter - 1] != '\t'&&fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1])) && fulltext[counter - 1] != LEX_ENDCONDCYCL)
 							amountOfLex++;
 						onelex[amountOfLex] = fulltext[counter];
 						amountOfLex++;
 					}
 					else {
-						if (fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1]))
+						if (fulltext[counter - 1] != SPACE && fulltext[counter - 1] != '\t' && !strchr(symvols, fulltext[counter - 1]))
 							amountOfLex++;
 					}
 				}
@@ -264,81 +273,102 @@ namespace LexA
 				myentryI.id[i] = NULL;
 			char temp = onelex[i][0];                          //первая буква лексемы
 			str = onelex[i];
+
+			if (str == "")break;//checker
+
 			identifyLex = 0;
-			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/) 17-from 18-to 19-$
+			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/) 17-from 18-to 19-$ 20-check 21-C
 			lex[0] = -1; lex[1] = -1; lex[2] = -1;
-			if (temp == '1' || temp == '2' || temp == '3' || temp == '4' || temp == '5' || temp == '6' || temp == '7' || temp == '8' || temp == '9' || temp == '0' || temp == '\'')lex[0] = 8; else {
-				switch (temp)       //определение возможного типа лексемы
-				{
-				case 'l':
-					lex[0] = 0;       //little
-					break;
-				case 't':
-					lex[0] = 1;      //text
-					lex[1] = 18;
-					break;
-				case 'f':
-					lex[0] = 2;
-					lex[1] = 17;
-					break;
-				case 's':
-					lex[0] = 3;
-					break;
-				case 'n':
-					lex[0] = 4;
-					break;
-				case 'r':
-					lex[0] = 5;
-					break;
-				case 'o':
-					lex[0] = 6;
-					break;
-				case '!':
-					lex[0] = 8;
-					break;
-				case LEX_SEMICOLON:
-					lex[0] = 9;
-					break;
-				case LEX_COMMA:
-					lex[0] = 10;
-					break;
-				case LEX_LEFTBRACE:
-					lex[0] = 11;
-					break;
-				case LEX_RIGHTBRACE:
-					lex[0] = 12;
-					break;
-				case LEX_LEFTTHESIS:
-					lex[0] = 13;
-					break;
-				case LEX_RIGHTTHESIS:
-					lex[0] = 14;
-					break;
-				case LEX_EQUAL:
-					lex[0] = 15;
-					break;
-				case ('+'):
-					lex[0] = 16;
-					break;
-				case '-':
-					lex[0] = 16;
-					break;
-				case '*':
-					lex[0] = 16;
-					break;
-				case '/':
-					lex[0] = 16;
-					break;
-				case '$':
-					lex[0] = 19;
-				default:
-					break;
-				}      //определение возможного типа лексемы
-			}
+
+			switch (temp)       //определение возможного типа лексемы
+			{
+			case 'l':
+				lex[0] = 0;       //little
+				break;
+			case 't':
+				lex[0] = 1;      //text
+				lex[1] = 18;
+				break;
+			case 'f':
+				lex[0] = 2;
+				lex[1] = 17;
+				break;
+			case 'c':
+				lex[0] = 20;
+				break;
+			case 's':
+				lex[0] = 3;
+				break;
+			case 'n':
+				lex[0] = 4;
+				break;
+			case 'r':
+				lex[0] = 5;
+				break;
+			case 'o':
+				lex[0] = 6;
+				break;
+			case LEX_SEMICOLON:
+				lex[0] = 9;
+				break;
+			case LEX_COMMA:
+				lex[0] = 10;
+				break;
+			case LEX_LEFTBRACE:
+				lex[0] = 11;
+				break;
+			case LEX_RIGHTBRACE:
+				lex[0] = 12;
+				break;
+			case LEX_LEFTTHESIS:
+				lex[0] = 13;
+				break;
+			case LEX_RIGHTTHESIS:
+				lex[0] = 14;
+				break;
+			case LEX_EQUAL:
+				lex[0] = 15;
+				break;
+			case ('+'):
+				lex[0] = 16;
+				break;
+			case '-':
+				lex[0] = 16;
+				break;
+			case '*':
+				lex[0] = 16;
+				break;
+			case '/':
+				lex[0] = 16;
+				break;
+			case '$':
+				lex[0] = 19;
+				break;
+			case '?':
+				lex[0] = 21;
+				break;
+			case '!':
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case '\'':
+				lex[0] = 8;
+				break;
+			default:
+				break;
+			}      //определение возможного типа лексемы
+
 			for (int i = 0; i < 3; i++)
 			{
 				if (lex[i] != 7 && lex[i] > -1)
-					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18)         //если можно разобрать автоматом
+					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18 || lex[i] == 20)         //если можно разобрать автоматом
 					{
 						Update(str, lex[i]);
 						if (automats.automat[lex[i]] == lex[i])          //проверка подошел ли автомат
@@ -354,9 +384,14 @@ namespace LexA
 
 			if (lex[0] == -1 && lex[1] == -1 && lex[2] == -1) identifyLex = 7;
 
+			if (identifyLex == 7 && !isAStandartFunction&&str != "buffer") {
+				Update(str, 7);
+				if (automats.automat[7] != 7)
+					throw ERROR_THROW_IN(117, currentLine, 0);
+			}
 
 			isAStandartFunction = false;
-			for (int i = 0; i <2; i++)
+			for (int i = 0; i < 2; i++)
 			{
 				if (str == standartFunction[i]) isAStandartFunction = true;
 			}
@@ -395,7 +430,8 @@ namespace LexA
 				areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
 				bufferi = myTables.mylextable.size;
 				while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_START &&
-					myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON && myTables.mylextable.table[bufferi].lexema != LEX_ENDCONDCYCL)
+					myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON && myTables.mylextable.table[bufferi].lexema != LEX_ENDCONDCYCL &&
+					myTables.mylextable.table[bufferi].lexema != LEX_ENDCHECK)
 				{
 					if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
 						myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
@@ -515,7 +551,7 @@ namespace LexA
 					{
 						bufferb = FindIDByLexAndArea(myTables.mylextable, myTables.myidtable, str);
 					}
-					else 
+					else
 					{
 						if (str == "textlenght")myentryL.idxTI = -2;
 						else myentryL.idxTI = -3;

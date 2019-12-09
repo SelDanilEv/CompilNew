@@ -1,21 +1,29 @@
-little function sum(little x,little y) 
+new text out;
+new little x;
+
+little function show(little u) 
 {
-new little out;
-out = x+y;
-return out;
+out = '';
+from(0)to(u)$
+{
+out = out + '*';
+}
+output(out);
+return 0;
 }; 
 
 start 
 {
-new little x;
-x=0;
-new text hello;
-from (5) to (10)$
+from(1)to(10)$ 
 {
-x = sum(x,1);
-output(x);
+x = buffer;
+x = show(x);
 }
-hello ='Happy '+'New '+'Year';
-output(hello);
+out = ' ';
+from(10)to(1)$
+{
+x = buffer;
+x = show(x);
+}
 return 0;
 };

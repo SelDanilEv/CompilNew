@@ -43,7 +43,7 @@ LT::Entry findOperator(LT::Entry *entry, short* priority, short count, short max
 LexA::Tables DoPolish(LexA::Tables tables) {
 	bool bufferb;
 	for (int i = 0; i < tables.mylextable.size; i++) {    //преобразовать в польку где надо
-		if (tables.mylextable.table[i].lexema == LEX_EQUAL)
+		if (tables.mylextable.table[i].lexema == LEX_EQUAL&&tables.mylextable.table[i-3].lexema!=LEX_CHECK)
 		{
 			i++;
 			bufferb = polishNotation(i, tables.mylextable, tables.myidtable);
@@ -224,7 +224,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	bufferEntry.used = false;
 	bufferEntry.value = NULL;
 	bufferEntry.sn = Line;
-	for (int k = buffershort + 1; k < countOfAllInputLex; k++)
+	for (int k = buffershort + 1; k < countOfAllInputLex+1; k++)
 	{
 		AlmostAllEntries[k] = bufferEntry;
 		lextable.table[startLex + k] = bufferEntry;

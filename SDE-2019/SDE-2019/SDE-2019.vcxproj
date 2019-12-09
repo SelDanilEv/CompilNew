@@ -195,9 +195,14 @@
   <ItemGroup>
     <Text Include="input.txt" />
     <Text Include="input.txt.log" />
+    <Text Include="input2.txt" />
+    <Text Include="input3.txt" />
+    <Text Include="input4.txt" />
+    <Text Include="input5.txt" />
     <Text Include="IT.txt" />
     <Text Include="LT.txt" />
     <Text Include="LT_mini.txt" />
+    <Text Include="trace.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

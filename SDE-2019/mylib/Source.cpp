@@ -31,7 +31,6 @@ extern "C"
 
 	char* _stdcall copytxt(char* str1, char* str2)
 	{
-		cleartxt(str1);
 		return strcpy(str1, str2);
 	}
 

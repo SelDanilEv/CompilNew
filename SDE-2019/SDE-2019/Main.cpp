@@ -2,6 +2,7 @@
 #include <iostream>
 #include <locale>
 
+
 int _tmain(int argc, _TCHAR ** argv)
 	{
 	setlocale(LC_CTYPE, "Russian");
@@ -18,12 +19,16 @@ int _tmain(int argc, _TCHAR ** argv)
 		
 		FilesManager::WriteFiles(myTables,log);
 
+		std::ofstream filetrace;
+		filetrace.open("trace.txt");
 		MFST_TRACE_START
 		MFST::Mfst mfst(myTables, GRB::getGreibach());
-		mfst.start(log);
-		*log.stream << "\n\n";
+		if (!mfst.start(filetrace))
+			throw ERROR_THROW(136);
+		filetrace << "\n\n";
 		mfst.savededucation();
 		mfst.printrules(log);
+		filetrace.close();
 
 		Semantic::CheckSemanticBeforePolish(myTables);
 		myTables = DoPolish(myTables);

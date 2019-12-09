@@ -21,10 +21,15 @@ namespace Generation
 	IT::IdTable idtable;
 
 	int countOfCycles = 1;
-	int numbOfBraces;
+	int countOfChecks = 1;
+	int numbOfBracesCyc;
+	int numbOfBracesChc;
 	bool IsCycleForIDAndLITERALS = false;
 	bool IsCycle = false;
+	bool IsCheckForIDAndLITERALS = false;
+	bool IsCheck = false;
 	bool isID;
+	bool isCheck;
 
 	std::stack<std::string> MainStack;
 
@@ -50,7 +55,8 @@ namespace Generation
 
 
 		Proto = "\nExitProcess PROTO : DWORD\nouttxt PROTO : DWORD\noutlit PROTO : SDWORD\ncopytxt PROTO : DWORD,:DWORD\ntxtcon PROTO : DWORD,:DWORD,:DWORD\ncleartxt PROTO : DWORD\nsleep PROTO\ntextlenght PROTO : DWORD\n";//дописать 
-		Data.Code += "\tbuf byte 255 dup(0)\n\tcycleisneg dword 0\n";
+		Data.Code += "\tbuf byte 255 dup(0)\n";
+		Const.Code += "\tmesdivbyzero byte 'Divide by zero',0\n";
 		for (int i = 0; i < idtable.size; i++)
 		{
 			if (idtable.table[i].idtype != IT::F)
@@ -108,7 +114,7 @@ namespace Generation
 		while (!MainStack.empty())
 			MainStack.pop();
 		buffstr = "";
-		int counter = 1;
+		int counter = 0;
 		std::string object;
 		std::string name;
 		if (!isMain) {
@@ -132,22 +138,29 @@ namespace Generation
 			indexInLexTable += 2;
 		}
 		buffstr += '\n';
-		for (int i = indexInLexTable + 1; i > 0; i++)
+		if (isMain)indexInLexTable--;
+		for (int i = indexInLexTable; i > 0; i++)
 		{
 			isID = false;
-			if (counter < 1)i = -5;
+			if (counter < 0)i = -5;
 			switch (lextable.table[i].lexema)
 			{
 			case LEX_RIGHTBRACE:
 				counter--;
 				if (IsCycle)
-					if (counter == numbOfBraces)
+					if (counter == numbOfBracesCyc)
 					{
 						IsCycle = false;
-						buffstr += "\tmov eax,cycleisneg\n\tcmp eax,0\n\tje iter" + std::to_string(countOfCycles - 1) +
+						buffstr += "\tmov eax,cycleisneg" + std::to_string(countOfCycles-1) + "\n\tcmp eax,0\n\tje iter" + std::to_string(countOfCycles - 1) +
 							"\n\tsub buffer00000,1\n\tjmp enditer" + std::to_string(countOfCycles - 1) + "\niter" + std::to_string(countOfCycles - 1) + ":\n" +
 							"\tadd buffer00000,1\n\tenditer" + std::to_string(countOfCycles - 1) + ":\n" +
-							"loop " + (std::string)ASMCYCLE + std::to_string(countOfCycles - 1) + '\n';
+							"\tpop ecx\nloop " + (std::string)ASMCYCLE + std::to_string(countOfCycles - 1) + '\n';
+					}
+				if(IsCheck)
+					if (counter == numbOfBracesChc)
+					{
+						IsCheck = false;
+						buffstr += (std::string)ASMCHECK+std::to_string(countOfChecks - 1) +" :\n";
 					}
 				break;
 			case LEX_LEFTBRACE:
@@ -155,21 +168,36 @@ namespace Generation
 				break;
 			case LEX_FROM:
 				IsCycleForIDAndLITERALS = IsCycle = true;
-				numbOfBraces = counter;
+				numbOfBracesCyc = counter;
+				break;
+			case LEX_CHECK:
+				IsCheckForIDAndLITERALS = IsCheck = true;
+				numbOfBracesChc = counter;
 				break;
 			case LEX_ENDCONDCYCL:
 				IsCycleForIDAndLITERALS = false;
 				//buffstr += "\tpop eax\n\tpop ebx\n\tmov buffer00000,ebx\n\tsub eax,ebx\n\tmov ecx,eax\n";
 				buffstr += "\tpop eax\n\tpop ebx\n\tmov edx,eax\n\tsub eax,ebx\n\tcmp eax,0\n\tjl negative" + std::to_string(countOfCycles) + "\n" +
-					"\tmov buffer00000,ebx\n\tmov ecx,eax\n\tmov eax,0\n\tmov cycleisneg,eax\n\tjmp endcondcycle" + std::to_string(countOfCycles) +
+					"\tmov buffer00000,ebx\n\tmov ecx,eax\n\tmov eax,0\n\tmov cycleisneg" + std::to_string(countOfCycles) +
+					",eax\n\tjmp endcondcycle" + std::to_string(countOfCycles) +
 					"\nnegative" + std::to_string(countOfCycles) + " :\n\tmov buffer00000,ebx\n\tneg eax\n\tmov ecx,eax\n\tadd ecx,1\n" +
-					"\tmov eax,1\n\tmov cycleisneg,eax\nendcondcycle" + std::to_string(countOfCycles) + " :\n";
-				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":\n";
+					"\tmov eax,1\n\tmov cycleisneg" + std::to_string(countOfCycles) + ",eax\nendcondcycle" + std::to_string(countOfCycles) + " :\n";
+				Data.Code += "\tcycleisneg"+ std::to_string(countOfCycles) + " dword 0\n";
+				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":\n\tpush ecx\n";
+				break;
+			case LEX_ENDCHECK:
+				buffstr += "\tpop eax\n\tpop ebx\n\tcmp eax,ebx\n\tjne "+
+					(std::string)ASMCHECK + std::to_string(countOfChecks++) +"\n";
+				IsCheckForIDAndLITERALS = false;
 				break;
 			case LEX_EQUAL:
 			{
+				if (lextable.table[i - 3].lexema == LEX_CHECK)
+					break;
 				object = GetName(lextable.table[i - 1].idxTI, true);
-				buffstr += "push ecx;\n";
+				if (idtable.table[lextable.table[i - 1].idxTI].idtype == IT::V && !isMain)
+					if(idtable.table[lextable.table[i - 1].idxTI].iddatatype!=IT::LIT)
+					object = "offset " + object;
 				bool TypeObject;  //true numb    false text
 				if (idtable.table[lextable.table[i - 1].idxTI].iddatatype == IT::LIT)TypeObject = true; else TypeObject = false;
 				while (lextable.table[i].lexema != LEX_SEMICOLON && lextable.table[i].lexema != LATTICE)
@@ -210,8 +238,15 @@ namespace Generation
 								}
 							}
 							else {
-								buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
-								MainStack.push(GetName(lextable.table[i].idxTI, isID));
+								if (idtable.table[lextable.table[i].idxTI].idtype != IT::V)
+								{
+									buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
+									MainStack.push(GetName(lextable.table[i].idxTI, isID));
+								}
+								else {
+									buffstr += "\tpush offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
+									MainStack.push("offset " + GetName(lextable.table[i].idxTI, isID));
+								}
 							}
 						}
 						break;
@@ -233,8 +268,12 @@ namespace Generation
 							mainstacktop = MainStack.top();
 							if (mainstacktop.size() > 8) {
 								if (mainstacktop[7] == 'T'&&mainstacktop.size() < 12) {
-									buffstr += "push ecx;\n\tpush " + mainstacktop + "\n\tpush " + mainstacktop + 'T' +
-										"\n\tcall copytxt\npop ecx;\n\tpush " + mainstacktop + 'T' + '\n';
+									buffstr += "\tpush " + mainstacktop + "\n\tpush " + mainstacktop + 'T' +
+										"\n\tcall copytxt\n\tpush " + mainstacktop + 'T' + '\n';
+									MainStack.pop();
+								}
+								else {
+									buffstr += "\tpush " + mainstacktop + '\n';
 									MainStack.pop();
 								}
 							}
@@ -286,6 +325,12 @@ namespace Generation
 							buffstr += "\tpop ebx\n\tpop eax\n\tsub eax, ebx\n\tpush eax\n";
 							break;
 						}
+						case '/':
+							buffstr += "\tpop ebx\n\tpop eax\n\tcmp ebx,0\n\tje divbyzero\n\tmov edx,0\n\tidiv ebx\n\tpush eax\n";
+							break;
+						case '%':
+							buffstr += "\tpop ebx\n\tcmp ebx,0\n\tje divbyzero\n\tmov edx,0\n\tidiv ebx\n\tpush edx\n";
+							break;
 						}
 						break;
 					}
@@ -300,7 +345,7 @@ namespace Generation
 						buffstr += "\tpush offset " + object + '\n';
 					else
 						buffstr += "\tpush " + object + '\n';
-					buffstr += "\tcall copytxt\npop ecx;\n";
+					buffstr += "\tcall copytxt\n";
 				}
 				break;
 			case LEX_RETURN:
@@ -316,9 +361,14 @@ namespace Generation
 						if (isMain)
 							buffstr += "\tmov eax, offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
 						else
-							buffstr += "\tmov eax, " + GetName(lextable.table[i].idxTI, isID) + '\n';
-					if (!isMain)
+							if (idtable.table[lextable.table[i].idxTI].idtype == IT::V)
+								buffstr += "\tmov eax, offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
+							else
+								buffstr += "\tmov eax, " + GetName(lextable.table[i].idxTI, isID) + '\n';
+					if (!isMain) {
+						buffstr += "jmp toend\ndivbyzero:\n\tpush offset mesdivbyzero\n\tcall outtxt\n\tcall sleep\n\tcall ExitProcess\ntoend:\n";
 						buffstr += "\tret\n";
+					}
 					else
 						buffstr += "\tpush 0\n";
 				}
@@ -331,16 +381,19 @@ namespace Generation
 					if ((idtable.table[lextable.table[i + 2].idxTI].idtype == IT::V) || (idtable.table[lextable.table[i + 2].idxTI].idtype == IT::P))
 						isID = true;
 					returned = GetName(lextable.table[i + 2].idxTI, isID);
-					buffstr += "\tpush ecx\n\tpush " + returned + "\n\tcall outlit\n\tpop ecx\n";
+					buffstr += "\tpush " + returned + "\n\tcall outlit\n";
 				}
 				else {
 					if ((idtable.table[lextable.table[i + 2].idxTI].idtype == IT::V) || (idtable.table[lextable.table[i + 2].idxTI].idtype == IT::P))
 						isID = true;
 					returned = GetName(lextable.table[i + 2].idxTI, isID);
 					if (!isMain || isID == false)
-						buffstr += "\tpush ecx\n\tpush " + returned + "\n\tcall outtxt\n\tpop ecx\n";
+						if (idtable.table[lextable.table[i + 2].idxTI].idtype != IT::P)
+							buffstr += "\tpush offset " + returned + "\n\tcall outtxt\n";
+						else
+							buffstr += "\tpush " + returned + "\n\tcall outtxt\n";
 					else
-						buffstr += "\tpush ecx\n\tpush offset " + returned + "\n\tcall outtxt\n\tpop ecx\n";
+						buffstr += "\tpush offset " + returned + "\n\tcall outtxt\n";
 				}
 				break;
 			}
@@ -353,7 +406,7 @@ namespace Generation
 				isID = true;
 			case LEX_LITERAL:
 			{
-				if (IsCycleForIDAndLITERALS)
+				if (IsCycleForIDAndLITERALS|| IsCheckForIDAndLITERALS)
 					if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::LIT)
 						buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
 				break;
@@ -364,6 +417,7 @@ namespace Generation
 			buffstr += "proc_" + name + " endp";
 		}
 		else {
+			buffstr += "jmp toend\ndivbyzero:\n\tpush offset mesdivbyzero\n\tcall outtxt\ntoend:\n";
 			buffstr += "\tcall sleep\n\tcall ExitProcess\nmain endp\nend main";
 		}
 		Code.Code += buffstr;

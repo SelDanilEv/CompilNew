@@ -3,6 +3,7 @@
 #define TEXTMAXSIZE 255
 #define ASM_FILE_PATH "../ASM/ASM.asm"
 #define ASMCYCLE "MARK"
+#define ASMCHECK "OUTCHECK"
 
 namespace Generation
 {
@@ -17,22 +18,4 @@ namespace Generation
 	void GenerateReturn();
 	void GenerateExpression();
 	void GenerateFunction(int);
-
-	//enum INSTRUCTIONTYPE
-	//{                   // Типы инструкций
-	//	PUSH = 0,		// помещение переменной в стек
-	//	FUNC = 2,		// инициализация функции tfi
-	//	RET = 3,		// возврат значения функции: return l/i/expression;
-	//	PRNT = 4,		// вывод : print  l/i/expression;
-	//	ADD = 5,		// +
-	//	ADDSTR = 6,
-	//	DIFF = 7,		// - бинарный
-	//	UDIFF = 8,		// - унарный ( лексема - '!')
-	//	DIV = 9,		// /
-	//	MUL = 10,		// *
-	//	SEM = 11,		// ;
-	//	PARM = 12,		// параметр : (ti,...)
-	//	CALL = 13,		// вызов функции : i(...)
-	//	ENDP = 14,		// конец процедуры : fucn_name ENDP
-	//};
 }
