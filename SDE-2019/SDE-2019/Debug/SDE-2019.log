@@ -1,8 +1,7 @@
-﻿Сборка начата 09.12.2019 2:47:41.
+﻿Сборка начата 09.12.2019 12:41:26.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:8800 = 11F414B0
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -95,4 +94,4 @@ windir = C:\WINDOWS
     Предупреждений: 0
     Ошибок: 0
 
-Прошло времени 00:00:04.68
+Прошло времени 00:00:03.63

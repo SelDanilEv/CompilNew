@@ -51,6 +51,7 @@ namespace Generation
 
 		Proto = "\nExitProcess PROTO : DWORD\nouttxt PROTO : DWORD\noutlit PROTO : SDWORD\ncopytxt PROTO : DWORD,:DWORD\ntxtcon PROTO : DWORD,:DWORD,:DWORD\ncleartxt PROTO : DWORD\nsleep PROTO\ntextlenght PROTO : DWORD\n";//дописать 
 		Data.Code += "\tbuf byte 255 dup(0)\n\tcycleisneg dword 0\n";
+		Const.Code += "\tmesdivbyzero byte 'Divide by zero',0\n";
 		for (int i = 0; i < idtable.size; i++)
 		{
 			if (idtable.table[i].idtype != IT::F)
@@ -169,6 +170,8 @@ namespace Generation
 			case LEX_EQUAL:
 			{
 				object = GetName(lextable.table[i - 1].idxTI, true);
+				if (idtable.table[lextable.table[i - 1].idxTI].idtype == IT::V && !isMain)
+					object = "offset " + object;
 				buffstr += "push ecx;\n";
 				bool TypeObject;  //true numb    false text
 				if (idtable.table[lextable.table[i - 1].idxTI].iddatatype == IT::LIT)TypeObject = true; else TypeObject = false;
@@ -210,8 +213,15 @@ namespace Generation
 								}
 							}
 							else {
-								buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
-								MainStack.push(GetName(lextable.table[i].idxTI, isID));
+								if (idtable.table[lextable.table[i].idxTI].idtype != IT::V)
+								{
+									buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
+									MainStack.push(GetName(lextable.table[i].idxTI, isID));
+								}
+								else {
+									buffstr += "\tpush offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
+									MainStack.push("offset "+GetName(lextable.table[i].idxTI, isID));
+								}
 							}
 						}
 						break;
@@ -286,6 +296,12 @@ namespace Generation
 							buffstr += "\tpop ebx\n\tpop eax\n\tsub eax, ebx\n\tpush eax\n";
 							break;
 						}
+						case '/':
+							buffstr += "\tpop ebx\n\tcmp ebx,0\n\tje divbyzero\n\tmov edx,0\n\tidiv ebx\n\tpush eax\n";
+							break;
+						case '%':
+							buffstr += "\tpop ebx\n\tcmp ebx,0\n\tje divbyzero\n\tmov edx,0\n\tidiv ebx\n\tpush edx\n";
+							break;
 						}
 						break;
 					}
@@ -316,7 +332,10 @@ namespace Generation
 						if (isMain)
 							buffstr += "\tmov eax, offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
 						else
-							buffstr += "\tmov eax, " + GetName(lextable.table[i].idxTI, isID) + '\n';
+							if (idtable.table[lextable.table[i].idxTI].idtype == IT::V)
+								buffstr += "\tmov eax, offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
+							else
+								buffstr += "\tmov eax, " + GetName(lextable.table[i].idxTI, isID) + '\n';
 					if (!isMain)
 						buffstr += "\tret\n";
 					else
@@ -338,7 +357,10 @@ namespace Generation
 						isID = true;
 					returned = GetName(lextable.table[i + 2].idxTI, isID);
 					if (!isMain || isID == false)
-						buffstr += "\tpush ecx\n\tpush " + returned + "\n\tcall outtxt\n\tpop ecx\n";
+						if (idtable.table[lextable.table[i + 2].idxTI].idtype == IT::V)
+							buffstr += "\tpush ecx\n\tpush offset " + returned + "\n\tcall outtxt\n\tpop ecx\n";
+						else
+							buffstr += "\tpush ecx\n\tpush " + returned + "\n\tcall outtxt\n\tpop ecx\n";
 					else
 						buffstr += "\tpush ecx\n\tpush offset " + returned + "\n\tcall outtxt\n\tpop ecx\n";
 				}
@@ -364,6 +386,7 @@ namespace Generation
 			buffstr += "proc_" + name + " endp";
 		}
 		else {
+			buffstr += "jmp toend\ndivbyzero:\n\tpush offset mesdivbyzero\n\tcall outtxt\ntoend:\n";
 			buffstr += "\tcall sleep\n\tcall ExitProcess\nmain endp\nend main";
 		}
 		Code.Code += buffstr;

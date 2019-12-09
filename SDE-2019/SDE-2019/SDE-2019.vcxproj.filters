@@ -133,5 +133,17 @@
     <Text Include="input.txt.log">
       <Filter>files</Filter>
     </Text>
+    <Text Include="input2.txt">
+      <Filter>files</Filter>
+    </Text>
+    <Text Include="input3.txt">
+      <Filter>files</Filter>
+    </Text>
+    <Text Include="input4.txt">
+      <Filter>files</Filter>
+    </Text>
+    <Text Include="input5.txt">
+      <Filter>files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

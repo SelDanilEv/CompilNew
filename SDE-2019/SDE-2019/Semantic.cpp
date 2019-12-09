@@ -16,8 +16,8 @@ namespace Semantic
 				int j = i;
 				IT::IDDATATYPE mainType;
 				//if (myTables.mylextable.table[i - 1].value == LEX_LIBFUNCTION) 
-				
-				mainType= myTables.myidtable.table[myTables.mylextable.table[i - 1].idxTI].iddatatype;
+
+				mainType = myTables.myidtable.table[myTables.mylextable.table[i - 1].idxTI].iddatatype;
 				std::stack<IT::IDDATATYPE> tempStack;
 				IT::IDDATATYPE tempType;
 				while (myTables.mylextable.table[++j].lexema != LEX_SEMICOLON)
@@ -44,7 +44,7 @@ namespace Semantic
 						tempStack.push(myTables.myidtable.table[myTables.mylextable.table[j].idxTI].iddatatype);
 						break;
 					}
-					
+
 				}
 				for (int q = 0; q < tempStack.size(); q++)
 				{
@@ -66,6 +66,18 @@ namespace Semantic
 		if (IT::IsId(myTables.myidtable, (unsigned char*)mainFunctionStrName.c_str()) == TI_NULLIDX) throw ERROR_THROW(151);
 		//check parameters
 		for (int i = 0; i < myTables.mylextable.size; i++) {       // семантика проверки
+			if (myTables.mylextable.table[i].lexema == LEX_DIRSLASH && myTables.mylextable.table[i].value == '/')
+			{
+				if (myTables.mylextable.table[i + 1].idxTI != TI_NULLIDX) {
+					if (myTables.mylextable.table[i + 1].lexema != LEX_LEFTTHESIS)
+						if (myTables.myidtable.table[myTables.mylextable.table[i + 1].idxTI].iddatatype == IT::LIT && myTables.myidtable.table[myTables.mylextable.table[i + 1].idxTI].idtype == IT::L) {
+							if (myTables.myidtable.table[myTables.mylextable.table[i + 1].idxTI].value.vint == 0)
+								throw ERROR_THROW_IN(2, myTables.mylextable.table[i].sn, 0);
+						}
+				}
+			}
+
+
 			if (myTables.mylextable.table[i].lexema == LEX_EQUAL)
 			{
 				int k = i;
@@ -86,7 +98,7 @@ namespace Semantic
 						isCheckLibFunction = true;
 					}
 					if (myTables.mylextable.table[k].lexema == LEX_RIGHTTHESIS)isCheckLibFunction = false;
-					if ((myTables.mylextable.table[k].lexema == LEX_ID || myTables.mylextable.table[k].lexema == LEX_LITERAL)&& myTables.mylextable.table[k].value != LEX_LIBFUNCTION)
+					if ((myTables.mylextable.table[k].lexema == LEX_ID || myTables.mylextable.table[k].lexema == LEX_LITERAL) && myTables.mylextable.table[k].value != LEX_LIBFUNCTION)
 					{
 						if (isCheckLibFunction) {
 							neededParams--;
@@ -102,7 +114,7 @@ namespace Semantic
 						counter++;
 					}
 				}
-				if(neededParams!=0)
+				if (neededParams != 0)
 					throw ERROR_THROW_IN(156, myTables.mylextable.table[i].sn, 0);
 				if (counter > 8)
 					throw ERROR_THROW_IN(162, myTables.mylextable.table[i].sn, 0);
