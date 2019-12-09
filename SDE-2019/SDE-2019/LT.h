@@ -10,10 +10,11 @@
 #define LEX_FUNCTION	'f'	// лексема для function
 #define LEX_NEW			'n'	// лексема для new
 #define LEX_RETURN		'r'	// лексема для return
-#define LEX_OUTPUT		'o'	// лексема для print
+#define LEX_OUTPUT		'o'	// лексема для output
 #define LEX_START		's'	// лексема для start
 #define LEX_FROM		'm'	// лексема для from
 #define LEX_TO			'e'	// лексема для to
+#define LEX_LIBFUNCTION	'z'	// лексема для библиотечных функций
 #define LEX_SEMICOLON	';'	// лексема для ;
 #define LEX_COMMA		','	// лексема для ,
 #define LEX_LEFTBRACE	'{'	// лексема для {
@@ -28,6 +29,7 @@
 #define LEX_OPERATOR	'v'	// лексема для операторов
 #define LEX_EQUAL		'=' // лексема для =
 #define NEWLINE			'\n'// новая строка
+#define POLISHFUNCTION  '@'
 #define LATTICE 		'#'// #
 #define SPACE	 		' '// space
 

@@ -4,8 +4,11 @@ namespace Error
 {
 	// серии ошибок:  0 -  99 - системные ошибки
 	//				100 - 109 - ошибки параметров
-	//				110 - 119 - ошибки открытия и чтения
-	//				120 - 140 - ошибки лексического анализа
+	//				110 - 129 - ошибки лексического анализа
+	//				130 - 149 - ошибки синтаксического анализа
+	//				150 - 169 - ошибки семантического анализа
+	//				170 - 200 - ошибки другие
+
 	ERROR errors[ERROR_MAX_ENTRY] =
 	{
 		ERROR_ENTRY(0, "Недопустимый код ошибки"),		// код ошибки вне диапазона 0 - ERROR_MAX_ENTRY
@@ -15,52 +18,66 @@ namespace Error
 		ERROR_ENTRY_NODEF10(10), ERROR_ENTRY_NODEF10(20), ERROR_ENTRY_NODEF10(30), ERROR_ENTRY_NODEF10(40), ERROR_ENTRY_NODEF10(50),
 		ERROR_ENTRY_NODEF10(60), ERROR_ENTRY_NODEF10(70), ERROR_ENTRY_NODEF10(80), ERROR_ENTRY_NODEF10(90),
 		ERROR_ENTRY(100, "Параметр -in должен быть задан"),
-		ERROR_ENTRY_NODEF(101), ERROR_ENTRY_NODEF(102), ERROR_ENTRY_NODEF(103),
+		ERROR_ENTRY(101,"Ошибка при открытии файла с исходным кодом (-in)"),
+		ERROR_ENTRY(102,"Недопустимый символ в исходном файле (-in)"),
+		ERROR_ENTRY(103,"Ошибка при создании файла протокола (-log)"),
 		ERROR_ENTRY(104, "Превышена длина входного параметра"),
-		ERROR_ENTRY_NODEF(105), ERROR_ENTRY_NODEF(106), ERROR_ENTRY_NODEF(107),
-		ERROR_ENTRY_NODEF(108), ERROR_ENTRY_NODEF(109),
-		ERROR_ENTRY(110, "Ошибка при открытии файла с исходным кодом (-in)"),
-		ERROR_ENTRY(111, "Недопустимый символ в исходном файле (-in)"),
-		ERROR_ENTRY(112, "Ошибка при создании файла протокола (-log)"),
-		ERROR_ENTRY_NODEF(113), ERROR_ENTRY_NODEF(114), ERROR_ENTRY_NODEF(115),
-		ERROR_ENTRY_NODEF(116), ERROR_ENTRY_NODEF(117), ERROR_ENTRY_NODEF(118), ERROR_ENTRY_NODEF(119),
-		ERROR_ENTRY(120, "Превышен максимльный размер таблицы лексем"),
-		ERROR_ENTRY(121, "Таблица лексем переполнена"),
-		ERROR_ENTRY(122, "Функция main должна быть одна"),
-		ERROR_ENTRY(123, "Функция main не обнаружена"),
-		ERROR_ENTRY(124, "Повторное объявление переменной в одной области видимости"),
-		ERROR_ENTRY(125, "Не найден конец строкового литерала"),
-		ERROR_ENTRY(126, "Используется не объявленная переменная"),
-		ERROR_ENTRY(127, "Неправильно объявление числового литерала"),
-		ERROR_ENTRY(128, "Неверное объявление переменной"),
-		ERROR_ENTRY(129, "Неверный тип параметра"),
-		ERROR_ENTRY(130, "" ),
-		ERROR_ENTRY_NODEF(131),
-		ERROR_ENTRY_NODEF(132),
-		ERROR_ENTRY_NODEF(133),
-		ERROR_ENTRY_NODEF(134),
-		ERROR_ENTRY_NODEF(135),
+		ERROR_ENTRY_NODEF(105), ERROR_ENTRY_NODEF(106), ERROR_ENTRY_NODEF(107),ERROR_ENTRY_NODEF(108),
+		ERROR_ENTRY_NODEF(109),
+		ERROR_ENTRY(110,"Превышен максимльный размер таблицы лексем"),
+		ERROR_ENTRY(111,"Таблица лексем переполнена"),
+		ERROR_ENTRY(112,"Не найден конец строкового литерала"),
+		ERROR_ENTRY(113,"Неправильно объявление числового литерала"),
+		ERROR_ENTRY(114,"Превышен максимльный размер таблицы идентификаторов"),
+		ERROR_ENTRY(115,"Таблица идентификаторов переполнена"),
+		ERROR_ENTRY(116,"Ошибка лексического анализа"),
+		ERROR_ENTRY_NODEF(117),
+		ERROR_ENTRY_NODEF(118),
+		ERROR_ENTRY_NODEF(119),
+		ERROR_ENTRY_NODEF10(120),
+		ERROR_ENTRY(130,"Неверная структура программы"),
+		ERROR_ENTRY(131,"Ошибка в выражении"),
+		ERROR_ENTRY(132,"Ошибочный оператор"),
+		ERROR_ENTRY(133,"Ошибка в параметрах функции"),
+		ERROR_ENTRY(134,"Ошибка в параметрах вызываемой функции"),
+		ERROR_ENTRY(135,"Ошибочный оператор"),
 		ERROR_ENTRY_NODEF(136),
 		ERROR_ENTRY_NODEF(137),
 		ERROR_ENTRY_NODEF(138),
 		ERROR_ENTRY_NODEF(139),
-		ERROR_ENTRY_NODEF10(140), ERROR_ENTRY_NODEF10(150),
-		ERROR_ENTRY(160, "Превышен максимльный размер таблицы идентификаторов"),
-		ERROR_ENTRY(161, "Таблица идентификаторов переполнена"),
-		ERROR_ENTRY(162, "Ошибка лексического анализа"), ERROR_ENTRY(163, ""), ERROR_ENTRY(164, ""),
-		ERROR_ENTRY(165, ""), ERROR_ENTRY(166, ""), ERROR_ENTRY(167, ""), ERROR_ENTRY(168, ""), ERROR_ENTRY(169, ""),
-		ERROR_ENTRY_NODEF10(170), ERROR_ENTRY_NODEF10(180), ERROR_ENTRY_NODEF10(190),
-		ERROR_ENTRY_NODEF100(200), ERROR_ENTRY_NODEF100(300), ERROR_ENTRY_NODEF100(400), ERROR_ENTRY_NODEF100(500),
-		ERROR_ENTRY(600, "Неверная структура программы"),
-		ERROR_ENTRY(601, "Ошибка в выражении"),
-		ERROR_ENTRY(602, "Ошибочный оператор"),
-		ERROR_ENTRY(603, "Ошибка в параметрах функции"),
-		ERROR_ENTRY(604, "Ошибка в параметрах вызываемой функции"),
-		ERROR_ENTRY(605, "Ошибочный оператор"),
-		ERROR_ENTRY_NODEF(606), ERROR_ENTRY_NODEF(607), ERROR_ENTRY_NODEF(609),
-		ERROR_ENTRY_NODEF10(610), ERROR_ENTRY_NODEF10(620), ERROR_ENTRY_NODEF10(630), ERROR_ENTRY_NODEF10(640),
-		ERROR_ENTRY_NODEF10(660), ERROR_ENTRY_NODEF10(670), ERROR_ENTRY_NODEF10(680), ERROR_ENTRY_NODEF10(690),
-		ERROR_ENTRY_NODEF100(700), ERROR_ENTRY_NODEF100(800), ERROR_ENTRY_NODEF100(900)
+		ERROR_ENTRY_NODEF10(140),
+		ERROR_ENTRY(150,"Функция start должна быть определена только 1 раз"),
+		ERROR_ENTRY(151,"Определение функции start не обнаружена"),
+		ERROR_ENTRY(152,"Повторное объявление переменной в данной области видимости"),
+		ERROR_ENTRY(153,"Используется не объявленная переменная"),
+		ERROR_ENTRY(154,"Неверное объявление переменной"),
+		ERROR_ENTRY(155,"Неверные типы параметров"),
+		ERROR_ENTRY(156,"Неверное количество параметров"),
+		ERROR_ENTRY(157,"Несоответсвие типов"),
+		ERROR_ENTRY(158,"Превышено максимальное колличество передаваемых параметров при определении функции"),
+		ERROR_ENTRY(159,"Превышено максимальное колличество передаваемых параметров при вызове функции"),
+		ERROR_ENTRY(160,"Функция не возращает значение"),
+		ERROR_ENTRY(161,"Тип возращаемого значения не соответсвует типу функции"),
+		ERROR_ENTRY(162,"Превышено максимальное количество опердов для выражения"),
+		ERROR_ENTRY(163,"Параметры цикла могут быть только типа little"),
+		ERROR_ENTRY_NODEF(164),
+		ERROR_ENTRY_NODEF(165),
+		ERROR_ENTRY_NODEF(166),
+		ERROR_ENTRY_NODEF(167),
+		ERROR_ENTRY_NODEF(168),
+		ERROR_ENTRY_NODEF(169),
+		ERROR_ENTRY_NODEF(170),
+		ERROR_ENTRY_NODEF10(180),
+		ERROR_ENTRY_NODEF(190),
+		ERROR_ENTRY_NODEF(191),
+		ERROR_ENTRY_NODEF(192),
+		ERROR_ENTRY_NODEF(193),
+		ERROR_ENTRY_NODEF(194),
+		ERROR_ENTRY_NODEF(195),
+		ERROR_ENTRY_NODEF(196),
+		ERROR_ENTRY_NODEF(197),
+		ERROR_ENTRY_NODEF(198),
+		ERROR_ENTRY_NODEF(199,"Ошибка в построении польской записи")
 	};
 
 	ERROR geterror(int id)
@@ -69,6 +86,7 @@ namespace Error
 		if (id < 0 || id > ERROR_MAX_ENTRY)
 			return errors[0];
 		er.id = id;
+		er.inext.col = er.inext.line = 0;
 		strcpy_s(er.message, errors[id].message);
 		return er;
 	}
@@ -79,7 +97,7 @@ namespace Error
 		if (id < 0 || id > ERROR_MAX_ENTRY)
 			return errors[0];
 		er.id = id;
-		er.inext.line = line;
+		er.inext.line = line + 1;
 		er.inext.col = col;
 		strcpy_s(er.message, errors[id].message);
 		return er;

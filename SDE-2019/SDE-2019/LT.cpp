@@ -4,7 +4,7 @@ namespace LT
 {
 	LexTable Create(int size)
 	{
-		if (size > LT_MAXSIZE) throw ERROR_THROW(120);
+		if (size > LT_MAXSIZE) throw ERROR_THROW(110);
 		LexTable Table;
 		Table.maxsize = size;
 		Table.size = 0;
@@ -14,7 +14,7 @@ namespace LT
 
 	void Add(LexTable& lextable, Entry entry)
 	{
-		if (lextable.size > lextable.maxsize) throw ERROR_THROW(121);
+		if (lextable.size > lextable.maxsize) throw ERROR_THROW(111);
 		lextable.table[lextable.size++] = entry;
 	}
 
@@ -32,7 +32,7 @@ namespace LT
 	void showTable(LexTable lextable, std::ofstream &file)		// вывод таблицы лексем
 	{
 		file << std::setfill('=')<<std::setw(25)<<"LEX TABLE"<<std::setw(16)<<"\n\n";
-		file <<"Num"<< std::setfill(' ') << std::setw(10)<<"Line"<<std::setw(9)<<"Lexema"<<std::setw(20)<<"ID in IT"<< "\n\n";
+		file <<"Num"<< std::setfill(' ') << std::setw(10)<<"Line"<<std::setw(9)<<"Lexema"<<std::setw(20)<<"ID in IT"<<std::setw(18)<<"value"<< "\n\n";
 		for (int i = 0; i < lextable.size; i++)
 		{
 			file << std::setw(3) << i << std::setfill(' ') << std::setw(8) << lextable.table[i].sn <<

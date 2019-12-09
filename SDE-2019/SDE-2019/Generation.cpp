@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Generation.h"
+#include <stdlib.h>
 
 namespace Generation
 {
@@ -10,69 +11,78 @@ namespace Generation
 	}
 
 	int buffer = 0;
-	OneSegment Stack = { "stack","4096" };
+	bool isMain = false;
+	OneSegment Stack = { "stack 4096" };
 	OneSegment Const = { "const" };
 	OneSegment Data = { "data" };
 	OneSegment Code = { "code" };
-	std::string helpstr = "";
-	std::string helpstr1 = "";
-	std::string helpstr2 = "";  //
-	std::string functionName = "";  //
-	LT::Entry* LEntries = new LT::Entry[32];
-	LT::Entry Empty;
+
+	LT::LexTable lextable;
+	IT::IdTable idtable;
+
+	int countOfCycles = 1;
+	int numbOfBraces;
+	bool IsCycleForIDAndLITERALS = false;
+	bool IsCycle = false;
+	bool isID;
+
+	std::stack<std::string> MainStack;
+
+	std::string buffstr = "";
+
+	std::string GetName(int indexInIdTable, bool Variable)
+	{
+		std::string rc = "";
+		rc += (std::string)(char*)idtable.table[indexInIdTable].id;
+		if (Variable)
+			for (int i = 0; i < 5; i++)
+				rc += std::to_string(idtable.table[indexInIdTable].areaOfVisibility[i]);
+		return rc;
+	}
 
 	void Generate(LexA::Tables tables)
 	{
-		LT::LexTable lextable = tables.mylextable;
-		IT::IdTable idtable = tables.myidtable;
+		lextable = tables.mylextable;
+		idtable = tables.myidtable;
 		std::string Proto;
-		std::string fullCode = "";
 
-		LT::Entry helpLEntry;
 		IT::Entry helpIEntry;
 
 
-		Proto = "\nExitProcess PROTO : DWORD\n";//дописать
-
+		Proto = "\nExitProcess PROTO : DWORD\nouttxt PROTO : DWORD\noutlit PROTO : SDWORD\ncopytxt PROTO : DWORD,:DWORD\ntxtcon PROTO : DWORD,:DWORD,:DWORD\ncleartxt PROTO : DWORD\nsleep PROTO\ntextlenght PROTO : DWORD\n";//дописать 
+		Data.Code += "\tbuf byte 255 dup(0)\n\tcycleisneg dword 0\n";
 		for (int i = 0; i < idtable.size; i++)
 		{
 			if (idtable.table[i].idtype != IT::F)
 			{
 				helpIEntry = idtable.table[i];
 				buffer = 0;
-				helpstr = "\t";
+				buffstr = "\t";
 				switch (idtable.table[i].idtype)
 				{
 				case IT::V:
-					while (helpIEntry.id[buffer] != NULL && helpIEntry.id[buffer] != '\0')
-					{
-						helpstr += helpIEntry.id[buffer++];
-					}
-					for (int k = 0; k < 5; k++)
-						helpstr += std::to_string(helpIEntry.areaOfVisibility[k]);
+					buffstr += GetName(i, true);
 					if (helpIEntry.iddatatype == IT::LIT)
-						helpstr += " dword 0\n";
+						buffstr += " sdword ?\n";
 					if (helpIEntry.iddatatype == IT::TXT)
 					{
-						helpstr += " byte 255 dup(0)\n";
+						buffstr += " byte 255 dup(0)\n";
 					}
-					Data.Code += helpstr;
+					Data.Code += buffstr;
 					break;
 				case IT::L:
-					while (helpIEntry.id[buffer] != NULL && helpIEntry.id[buffer] != '\0')
-					{
-						helpstr += helpIEntry.id[buffer++];
-					}
+					buffstr += GetName(i, false);
 					if (helpIEntry.iddatatype == IT::LIT)
-						helpstr += " dword " + std::to_string(helpIEntry.value.vint) + '\n';
+						buffstr += " sdword " + std::to_string(helpIEntry.value.vint) + '\n';
 					if (helpIEntry.iddatatype == IT::TXT)
 					{
-						helpstr += " byte ";
+						Data.Code += buffstr + "T byte 255 dup(0)\n";
+						buffstr += " byte ";
 						for (int k = 0; k < helpIEntry.value.vstr.len; k++)
-							helpstr += helpIEntry.value.vstr.str[k];
-						helpstr += ", 0\n";
+							buffstr += helpIEntry.value.vstr.str[k];
+						buffstr += ", 0\n";
 					}
-					Const.Code += helpstr;
+					Const.Code += buffstr;
 					break;
 				default:
 					break;
@@ -80,332 +90,282 @@ namespace Generation
 			}
 			else   //если функция
 			{
-				if (lextable.table[idtable.table[i].idxfirstLE].lexema != LEX_START)
-				{
-					GenerateFunction(idtable, lextable, helpIEntry, i);
-				}
+				if (lextable.table[idtable.table[i].idxfirstLE].lexema == LEX_START)
+					isMain = true;
+				int lexposition = idtable.table[i].idxfirstLE;
+				GenerateFunction(lexposition);
 			}
 		}
-
-		fullCode += BEFORE_DATA + Proto + WriteSegment(Stack) + WriteSegment(Const) +
-			WriteSegment(Data) + WriteSegment(Code);
 		std::ofstream fileASM;
 		fileASM.open(ASM_FILE_PATH);
-		fileASM << fullCode;
+		fileASM << BEFORE_DATA + Proto + WriteSegment(Stack) + WriteSegment(Const) +
+			WriteSegment(Data) + WriteSegment(Code);
 		fileASM.close();
 	}
 
-	void GenerateFunction(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i)
+	void GenerateFunction(int indexInLexTable)
 	{
-		GenerateHat(idtable, lextable, helpIEntry, i);
-		GenerateBody(idtable, lextable, helpIEntry, i);
-	}
-
-	void GenerateHat(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i) {
-		helpIEntry = idtable.table[i];
-		buffer = 0;
-		helpstr = "proc_";
-		while (helpIEntry.id[buffer] != NULL)
-		{
-			helpstr += helpIEntry.id[buffer++];
-		}
-		functionName = helpstr;
-		helpstr += " proc";
-		buffer = i + 2;
-		while (lextable.table[buffer].lexema != LEX_RIGHTTHESIS)
-		{
-			if (lextable.table[buffer].lexema == LEX_ID)
+		while (!MainStack.empty())
+			MainStack.pop();
+		buffstr = "";
+		int counter = 1;
+		std::string object;
+		std::string name;
+		if (!isMain) {
+			name = GetName(lextable.table[indexInLexTable].idxTI, false);
+			buffstr = "proc_" + name + " proc";
+			while (lextable.table[++indexInLexTable].lexema != LEX_LEFTBRACE)
 			{
-				if (buffer != i + 3)helpstr += ", ";
-				int m = 0;
-				while (idtable.table[lextable.table[buffer].idxTI].id[m] != NULL && idtable.table[lextable.table[buffer].idxTI].id[m] != '\0')
+				if (lextable.table[indexInLexTable].lexema == LEX_ID)
 				{
-					helpstr += idtable.table[lextable.table[buffer].idxTI].id[m++];
+					buffstr += ", " + GetName(lextable.table[indexInLexTable].idxTI, true) + " : ";
+					if (idtable.table[lextable.table[indexInLexTable].idxTI].iddatatype == IT::LIT)
+						buffstr += "dword";
+					else
+						buffstr += "ptr dword";
 				}
-				for (int k = 0; k < 5; k++)
-					helpstr += std::to_string(idtable.table[lextable.table[buffer].idxTI].areaOfVisibility[k]);
-
-				helpstr += " : ";
-				if (idtable.table[lextable.table[buffer].idxTI].iddatatype == IT::LIT)
-					helpstr += "dword";
-				else
-					helpstr += "byte";
 			}
-			buffer++;
 		}
-		helpstr += '\n';
-		Code.Code += helpstr;
-	}
-
-	void GenerateBody(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i) {
-		helpstr = "";
-		int counterLEntries = 0;
-		int exit = 1;
-		int startLex = idtable.table[i].idxfirstLE;
-		int currentLex = startLex;
-		while (lextable.table[currentLex].lexema != LEX_LEFTBRACE)currentLex++;
-		int currentLine = lextable.table[++currentLex].sn;
-		int lastLine = currentLine;
-		while (exit != 0)
+		else
 		{
-			switch (lextable.table[currentLex].lexema)
+			buffstr += "\nmain proc\n\tSTART :";
+			indexInLexTable += 2;
+		}
+		buffstr += '\n';
+		for (int i = indexInLexTable + 1; i > 0; i++)
+		{
+			isID = false;
+			if (counter < 1)i = -5;
+			switch (lextable.table[i].lexema)
 			{
 			case LEX_RIGHTBRACE:
-				exit--;
+				counter--;
+				if (IsCycle)
+					if (counter == numbOfBraces)
+					{
+						IsCycle = false;
+						buffstr += "\tmov eax,cycleisneg\n\tcmp eax,0\n\tje iter" + std::to_string(countOfCycles - 1) +
+							"\n\tsub buffer00000,1\n\tjmp enditer" + std::to_string(countOfCycles - 1) + "\niter" + std::to_string(countOfCycles - 1) + ":\n" +
+							"\tadd buffer00000,1\n\tenditer" + std::to_string(countOfCycles - 1) + ":\n" +
+							"loop " + (std::string)ASMCYCLE + std::to_string(countOfCycles - 1) + '\n';
+					}
 				break;
 			case LEX_LEFTBRACE:
-				exit++;
+				counter++;
 				break;
-			default:
-				currentLine = lextable.table[currentLex].sn;
-				if (lastLine == currentLine)
+			case LEX_FROM:
+				IsCycleForIDAndLITERALS = IsCycle = true;
+				numbOfBraces = counter;
+				break;
+			case LEX_ENDCONDCYCL:
+				IsCycleForIDAndLITERALS = false;
+				//buffstr += "\tpop eax\n\tpop ebx\n\tmov buffer00000,ebx\n\tsub eax,ebx\n\tmov ecx,eax\n";
+				buffstr += "\tpop eax\n\tpop ebx\n\tmov edx,eax\n\tsub eax,ebx\n\tcmp eax,0\n\tjl negative" + std::to_string(countOfCycles) + "\n" +
+					"\tmov buffer00000,ebx\n\tmov ecx,eax\n\tmov eax,0\n\tmov cycleisneg,eax\n\tjmp endcondcycle" + std::to_string(countOfCycles) +
+					"\nnegative" + std::to_string(countOfCycles) + " :\n\tmov buffer00000,ebx\n\tneg eax\n\tmov ecx,eax\n\tadd ecx,1\n" +
+					"\tmov eax,1\n\tmov cycleisneg,eax\nendcondcycle" + std::to_string(countOfCycles) + " :\n";
+				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":\n";
+				break;
+			case LEX_EQUAL:
+			{
+				object = GetName(lextable.table[i - 1].idxTI, true);
+				buffstr += "push ecx;\n";
+				bool TypeObject;  //true numb    false text
+				if (idtable.table[lextable.table[i - 1].idxTI].iddatatype == IT::LIT)TypeObject = true; else TypeObject = false;
+				while (lextable.table[i].lexema != LEX_SEMICOLON && lextable.table[i].lexema != LATTICE)
 				{
-					helpstr += lextable.table[currentLex].lexema;
-					LEntries[counterLEntries++] = lextable.table[currentLex];
-				}
-				else
-				{
-					switch (helpstr[0])
+					isID = false;
+					switch (lextable.table[i].lexema)
 					{
-					case LEX_NEW:
-						break;
 					case LEX_ID:
-						GenerateExpression(LEntries, counterLEntries, idtable);
-						break;
-					default:
+						isID = true;
+					case LEX_LITERAL:
+					{
+						if (lextable.table[i].value == LEX_LIBFUNCTION) {
+							switch (lextable.table[i].idxTI)
+							{
+							case -2:
+								buffstr += "\tpush textlenght\n";
+								MainStack.push("textlenght");
+								break;
+							case -3:
+								buffstr += "\tpush copytxt\n";
+								MainStack.push("copytxt");
+							default:
+								break;
+							}
+							break;
+						}
+						if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::LIT)
+						{
+							buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
+							MainStack.push(GetName(lextable.table[i].idxTI, isID));
+						}
+						if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::TXT)
+						{
+							if (isMain || isID == false) {
+								if (idtable.table[lextable.table[i].idxTI].iddatatype != IT::L) {
+									buffstr += "\tpush offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
+									MainStack.push("offset " + GetName(lextable.table[i].idxTI, isID));
+								}
+							}
+							else {
+								buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
+								MainStack.push(GetName(lextable.table[i].idxTI, isID));
+							}
+						}
 						break;
 					}
-					for (int k = counterLEntries - 1; k >= 0; k--) LEntries[k] = Empty;
-					counterLEntries = 0;
-					helpstr.clear();
-					lastLine = currentLine;
-					currentLex--;
+					case POLISHFUNCTION:
+					{
+						int j = i + 1;
+						std::string x = ""; x += lextable.table[i + 1].lexema;
+						std::stack<std::string> temp;
+						std::string buf;
+						std::string mainstacktop;
+						int numbOfParameters = atoi(x.c_str());
+						for (j = 0; j < numbOfParameters; j++)
+						{
+							buffstr += "\tpop edx\n";
+						}
+						for (j = 0; j < numbOfParameters; j++)
+						{
+							mainstacktop = MainStack.top();
+							if (mainstacktop.size() > 8) {
+								if (mainstacktop[7] == 'T'&&mainstacktop.size() < 12) {
+									buffstr += "push ecx;\n\tpush " + mainstacktop + "\n\tpush " + mainstacktop + 'T' +
+										"\n\tcall copytxt\npop ecx;\n\tpush " + mainstacktop + 'T' + '\n';
+									MainStack.pop();
+								}
+							}
+							else {
+								buffstr += "\tpush " + mainstacktop + '\n';
+								MainStack.pop();
+							}
+						}
+						switch (lextable.table[i].idxTI)
+						{
+						case -2:
+							buffstr += "\tcall textlenght\n\tpush eax\n";
+							break;
+						case -3:
+							buffstr += "\tcall copytxt\n\tpush eax\n";
+							break;
+						default:
+							buffstr += "\tcall proc_" + GetName(lextable.table[i].idxTI, false) + "\n\tpush eax\n";
+							break;
+						}
+						i++;
+						break;
+					}
+					case LEX_OPERATOR:
+					{
+						switch (lextable.table[i].value)
+						{
+						case '*':
+						{
+							buffstr += "\tpop eax\n\tpop ebx\n\tmul ebx\n\tpush eax\n";
+							break;
+						}
+						case '+':
+						{
+							if (idtable.table[lextable.table[i - 1].idxTI].iddatatype == IT::LIT)
+							{
+								buffstr += "\tpop eax\n\tpop ebx\n\tadd eax, ebx\n\tpush eax\n";
+							}
+							else
+							{
+								buffstr += "\tpop eax\n\tpop ebx\n";
+								buffstr += "\tpush offset buf\n\tpush ebx\n\tpush eax\n";
+								buffstr += "\tcall txtcon\n\tpush eax\n";
+							}
+							break;
+						}
+						case '-':
+						{
+							buffstr += "\tpop ebx\n\tpop eax\n\tsub eax, ebx\n\tpush eax\n";
+							break;
+						}
+						}
+						break;
+					}
+					}
+					i++;
+				}
+				if (TypeObject)
+					buffstr += "\tpop " + object + '\n';
+				else
+				{
+					if (isMain)
+						buffstr += "\tpush offset " + object + '\n';
+					else
+						buffstr += "\tpush " + object + '\n';
+					buffstr += "\tcall copytxt\npop ecx;\n";
+				}
+				break;
+			case LEX_RETURN:
+			{
+				switch (lextable.table[++i].lexema)
+				{
+				case LEX_ID:
+					isID = true;
+				case LEX_LITERAL:
+					if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::LIT)
+						buffstr += "\tmov eax," + GetName(lextable.table[i].idxTI, isID) + '\n';
+					if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::TXT)
+						if (isMain)
+							buffstr += "\tmov eax, offset " + GetName(lextable.table[i].idxTI, isID) + '\n';
+						else
+							buffstr += "\tmov eax, " + GetName(lextable.table[i].idxTI, isID) + '\n';
+					if (!isMain)
+						buffstr += "\tret\n";
+					else
+						buffstr += "\tpush 0\n";
 				}
 				break;
 			}
-			currentLex++;
-		}
-		Code.Code += functionName + " endp";
-	}
-
-	void GenerateExpression(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable)
-	{
-		helpstr2 = "";
-		helpstr.clear();
-		Expressions newExpressions;
-		ForExpression EmptyForEx;
-		ForExpression tempexpr;
-		std::string object = "";
-		buffer = 0;
-		while (idtable.table[LEntries[0].idxTI].id[buffer] != NULL && idtable.table[LEntries[0].idxTI].id[buffer])
-		{
-			object += idtable.table[LEntries[0].idxTI].id[buffer++];
-		}
-		for (int m = 0; m < 5; m++)
-			object += std::to_string(idtable.table[LEntries[0].idxTI].areaOfVisibility[m]);
-
-		for (int k = 0; k < counterLEntries - 1; k++) {
-			if (LEntries[k].lexema == LATTICE)counterLEntries--;
-		}
-
-		newExpressions.size = counterLEntries - 1;
-		int k;
-		for (k = 2; k < counterLEntries + 1; k++) {
-			switch (LEntries[k].lexema)
+			case LEX_OUTPUT:
 			{
-			case LEX_OPERATOR:
-				newExpressions.Elements[k].name = LEntries[k].value;
-				newExpressions.Elements[k].index = k;
-				newExpressions.Elements[k].cvalue = o;
-				break;
-			case LEX_ID:
-				newExpressions.Elements[k].cvalue = i;
-				newExpressions.Elements[k].index = k;
-				buffer = 0;
-				newExpressions.Elements[k].name = "";
-				while (idtable.table[LEntries[k].idxTI].id[buffer] != NULL && idtable.table[LEntries[k].idxTI].id[buffer])
-				{
-					newExpressions.Elements[k].name += idtable.table[LEntries[k].idxTI].id[buffer++];
+				std::string returned;
+				if (idtable.table[lextable.table[i + 2].idxTI].iddatatype == IT::LIT) {
+					if ((idtable.table[lextable.table[i + 2].idxTI].idtype == IT::V) || (idtable.table[lextable.table[i + 2].idxTI].idtype == IT::P))
+						isID = true;
+					returned = GetName(lextable.table[i + 2].idxTI, isID);
+					buffstr += "\tpush ecx\n\tpush " + returned + "\n\tcall outlit\n\tpop ecx\n";
 				}
-				for (int m = 0; m < 5; m++)
-					newExpressions.Elements[k].name += std::to_string(idtable.table[LEntries[k].idxTI].areaOfVisibility[m]);
-				break;
-			case LEX_LITERAL:
-				newExpressions.Elements[k].cvalue = i;
-				newExpressions.Elements[k].index = k;
-				buffer = 0;
-				newExpressions.Elements[k].name = "";
-				while (idtable.table[LEntries[k].idxTI].id[buffer] != NULL && idtable.table[LEntries[k].idxTI].id[buffer])
-				{
-					newExpressions.Elements[k].name += idtable.table[LEntries[k].idxTI].id[buffer++];
+				else {
+					if ((idtable.table[lextable.table[i + 2].idxTI].idtype == IT::V) || (idtable.table[lextable.table[i + 2].idxTI].idtype == IT::P))
+						isID = true;
+					returned = GetName(lextable.table[i + 2].idxTI, isID);
+					if (!isMain || isID == false)
+						buffstr += "\tpush ecx\n\tpush " + returned + "\n\tcall outtxt\n\tpop ecx\n";
+					else
+						buffstr += "\tpush ecx\n\tpush offset " + returned + "\n\tcall outtxt\n\tpop ecx\n";
 				}
 				break;
+			}
 			default:
+				if (counter < 1)
+					counter--;
 				break;
 			}
-		}
-		while (newExpressions.size != 3) {
-			int k = newExpressions.size;
-			while (newExpressions.Elements[k].cvalue != o || newExpressions.Elements[k - 1].cvalue != i || newExpressions.Elements[k - 2].cvalue != i)
+			case LEX_ID:
+				isID = true;
+			case LEX_LITERAL:
 			{
-				k--;
+				if (IsCycleForIDAndLITERALS)
+					if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::LIT)
+						buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
+				break;
 			}
-			tempexpr = doTreade(newExpressions, k);
-			newExpressions.Elements[k - 2] = tempexpr;
-			while (newExpressions.Elements[++k].name[0] != ' ')
-				newExpressions.Elements[k - 2] = newExpressions.Elements[k];
-			newExpressions.Elements[k] = newExpressions.Elements[k] = EmptyForEx;
-			newExpressions.size -= 2;
+			}
 		}
-		helpstr2 += "\tmov "+object+", eax;\n";
-		Code.Code += helpstr2;
-	}
-
-	ForExpression doTreade(Expressions expr, int k) {
-		ForExpression rc;
-		helpstr2 += "\tmov ebx,"+expr.Elements[k-1].name+'\n';
-		helpstr2 += "\tmov eax,"+expr.Elements[k-2].name+'\n';
-		switch (expr.Elements[k].name[0])
-		{
-		case '+':
-			helpstr2 += "\tadd eax,ebx\n";
-			break;
-		case '-':
-			helpstr2 += "\tsub eax,ebx\n";
-			break;
-		case '/':
-			helpstr2 += "\tdiv ebx\n";
-			break;
-		case '%':
-			helpstr2 += "\tdiv ebx\n";
-			helpstr2 += "\tmov eax,edx\n";
-			break;
-		case '*':
-			helpstr2 += "\tmul eax,ebx\n";
-			break;
-		default:
-			break;
+		if (!isMain) {
+			buffstr += "proc_" + name + " endp";
 		}
-		rc.cvalue = i;
-		rc.index = expr.Elements[k - 2].index;
-		rc.name = "eax";
-		return rc;
+		else {
+			buffstr += "\tcall sleep\n\tcall ExitProcess\nmain endp\nend main";
+		}
+		Code.Code += buffstr;
 	}
-
-	//void generateExpression(std::vector<LT::Entry>& tempEntries, std::string& Code , int idxTI, IT::IdTable idtable, IT::IDDATATYPE type)
-	//{
-	//	int begin = 0; int end = 0; int count = 0;
-	//	for (size_t j = 0; j < tempEntries.size(); j++)
-	//	{
-	//		if (tempEntries[j].lexema == '@')
-	//		{
-	//			count = int(tempEntries[j + 1].lexema);
-	//			begin = j - count - 1;
-	//		}
-	//		if (tempEntries[j].lexema == '_')
-	//		{
-	//			end = j - 1;
-	//		}
-	//		if (begin && end && count != 1 && strcmp((const char*)idtable.table[tempEntries[begin - 1].idxTI].id, "strcon") != 0)
-	//		{
-	//			while (end >= begin)
-	//			{
-	//				std::swap(tempEntries[begin++], tempEntries[end--]);
-	//			}
-	//			end = 0;
-	//			begin = 0;
-	//		}
-
-	//	}
-	//	for (size_t i = 0; i < tempEntries.size(); i++)
-	//	{
-	//		switch (tempEntries[i].lexema)
-	//		{
-	//		case LEX_LITERAL:
-	//		case LEX_ID:		helpstr += (generateInstructions(PUSH, tempEntries[i].idxTI, idtable));	break;
-	//		case LEX_SEMICOLON: CS.add(generateInstructions(SEM, idxTI, idtable));	break;
-	//		case LEX_PLUS:		if (type == IT::LIT)
-	//			CS.add(generateInstructions(ADD, tempEntries[i].idxTI, idtable));
-	//							else
-	//			CS.add(generateInstructions(ADDSTR, tempEntries[i].idxTI, idtable));	break;
-	//		case LEX_STAR:		CS.add(generateInstructions(MUL, tempEntries[i].idxTI, idtable));	break;
-	//		case LEX_MINUS:		CS.add(generateInstructions(DIFF, tempEntries[i].idxTI, idtable));	break;
-	//		case LEX_DIRSLASH:	CS.add(generateInstructions(DIV, tempEntries[i].idxTI, idtable));	break;
-	//		case '!':			CS.add(generateInstructions(UDIFF, NULL, idtable));	break;
-	//		case '_':			CS.add(generateInstructions(CALL, tempEntries[i].idxTI, idtable));	break;
-	//		}
-	//	};
-	//	tempEntries.clear();
-	//}
-
-	//std::string	generateInstructions(INSTRUCTIONTYPE t, int idxTI, IT::IdTable iT, IT::IDDATATYPE type, std::string fucn_name)
-	//{
-	//	std::string str; static int ret = 0;
-	//	switch (t)
-	//	{
-	//	case FUNC:
-	//		str += "\n\n"; str += fucn_name; str += " PROC";
-	//		return str;
-	//		break;
-	//	case PARM:
-	//		str += ", "; str += iT.table[idxTI].id; str += " : ";
-	//		switch (type)
-	//		{
-	//		case IT::TXT: str += "DWORD"; ret += 4;  return str; break;
-	//		case IT::LIT: str += "SDWORD"; ret += 4;   return str; break;
-	//		}
-	//		break;
-	//	case PUSH:	if ((iT.table[idxTI].iddatatype == IT::LIT || iT.table[idxTI].idtype == IT::P) && iT.table[idxTI].idtype != IT::F)
-	//	{
-	//		str += "\n\tpush "; str += iT.table[idxTI].id;
-	//	}
-	//				else if (iT.table[idxTI].idtype != IT::F)
-	//	{
-	//		str += "\n\tpush offset ";	str += iT.table[idxTI].id;
-	//	}
-	//				return str;
-	//				break;
-	//	case RET:	if (idxTI)
-	//		return "\n\tpush 0\n\tcall ExitProcess\n";
-	//				else
-	//	{
-	//		char str[30]; char buf[4];
-	//		std::strcpy(str, "\n\tpop eax\n\tret ");
-	//		_itoa(ret, buf, 10);
-	//		std::strcat(str, buf);
-	//		std::strcat(str, "\n");
-	//		ret = 0;
-	//		return str;  break;
-	//	}
-	//	case ADD:	return "\n\tpop eax\n\tpop ebx\n\tadd eax, ebx\n\tjo EXIT_OVERFLOW\n\tpush eax"; break;
-	//	case ADDSTR:	return "\n\tcall strcon\n\tjo EXIT_OVERFLOW\n\tpush eax"; break;
-	//	case UDIFF: return "\n\tpop eax\n\tneg eax\n\tpush eax";
-	//	case DIFF:	return "\n\tpop eax\n\tneg eax\n\tpop ebx\n\tadd eax, ebx\n\tjo EXIT_OVERFLOW\n\tpush eax"; break;
-	//	case MUL:	return "\n\tpop eax\n\tpop ebx\n\timul eax, ebx\n\tjo EXIT_OVERFLOW\n\tpush eax"; break;
-	//	case DIV:	return "\n\tpop ebx\n\tpop eax\n\ttest ebx,ebx\n\tjz EXIT_DIV_ON_NULL\n\tcdq\n\tidiv ebx\n\tpush eax"; break;
-	//	case ENDP:	str += "\n"; str += fucn_name; str += " ENDP";
-	//		switch ((strcmp(fucn_name.c_str(), "main") == 0) ? true : false)
-	//		{
-	//		case true: str += "\nend main"; return str;
-	//		case false:						return str;
-	//		}
-	//		break;
-	//	case PRNT:	if (type == IT::TXT)
-	//		return "\n\tcall outstr\n";
-	//				else
-	//		return "\n\tcall outint\n"; break;
-	//	case SEM:	if (idxTI != -1 && iT.table[idxTI].iddatatype == IT::LIT && iT.table[idxTI].idtype != IT::F) {
-	//		str += "\n\tpop "; str += iT.table[idxTI].id;
-	//	}
-	//				else if (idxTI != -1 && iT.table[idxTI].iddatatype == IT::TXT) {  // Если это строковый литерал
-	//		str += "\n\tpush offset "; str += iT.table[idxTI].id;
-	//		str += "\n\tcall copystr\n";
-	//	}	return str; break;
-
-	//	case CALL:  str += "\n\tcall "; str += iT.table[idxTI].id;
-	//		str += "\n\tpush eax";
-	//		return str; break;
-	//	}
-	//}
-
-};
+}

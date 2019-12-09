@@ -1,7 +1,8 @@
-﻿Сборка начата 06.12.2019 18:21:30.
+﻿Сборка начата 09.12.2019 3:06:09.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
+BTK_BASELIBCTX:8800 = 11F414B0
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -64,23 +65,17 @@ windir = C:\WINDOWS
      1>InitializeBuildStatus:
          Создание "Debug\ASM.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        _MASM:
-         Assembling ASM.asm...
-         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmp6a49139f867b4c0083698e9d8981112b.cmd"
-         ml.exe /c /nologo /Zi /Fo"Debug\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm
-     1>ASM.asm(35): error A2006: undefined symbol : main
-     1>ASM.asm(35): error A2148: invalid symbol type in expression : main
-     1>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\BuildCustomizations\masm.targets(69,5): error MSB3721: выход из команды "ml.exe /c /nologo /Zi /Fo"Debug\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm" с кодом "1".
-     1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Build) с ошибкой.
+       Целевой объект "_MASM" пропускается, так как все выходные файлы актуальны по отношению к входным.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\SDE-2019\Debug\ASM.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\SDE-2019\Debug\ASM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\SDE-2019\Debug\ASM.lib" /MACHINE:X86 Debug\ASM.obj
+         ASM.vcxproj -> E:\Compil\SDE-2019\Debug\ASM.exe
+       FinalizeBuildStatus:
+         Файл "Debug\ASM.tlog\unsuccessfulbuild" удаляется.
+         Обращение к "Debug\ASM.tlog\ASM.lastbuildstate".
+     1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Build).
 
-Ошибка сборки.
-
-       "E:\Compil\SDE-2019\ASM\ASM.vcxproj" (целевой объект Build ) (1) ->
-       (_MASM конечный объект) -> 
-         ASM.asm(35): error A2006: undefined symbol : main
-         ASM.asm(35): error A2148: invalid symbol type in expression : main
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\BuildCustomizations\masm.targets(69,5): error MSB3721: выход из команды "ml.exe /c /nologo /Zi /Fo"Debug\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm" с кодом "1".
-
+Сборка успешно завершена.
     Предупреждений: 0
-    Ошибок: 3
+    Ошибок: 0
 
-Прошло времени 00:00:00.43
+Прошло времени 00:00:00.87

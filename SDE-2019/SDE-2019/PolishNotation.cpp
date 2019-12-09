@@ -48,7 +48,7 @@ LexA::Tables DoPolish(LexA::Tables tables) {
 			i++;
 			bufferb = polishNotation(i, tables.mylextable, tables.myidtable);
 			if (!bufferb)
-				std::cout << "Fail polsk";
+				throw ERROR_THROW_IN(199, tables.mylextable.table[i].sn, 0);
 		}
 	}
 	return tables;
@@ -56,6 +56,7 @@ LexA::Tables DoPolish(LexA::Tables tables) {
 
 bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable)
 {
+	short Line = 0;
 	short counter = 0;
 	short buffershort;
 	short countOfAllInputLex = 0;
@@ -94,8 +95,11 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	for (int i = 0; (i < countOfAllInputLex + 1) || lextable.table[startLex + i - 1].lexema == LEX_SEMICOLON; i++)
 	{
 		if (lextable.table[startLex + i].lexema == LEX_ID)
-			if (idtable.table[lextable.table[startLex + i].idxTI].idtype == IT::F)
+			if (lextable.table[startLex + i].value == LEX_LIBFUNCTION)
 				isAFunction = true;
+			else
+				if (idtable.table[lextable.table[startLex + i].idxTI].idtype == IT::F)
+					isAFunction = true;
 		switch (lextable.table[lextable_pos + i].lexema)
 		{
 		case LEX_LEFTTHESIS:
@@ -127,6 +131,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 				bufferEntry = lextable.table[startLex + i];
 				bufferEntry.lexema = '@';
 				i++;
+				Line = lextable.table[lextable_pos + i].sn;
 
 				while (lextable.table[lextable_pos + i].lexema != LEX_RIGHTTHESIS)
 				{
@@ -210,7 +215,6 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	{
 		if (AlmostAllEntries[i].lexema == LEX_LITERAL)
 			litPositions[counter3++] = i;
-		std::cout << AlmostAllEntries[i].lexema << AlmostAllEntries[i].value;
 		lextable.table[startLex + i] = AlmostAllEntries[i];
 		buffershort = i;
 	}
@@ -219,7 +223,8 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	bufferEntry.lexema = LATTICE;
 	bufferEntry.used = false;
 	bufferEntry.value = NULL;
-	for (int k = buffershort + 1; k < countOfAllInputLex + 1; k++)
+	bufferEntry.sn = Line;
+	for (int k = buffershort + 1; k < countOfAllInputLex; k++)
 	{
 		AlmostAllEntries[k] = bufferEntry;
 		lextable.table[startLex + k] = bufferEntry;
@@ -227,9 +232,9 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 
 	//изменения в idtable
 	int k = 0;
-	for (int i = 0; i < counter1; i++) 
+	for (int i = 0; i < counter1; i++)
 	{
-		if (AlmostAllEntries[i].lexema == LEX_LITERAL) 
+		if (AlmostAllEntries[i].lexema == LEX_LITERAL)
 		{
 			idtable.table[AlmostAllEntries[i].idxTI].idxfirstLE = lextable_pos + litPositions[k++];
 		}
@@ -238,8 +243,6 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 	delete[] AlmostAllEntries;
 	delete[] inputOperEntries;
 	delete[] operatorPriority;
-
-	std::cout << NEWLINE;
 
 	return true;
 }

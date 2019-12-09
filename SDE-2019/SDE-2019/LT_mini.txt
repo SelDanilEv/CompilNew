@@ -3,8 +3,7 @@
 tfi(ti,ti)
 {
 nti;
-i=llviv;
-o(i);
+i=iiv;
 ri;
 };
 
@@ -12,7 +11,13 @@ s
 {
 nti;
 i=l;
-i=ll@2;##
+nti;
+m(l)e(l)
+${
+i=il@2;#;
+o(i);
+}
+i=llvlv;
 o(i);
 rl;
-}
+};

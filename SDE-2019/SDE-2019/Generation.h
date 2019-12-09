@@ -1,7 +1,8 @@
 #pragma once
-#define BEFORE_DATA ".586\n.model flat, stdcall\nincludelib SDElib.lib\nincludelib kernel32.lib\n"
+#define BEFORE_DATA ".586\n.model flat, stdcall\n\nincludelib kernel32.lib\nincludelib libucrt.lib\nincludelib ../Debug/mylib.lib\n"
 #define TEXTMAXSIZE 255
 #define ASM_FILE_PATH "../ASM/ASM.asm"
+#define ASMCYCLE "MARK"
 
 namespace Generation
 {
@@ -11,31 +12,11 @@ namespace Generation
 	};
 	std::string WriteSegment(OneSegment segment);
 
-
-	enum exprvalue {
-		o = 0,
-		i,
-	};
-
 	void Generate(LexA::Tables);
-
-	struct ForExpression {
-		short index;
-		std::string name=" ";
-		exprvalue cvalue;
-	};
-
-
-	struct Expressions {
-		ForExpression *Elements = new ForExpression[32];
-		int size;
-	};
-
-	void GenerateBody(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
-	ForExpression doTreade(Expressions expr, int k);
-	void GenerateExpression(LT::Entry* LEntries, int counterLEntries, IT::IdTable idtable);
-	void GenerateHat(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
-	void GenerateFunction(IT::IdTable idtable, LT::LexTable lextable, IT::Entry helpIEntry, int i);
+	void GenerateOutput();
+	void GenerateReturn();
+	void GenerateExpression();
+	void GenerateFunction(int);
 
 	//enum INSTRUCTIONTYPE
 	//{                   // Типы инструкций
