@@ -4,7 +4,6 @@
 
 namespace GRB
 {
-
 	Rule::Chain::Chain(short psize, GRBALPHABET s, ...)	// конструктор
 	{
 		nt = new GRBALPHABET[size = psize];

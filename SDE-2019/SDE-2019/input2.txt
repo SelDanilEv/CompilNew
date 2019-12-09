@@ -58,3 +58,103 @@ hello ='Happy '+'New '+'Year';
 output(hello);
 return 0;
 };
+
+
+
+start 
+{
+new little x;
+x=100;
+new little y;
+new little z;
+from (10) to (0)$
+{
+y=buffer;
+z =x/y;
+output(z);
+}
+return 0;
+};
+
+
+
+
+
+new little x;
+
+little function eq(little qq,little ww)
+{
+	check ( qq = ww ) ? 
+	{
+		output('Numbers are equals!');
+		output(qq);
+	}
+	return x;
+};
+
+start 
+{
+	x=0;
+	from (7) to (0)$
+		{
+			x = 36/buffer;
+			x = eq(x,buffer);
+		}
+	return 0;
+};
+
+
+
+
+new little x;
+
+little function show(little u) 
+{
+new text spam;
+spam = 'SPAM '+' spam '+' SPAM';
+output(spam);
+return 0;
+}; 
+
+start 
+{
+from(0)to(999)$ 
+{
+x = show(x);
+}
+return 0;
+};
+
+
+
+
+
+new text out;
+new little x;
+
+little function show(little u) 
+{
+out = ' ';
+from(0)to(u)$ 
+{
+out = out + '*';
+}
+output(out);
+return 0;
+}; 
+
+start 
+{
+from(1)to(10)$ 
+{
+x = buffer;
+x = show(x);
+}
+out = ' ';
+from(10)to(1)$ 
+{
+x = buffer;
+x = show(x);
+}
+return 0;
+};

@@ -19,7 +19,7 @@ namespace FST
 			NODE(1, RELATION('e', 6)),
 			NODE()
 		);
-		if (execute(fst))return 0;
+		if (execute(fst))return 0; else return -1;
 	}
 
 	int text(char* str) {
@@ -32,7 +32,7 @@ namespace FST
 			NODE(1, RELATION('t', 4)),
 			NODE()
 		);
-		if (execute(fst))return 1;
+		if (execute(fst))return 1; else return -1;
 	}
 
 	int function(char* str) {
@@ -49,7 +49,7 @@ namespace FST
 			NODE(1, RELATION('n', 8)),
 			NODE()
 		);
-		if (execute(fst))return 2;
+		if (execute(fst))return 2; else return -1;
 	}
 
 	int start(char* str) {
@@ -63,7 +63,7 @@ namespace FST
 			NODE(1, RELATION('t', 5)),
 			NODE()
 		);
-		if (execute(fst))return 3;
+		if (execute(fst))return 3; else return -1;
 	}
 
 	int New(char* str) {
@@ -75,7 +75,7 @@ namespace FST
 			NODE(1, RELATION('w', 3)),
 			NODE()
 		);
-		if (execute(fst))return 4;
+		if (execute(fst))return 4; else return -1;
 	}
 
 	int Return(char* str) {
@@ -90,7 +90,7 @@ namespace FST
 			NODE(1, RELATION('n', 6)),
 			NODE()
 		);
-		if (execute(fst))return 5;
+		if (execute(fst))return 5; else return -1;
 	}
 
 	int output(char* str) {
@@ -105,7 +105,7 @@ namespace FST
 			NODE(1, RELATION('t', 6)),
 			NODE()
 		);
-		if (execute(fst))return 6;
+		if (execute(fst))return 6; else return -1;
 	}
 
 	int from(char* str) {
@@ -118,7 +118,7 @@ namespace FST
 			NODE(1, RELATION('m', 4)),
 			NODE()
 		);
-		if (execute(fst))return 17;
+		if (execute(fst))return 17; else return -1;
 	}
 
 	int to(char* str) {
@@ -129,22 +129,59 @@ namespace FST
 			NODE(1, RELATION('o', 2)),
 			NODE()
 		);
-		if (execute(fst))return 18;
+		if (execute(fst))return 18; else return -1;
 	}
 
-	//int Short(char* str) {
-	//	FST fst(
-	//		str,
-	//		6,
-	//		NODE(1, RELATION('s', 1)),
-	//		NODE(1, RELATION('h', 2)),
-	//		NODE(1, RELATION('o', 3)),
-	//		NODE(1, RELATION('r', 4)),
-	//		NODE(1, RELATION('t', 5)),
-	//		NODE()
-	//	);
-	//	if (execute(fst))return 17;
-	//}
+	int check(char* str) {
+		FST fst(
+			str,
+			6,
+			NODE(1, RELATION('c', 1)),
+			NODE(1, RELATION('h', 2)),
+			NODE(1, RELATION('e', 3)),
+			NODE(1, RELATION('c', 4)),
+			NODE(1, RELATION('k', 5)),
+			NODE()
+		);
+		if (execute(fst))return 20; else return -1;
+	}
+
+	int id(char* str) {
+		FST fst(
+			str,
+			3,
+			NODE(52,
+				 RELATION('a', 1),  RELATION('b', 1),  RELATION('c', 1),  RELATION('d', 1),  RELATION('e', 1),  RELATION('f', 1),
+				 RELATION('g', 1),  RELATION('h', 1),  RELATION('i', 1),  RELATION('j', 1),  RELATION('k', 1),  RELATION('l', 1),
+				 RELATION('m', 1),  RELATION('n', 1),  RELATION('o', 1),  RELATION('p', 1),  RELATION('q', 1),  RELATION('r', 1),
+				 RELATION('s', 1),  RELATION('t', 1),  RELATION('u', 1),  RELATION('v', 1),  RELATION('w', 1),  RELATION('x', 1),
+				 RELATION('y', 1),  RELATION('z', 1),
+
+				 RELATION('a', 2),  RELATION('b', 2),  RELATION('c', 2),  RELATION('d', 2),  RELATION('e', 2),  RELATION('f', 2),
+				 RELATION('g', 2),  RELATION('h', 2),  RELATION('i', 2),  RELATION('j', 2),  RELATION('k', 2),  RELATION('l', 2),
+				 RELATION('m', 2),  RELATION('n', 2),  RELATION('o', 2),  RELATION('p', 2),  RELATION('q', 2),  RELATION('r', 2),
+				 RELATION('s', 2),  RELATION('t', 2),  RELATION('u', 2),  RELATION('v', 2),  RELATION('w', 2),  RELATION('x', 2),
+				 RELATION('y', 2),  RELATION('z', 2)),
+			 NODE(72,
+				 RELATION('a', 1),  RELATION('b', 1),  RELATION('c', 1),  RELATION('d', 1),  RELATION('e', 1),  RELATION('f', 1),
+				 RELATION('g', 1),  RELATION('h', 1),  RELATION('i', 1),  RELATION('j', 1),  RELATION('k', 1),  RELATION('l', 1),
+				 RELATION('m', 1),  RELATION('n', 1),  RELATION('o', 1),  RELATION('p', 1),  RELATION('q', 1),  RELATION('r', 1),
+				 RELATION('s', 1),  RELATION('t', 1),  RELATION('u', 1),  RELATION('v', 1),  RELATION('w', 1),  RELATION('x', 1),
+				 RELATION('y', 1),  RELATION('z', 1),
+				 RELATION('1', 1),  RELATION('2', 1),  RELATION('3', 1),  RELATION('4', 1),  RELATION('5', 1),  RELATION('6', 1),
+				 RELATION('7', 1),  RELATION('8', 1),  RELATION('9', 1),  RELATION('0', 1),
+
+				 RELATION('a', 2),  RELATION('b', 2),  RELATION('c', 2),  RELATION('d', 2),  RELATION('e', 2),  RELATION('f', 2),
+				 RELATION('g', 2),  RELATION('h', 2),  RELATION('i', 2),  RELATION('j', 2),  RELATION('k', 2),  RELATION('l', 2),
+				 RELATION('m', 2),  RELATION('n', 2),  RELATION('o', 2),  RELATION('p', 2),  RELATION('q', 2),  RELATION('r', 2),
+				 RELATION('s', 2),  RELATION('t', 2),  RELATION('u', 2),  RELATION('v', 2),  RELATION('w', 2),  RELATION('x', 2),
+				 RELATION('y', 2),  RELATION('z', 2),
+				 RELATION('1', 2),  RELATION('2', 2),  RELATION('3', 2),  RELATION('4', 2),  RELATION('5', 2),  RELATION('6', 2),
+				 RELATION('7', 2),  RELATION('8', 2),  RELATION('9', 2),  RELATION('0', 2)),
+			 NODE()
+		);
+		if (execute(fst))return 7; else return -1;
+	}
 
 	bool literalInt(char* str)
 	{

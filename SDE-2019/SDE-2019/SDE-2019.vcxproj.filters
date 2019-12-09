@@ -145,5 +145,8 @@
     <Text Include="input5.txt">
       <Filter>files</Filter>
     </Text>
+    <Text Include="trace.txt">
+      <Filter>files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

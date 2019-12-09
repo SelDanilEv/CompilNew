@@ -202,6 +202,7 @@
     <Text Include="IT.txt" />
     <Text Include="LT.txt" />
     <Text Include="LT_mini.txt" />
+    <Text Include="trace.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

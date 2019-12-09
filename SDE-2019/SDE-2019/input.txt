@@ -1,7 +1,29 @@
+new text out;
+new little x;
+
+little function show(little u) 
+{
+out = '';
+from(0)to(u)$
+{
+out = out + '*';
+}
+output(out);
+return 0;
+}; 
+
 start 
 {
-new little x;
-x = 5/(5-5);
-output(x);
+from(1)to(10)$ 
+{
+x = buffer;
+x = show(x);
+}
+out = ' ';
+from(10)to(1)$
+{
+x = buffer;
+x = show(x);
+}
 return 0;
 };

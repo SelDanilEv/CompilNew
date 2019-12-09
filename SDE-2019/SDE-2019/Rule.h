@@ -12,27 +12,31 @@ namespace GRB
 		7,									  // количество правил
 		Rule(
 			NS('S'), GRB_ERROR_SERIES + 0,    // неверна€ структура программы
-			5,                                // 
+			6,                                // 
 			Rule::Chain(8, TS('s'), TS('{'), NS('N'), TS('r'), NS('U'), TS(';'), TS('}'), TS(';')),
 			Rule::Chain(9, TS('s'), TS('{'), NS('N'), TS('r'), NS('U'), TS(';'), TS('}'), TS(';'), NS('S')),
 			Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('U'), TS(';'), TS('}'), TS(';')),
 			Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('U'), TS(';'), TS('}'), TS(';'), NS('S')),
-			Rule::Chain(5, TS('n'), TS('t'), TS('i'), TS(';'), NS('S'))
+			Rule::Chain(5, TS('n'), TS('t'), TS('i'), TS(';'), NS('S')),
+			Rule::Chain(4, TS('n'), TS('t'), TS('i'), TS(';'))
 		),
 		Rule(
 			NS('N'), GRB_ERROR_SERIES + 1,    // ошибочный оператор
-			11,
+			14,
 			Rule::Chain(4, TS('n'), TS('t'), TS('i'), TS(';')),
 			Rule::Chain(5, TS('n'), TS('t'), TS('i'), TS(';'), NS('N')),
 			Rule::Chain(3, TS('r'), NS('U'), TS(';')),
 			Rule::Chain(4, TS('r'), NS('U'), TS(';'), NS('N')),
 			Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
 			Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
+			Rule::Chain(11, TS('c'), TS('('), NS('U'), TS('='), NS('U'), TS(')'),TS('?'), TS('{'), NS('N'), TS('}'), NS('N')),
+			Rule::Chain(10, TS('c'), TS('('), NS('U'), TS('='), NS('U'), TS(')'),TS('?'), TS('{'), NS('N'), TS('}')),
 			Rule::Chain(8, TS('n'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';')),
 			Rule::Chain(9, TS('n'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')),
 			Rule::Chain(6, TS('o'), TS('('), NS('U'), TS(')'), TS(';'), NS('N')),
 			Rule::Chain(5, TS('o'), TS('('), NS('U'), TS(')'), TS(';')),
-			Rule::Chain(12, TS('m'), TS('('), NS('U'), TS(')'), TS('e'), TS('('), NS('U'), TS(')'), TS('$'), TS('{'), NS('N'), TS('}'))
+			Rule::Chain(12, TS('m'), TS('('), NS('U'), TS(')'), TS('e'), TS('('), NS('U'), TS(')'), TS('$'), TS('{'), NS('N'), TS('}')),
+			Rule::Chain(13, TS('m'), TS('('), NS('U'), TS(')'), TS('e'), TS('('), NS('U'), TS(')'), TS('$'), TS('{'), NS('N'), TS('}'), NS('N'))
 		),
 		Rule(
 			NS('E'), GRB_ERROR_SERIES + 2,    // ошибка в выражении

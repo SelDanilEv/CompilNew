@@ -62,7 +62,7 @@ namespace MFST
 		nrulechain = -1;
 	};
 
-	Mfst::RC_STEP Mfst::step(Log::LOG& log)		// шаг автомата
+	Mfst::RC_STEP Mfst::step(std::ofstream& filetrace)		// шаг автомата
 	{
 		RC_STEP rc = SURPRISE;
 		if (lenta_position < lenta_size)	// если лента не закончилась
@@ -76,7 +76,7 @@ namespace MFST
 					if ((nrulechain = rule.getNextChain(lenta[lenta_position], chain, nrulechain + 1)) >= 0)	// получаем следующую цепочку по терминалу из ленты
 					{
 						MFST_TRACE1			// вывод ++номера шага автомата, правила, ленты и стека
-							savestate(log);		// сохраняем состояние
+							savestate(filetrace);		// сохраняем состояние
 						st.pop();			// извлекаем из стека символ
 						push_chain(chain);	// помещаем цепочку в стек
 						rc = NS_OK;			// найдено правило и цепочка, цепочка записана в стек
@@ -86,7 +86,7 @@ namespace MFST
 					{
 						MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE")
 							savediagnosis(NS_NORULECHAIN);
-						rc = reststate(log) ? NS_NORULECHAIN : NS_NORULE;	// восстановить состояние автомата
+						rc = reststate(filetrace) ? NS_NORULECHAIN : NS_NORULE;	// восстановить состояние автомата
 					};
 				}
 				else rc = NS_ERROR;		// неизвестный нетерминал
@@ -100,7 +100,7 @@ namespace MFST
 			else
 			{
 				MFST_TRACE4("TS_NOK/NS_NORULECHAIN")		// вывод ++номера шага автомата и сообщения
-					rc = reststate(log) ? TS_NOK : NS_NORULECHAIN;
+					rc = reststate(filetrace) ? TS_NOK : NS_NORULECHAIN;
 			};
 		}
 		else { rc = LENTA_END; MFST_TRACE4("LENTA_END") };
@@ -113,14 +113,14 @@ namespace MFST
 		return true;
 	};
 
-	bool Mfst::savestate(Log::LOG& log)
+	bool Mfst::savestate(std::ofstream& filetrace)
 	{
 		storestate.push(MfstState(lenta_position, st, nrule, nrulechain));
 		MFST_TRACE6("SAVESTATE:", storestate.size());		// вывод текста и размера стека для сохранения состояний
 		return true;
 	};
 
-	bool Mfst::reststate(Log::LOG& log)
+	bool Mfst::reststate(std::ofstream& filetrace)
 	{
 		bool rc = false;
 		MfstState state;
@@ -153,27 +153,27 @@ namespace MFST
 		return rc;
 	};
 
-	bool Mfst::start(Log::LOG& log)
+	bool Mfst::start(std::ofstream& filetrace)
 	{
 		bool rc = false;
 		RC_STEP rc_step = SURPRISE;
 		char buf[MFST_DIAGN_MAXSIZE];
-		rc_step = step(log);
-		while (rc_step == NS_OK || rc_step == NS_NORULECHAIN || rc_step == TS_OK || rc_step == TS_NOK) rc_step = step(log);
+		rc_step = step(filetrace);
+		while (rc_step == NS_OK || rc_step == NS_NORULECHAIN || rc_step == TS_OK || rc_step == TS_NOK) rc_step = step(filetrace);
 
 		switch (rc_step)
 		{
 		case LENTA_END:			MFST_TRACE4("------>LENTA_END")
-			*log.stream << "--------------------------------------------------------------------------" << std::endl;
+			filetrace << "--------------------------------------------------------------------------" << std::endl;
 			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d всего строк %d, синтаксический анализ выполнен без ошибок", 0, lenta_size);
-			*log.stream << std::setw(4) << std::left << 0 << ": всего строк " << lenta_size << ", синтаксический анализ выполнен без ошибок" << std::endl;
+			filetrace << std::setw(4) << std::left << 0 << ": всего строк " << lenta_size << ", синтаксический анализ выполнен без ошибок" << std::endl;
 			rc = true;
 			break;
 		case NS_NORULE:			MFST_TRACE4("------>NS_NURULE")
-			*log.stream << "--------------------------------------------------------------------------" << std::endl;
-			*log.stream << getDiagnosis(0, buf) << std::endl;
-			*log.stream << getDiagnosis(1, buf) << std::endl;
-			*log.stream << getDiagnosis(2, buf) << std::endl;
+			filetrace << "--------------------------------------------------------------------------" << std::endl;
+			filetrace << getDiagnosis(0, buf) << std::endl;
+			filetrace << getDiagnosis(1, buf) << std::endl;
+			filetrace << getDiagnosis(2, buf) << std::endl;
 			break;
 		case NS_NORULECHAIN:	MFST_TRACE4("------>NS_NURULENORULECHAIN") break;
 		case NS_ERROR:			MFST_TRACE4("------>NS_ERROR") break;
@@ -220,12 +220,14 @@ namespace MFST
 	{
 		MfstState state;
 		GRB::Rule rule;
+		*log.stream << "\n\n";
 		for (unsigned short k = 0; k < storestate.size(); k++)
 		{
 			state = storestate._Get_container()[k];
 			rule = grebach.getRule(state.nrule);
 			MFST_TRACE7
 		};
+		*log.stream << "\n\n";
 	};
 
 	bool Mfst::savededucation()
