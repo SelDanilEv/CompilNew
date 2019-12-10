@@ -1,29 +1,23 @@
-new text out;
-new little x;
-
-little function show(little u) 
+little function ch(little x)
 {
-out = '';
-from(0)to(u)$
+check(buffer=5)?
 {
-out = out + '*';
+output('Yes');
 }
-output(out);
+not
+{
+output('No');
+buffer = buffer + 1;
+x = ch(x);
+}
 return 0;
-}; 
+};
 
 start 
 {
-from(1)to(10)$ 
-{
-x = buffer;
-x = show(x);
-}
-out = ' ';
-from(10)to(1)$
-{
-x = buffer;
-x = show(x);
-}
+new little x; 
+buffer = 0;
+x = 0;
+buffer = ch(x);
 return 0;
 };

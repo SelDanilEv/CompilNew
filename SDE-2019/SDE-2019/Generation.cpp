@@ -30,6 +30,7 @@ namespace Generation
 	bool IsCheck = false;
 	bool isID;
 	bool isCheck;
+	bool thereisnot=false;
 
 	std::stack<std::string> MainStack;
 
@@ -159,8 +160,20 @@ namespace Generation
 				if(IsCheck)
 					if (counter == numbOfBracesChc)
 					{
-						IsCheck = false;
-						buffstr += (std::string)ASMCHECK+std::to_string(countOfChecks - 1) +" :\n";
+						if (lextable.table[i + 1].lexema != LEX_NOT) {
+							if (thereisnot == false) {
+								buffstr += (std::string)ASMCHECKNOT + std::to_string(countOfChecks - 1) + " :\n";
+							}
+							else {
+								buffstr += (std::string)ASMCHECK + std::to_string(countOfChecks - 1) + " :\n";
+							}
+							IsCheck = thereisnot = false;
+						}
+						else {
+							thereisnot = true;
+							buffstr +="jmp "+ (std::string)ASMCHECK + std::to_string(countOfChecks - 1) + "\n";
+							buffstr += (std::string)ASMCHECKNOT + std::to_string(countOfChecks - 1) + " :\n";
+						}
 					}
 				break;
 			case LEX_LEFTBRACE:
@@ -187,8 +200,9 @@ namespace Generation
 				break;
 			case LEX_ENDCHECK:
 				buffstr += "\tpop eax\n\tpop ebx\n\tcmp eax,ebx\n\tjne "+
-					(std::string)ASMCHECK + std::to_string(countOfChecks++) +"\n";
+					(std::string)ASMCHECKNOT + std::to_string(countOfChecks++) +"\n";
 				IsCheckForIDAndLITERALS = false;
+				thereisnot = false;
 				break;
 			case LEX_EQUAL:
 			{

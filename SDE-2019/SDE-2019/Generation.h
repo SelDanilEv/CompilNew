@@ -4,6 +4,7 @@
 #define ASM_FILE_PATH "../ASM/ASM.asm"
 #define ASMCYCLE "MARK"
 #define ASMCHECK "OUTCHECK"
+#define ASMCHECKNOT "CKECKNOT"
 
 namespace Generation
 {

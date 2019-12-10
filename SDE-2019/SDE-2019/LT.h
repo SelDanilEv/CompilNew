@@ -14,6 +14,7 @@
 #define LEX_START		's'	// лексема для start
 #define LEX_FROM		'm'	// лексема для from
 #define LEX_TO			'e'	// лексема для to
+#define LEX_NOT			'j'	// лексема для not
 #define LEX_CHECK		'c'	// лексема для check
 #define LEX_ENDCHECK	'?'	// лексема для endcheck
 #define LEX_LIBFUNCTION	'z'	// лексема для библиотечных функций

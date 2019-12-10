@@ -158,3 +158,30 @@ x = show(x);
 }
 return 0;
 };
+
+
+
+
+little function ch(little x)
+{
+check(buffer=5)?
+{
+output('Yes');
+}
+not
+{
+output('No');
+buffer = buffer + 1;
+x = ch(x);
+}
+return 0;
+};
+
+start 
+{
+new little x; 
+buffer = 0;
+x = 0;
+buffer = ch(x);
+return 0;
+};

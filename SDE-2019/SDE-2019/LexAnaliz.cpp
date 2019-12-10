@@ -15,9 +15,9 @@ namespace LexA
 {
 	struct MyAutomat                       //структура для автоматов
 	{
-		int automat[21];                        //массив автоматов
+		int automat[23];                        //массив автоматов
 
-		char lexema[22] = {
+		char lexema[23] = {
 			LEX_LITTLE,LEX_TEXT,LEX_FUNCTION,
 			LEX_START,LEX_NEW,LEX_RETURN,
 			LEX_OUTPUT,LEX_ID,LEX_LITERAL,
@@ -25,9 +25,9 @@ namespace LexA
 			LEX_RIGHTBRACE,LEX_LEFTTHESIS,LEX_RIGHTTHESIS,
 			LEX_EQUAL,LEX_OPERATOR,LEX_FROM,
 			LEX_TO,LEX_ENDCONDCYCL,LEX_CHECK,
-			LEX_ENDCHECK
+			LEX_ENDCHECK,LEX_NOT
 		};
-		char value[22] = {
+		char value[23] = {
 			'l','t',' ',
 			' ',' ',' ',
 			' ',' ',' ',
@@ -35,7 +35,7 @@ namespace LexA
 			' ',' ',' ',
 			' ',' ',' ',
 			' ','$',' ',
-			'?'
+			'?',' '
 		};
 	}automats;
 
@@ -96,6 +96,9 @@ namespace LexA
 			break;
 		case 20:
 			automats.automat[20] = FST::check((char*)str.c_str());
+			break;
+		case 22:
+			automats.automat[22] = FST::Not((char*)str.c_str());
 			break;
 		default:
 			break;
@@ -199,11 +202,15 @@ namespace LexA
 			{
 				if (fulltext[counter] == '\'')
 				{
+					int sizeofLit = 0;
 					onelex[amountOfLex] = fulltext[counter];
 					counter++;
 					if (fulltext[counter] != '\'')
 						do
 						{
+							if (sizeofLit > 255)
+								throw ERROR_THROW_IN(118, currentLine, 0);
+							sizeofLit++;
 							onelex[amountOfLex] += fulltext[counter];
 							counter++;
 						} while (fulltext[counter - 1] != '\'' && (fulltext[counter - 1] != '\n'));
@@ -233,6 +240,8 @@ namespace LexA
 				else {
 					linesForLex[currentLine] = amountOfLex;
 					currentLine++;
+					if (onelex[amountOfLex] != "")
+						amountOfLex++;
 				}
 			}
 		}
@@ -301,6 +310,7 @@ namespace LexA
 				break;
 			case 'n':
 				lex[0] = 4;
+				lex[1] = 22;
 				break;
 			case 'r':
 				lex[0] = 5;
@@ -341,10 +351,10 @@ namespace LexA
 			case '/':
 				lex[0] = 16;
 				break;
-			case '$':
+			case LEX_ENDCONDCYCL:
 				lex[0] = 19;
 				break;
-			case '?':
+			case LEX_ENDCHECK:
 				lex[0] = 21;
 				break;
 			case '!':
@@ -368,7 +378,7 @@ namespace LexA
 			for (int i = 0; i < 3; i++)
 			{
 				if (lex[i] != 7 && lex[i] > -1)
-					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18 || lex[i] == 20)         //если можно разобрать автоматом
+					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18 || lex[i] == 20|| lex[i] == 22)         //если можно разобрать автоматом
 					{
 						Update(str, lex[i]);
 						if (automats.automat[lex[i]] == lex[i])          //проверка подошел ли автомат
@@ -426,12 +436,14 @@ namespace LexA
 			case 11:                                                         //область видимости
 				counterOfBracket++;
 				counterOfAreaOfVisibility++;
+				if (counterOfAreaOfVisibility > 4)
+					throw ERROR_THROW_IN(119, currentLine, 0);
 				myentryI.areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
 				areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
 				bufferi = myTables.mylextable.size;
 				while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_START &&
 					myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON && myTables.mylextable.table[bufferi].lexema != LEX_ENDCONDCYCL &&
-					myTables.mylextable.table[bufferi].lexema != LEX_ENDCHECK)
+					myTables.mylextable.table[bufferi].lexema != LEX_ENDCHECK && myTables.mylextable.table[bufferi].lexema != LEX_RIGHTBRACE)
 				{
 					if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
 						myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;

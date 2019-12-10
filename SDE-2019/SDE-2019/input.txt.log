@@ -1,5 +1,5 @@
 Тест Без ошибок
----- Протокол ------- Дата: 10.12.2019 00:26:07
+---- Протокол ------- Дата: 10.12.2019 18:03:33
 ---- Параметры -------
 -log: input.txt.log
 -out: E:\Compil\SDE-2019\Debug\SDE-2019.exe.out
@@ -10,139 +10,105 @@
 
 Num      Line   Lexema            ID in IT             value
 
-  0       1       n                                        
-  1       1       t                                       t
+  0       1       t                                       l
+  1       1       f                                        
   2       1       i                   1                    
-  3       1       ;                                        
-  4       2       n                                        
-  5       2       t                                       l
-  6       2       i                   2                    
-  7       2       ;                                        
-  8       4       t                                       l
-  9       4       f                                        
- 10       4       i                   3                    
- 11       4       (                                        
- 12       4       t                                       l
- 13       4       i                   4                    
- 14       4       )                                        
- 15       5       {                                        
- 16       6       i                   1                    
- 17       6       =                                        
- 18       6       l                   5                    
- 19       6       ;                                        
- 20       7       m                                        
- 21       7       (                                        
- 22       7       l                   6                    
- 23       7       )                                        
- 24       7       e                                        
- 25       7       (                                        
- 26       7       i                   4                    
- 27       7       )                                        
- 28       7       $                                       $
- 29       8       {                                        
- 30       9       i                   1                    
- 31       9       =                                        
- 32       9       i                   1                    
- 33       9       v                                       +
- 34       9       l                   7                    
- 35       9       ;                                        
- 36      10       }                                        
- 37      11       o                                        
+  3       1       (                                        
+  4       1       t                                       l
+  5       1       i                   2                    
+  6       1       )                                        
+  7       2       {                                        
+  8       3       c                                        
+  9       3       (                                        
+ 10       3       i                   0                    
+ 11       3       =                                        
+ 12       3       l                   3                    
+ 13       3       )                                        
+ 14       3       ?                                       ?
+ 15       4       {                                        
+ 16       5       o                                        
+ 17       5       (                                        
+ 18       5       l                   4                    
+ 19       5       )                                        
+ 20       5       ;                                        
+ 21       6       }                                        
+ 22       8       j                                        
+ 23       8       {                                        
+ 24       9       o                                        
+ 25       9       (                                        
+ 26       9       l                   5                    
+ 27       9       )                                        
+ 28       9       ;                                        
+ 29      10       i                   0                    
+ 30      10       =                                        
+ 31      10       i                   0                    
+ 32      10       v                                       +
+ 33      10       l                   6                    
+ 34      10       ;                                        
+ 35      11       i                   2                    
+ 36      11       =                                        
+ 37      11       i                   1                    
  38      11       (                                        
- 39      11       i                   1                    
+ 39      11       i                   2                    
  40      11       )                                        
  41      11       ;                                        
- 42      12       r                                        
- 43      12       l                   8                    
- 44      12       ;                                        
- 45      13       }                                        
- 46      13       ;                                        
- 47      15       s                   9                    
- 48      16       {                                        
- 49      17       m                                        
- 50      17       (                                        
- 51      17       l                  10                    
- 52      17       )                                        
- 53      17       e                                        
- 54      17       (                                        
- 55      17       l                  11                    
- 56      17       )                                        
- 57      17       $                                       $
- 58      18       {                                        
- 59      19       i                   2                    
- 60      19       =                                        
- 61      19       i                   0                    
- 62      19       ;                                        
- 63      20       i                   2                    
- 64      20       =                                        
- 65      20       i                   3                    
- 66      20       (                                        
- 67      20       i                   2                    
- 68      20       )                                        
- 69      20       ;                                        
- 70      21       }                                        
- 71      22       i                   1                    
- 72      22       =                                        
- 73      22       l                  12                    
- 74      22       ;                                        
- 75      23       m                                        
- 76      23       (                                        
- 77      23       l                  13                    
- 78      23       )                                        
- 79      23       e                                        
- 80      23       (                                        
- 81      23       l                  14                    
- 82      23       )                                        
- 83      23       $                                       $
- 84      24       {                                        
- 85      25       i                   2                    
- 86      25       =                                        
- 87      25       i                   0                    
- 88      25       ;                                        
- 89      26       i                   2                    
- 90      26       =                                        
- 91      26       i                   3                    
- 92      26       (                                        
- 93      26       i                   2                    
- 94      26       )                                        
- 95      26       ;                                        
- 96      27       }                                        
- 97      28       r                                        
- 98      28       l                  15                    
- 99      28       ;                                        
-100      29       }                                        
-101      29       ;                                        
+ 42      12       }                                        
+ 43      13       r                                        
+ 44      13       l                   7                    
+ 45      13       ;                                        
+ 46      14       }                                        
+ 47      14       ;                                        
+ 48      16       s                   8                    
+ 49      17       {                                        
+ 50      18       n                                        
+ 51      18       t                                       l
+ 52      18       i                   9                    
+ 53      18       ;                                        
+ 54      19       i                   0                    
+ 55      19       =                                        
+ 56      19       l                  10                    
+ 57      19       ;                                        
+ 58      20       i                   9                    
+ 59      20       =                                        
+ 60      20       l                  11                    
+ 61      20       ;                                        
+ 62      21       i                   0                    
+ 63      21       =                                        
+ 64      21       i                   1                    
+ 65      21       (                                        
+ 66      21       i                   9                    
+ 67      21       )                                        
+ 68      21       ;                                        
+ 69      22       r                                        
+ 70      22       l                  12                    
+ 71      22       ;                                        
+ 72      23       }                                        
+ 73      23       ;                                        
                   
 
 ===========LEX TABLE mini==============
 
-nti;
-nti;
-
 tfi(ti)
 {
-i=l;
-m(l)e(i)$
+c(i=l)?
 {
-i=ivl;
+o(l);
 }
-o(i);
+
+j{
+o(l);
+i=ivl;
+i=i(i);
+}
 rl;
 };
 
 s
 {
-m(l)e(l)$
-{
-i=i;
-i=i(i);
-}
+nti;
 i=l;
-m(l)e(l)$
-{
-i=i;
+i=l;
 i=i(i);
-}
 rl;
 };
 
@@ -151,64 +117,54 @@ rl;
       Name           Type         Data type        First in LT                Value         Visibility
 
   0    buffer       variable         little             -1                        0              0
-  1       out       variable           text              2                       NV              0
-  2         x       variable         little              6                        0              0
-  3      show       function         little             10                        0              0
-  4         u      parameter         little             13                        0              0 1
-  5        T0        literal           text             18                      ' '              0 1
-  6        L0        literal         little             22                        0              0 1
-  7        T1        literal           text             34                      '*'              0 1 2
-  8        L1        literal         little             43                        0              0 1
-  9     start       function         little             47                        0              0
- 10        L2        literal         little             51                        1              0 3
- 11        L3        literal         little             55                       10              0 3
- 12        T2        literal           text             73                      ' '              0 3
- 13        L4        literal         little             77                       10              0 3
- 14        L5        literal         little             81                        1              0 3
- 15        L6        literal         little             98                        0              0 3
+  1        ch       function         little              2                        0              0
+  2         x      parameter         little              5                        0              0 1
+  3        L0        literal         little             12                        5              0 1
+  4        T0        literal           text             18                    'Yes'              0 1 2
+  5        T1        literal           text             26                     'No'              0 1 3
+  6        L1        literal         little             33                        1              0 1 3
+  7        L2        literal         little             44                        0              0 1
+  8     start       function         little             48                        0              0
+  9         x       variable         little             52                        0              0 4
+ 10        L3        literal         little             56                        0              0 4
+ 11        L4        literal         little             60                        0              0 4
+ 12        L5        literal         little             70                        0              0 4
 
 
 
 
-0   : S->nti;S            
-4   : S->nti;S            
-8   : S->tfi(F){NrU;};S   
-12  : F->ti               
-16  : N->i=E;N            
-18  : E->l                
-20  : N->m(U)e(U)${N}N    
-22  : U->l                
-26  : U->i                
-30  : N->i=E;             
-32  : E->iM               
-33  : M->vE               
-34  : E->l                
-37  : N->o(U);            
-39  : U->i                
-43  : U->l                
-47  : S->s{NrU;};         
-49  : N->m(U)e(U)${N}N    
-51  : U->l                
-55  : U->l                
-59  : N->i=E;N            
-61  : E->i                
-63  : N->i=E;             
-65  : E->i(W)             
-67  : W->i                
-71  : N->i=E;N            
-73  : E->l                
-75  : N->m(U)e(U)${N}     
-77  : U->l                
-81  : U->l                
-85  : N->i=E;N            
-87  : E->i                
-89  : N->i=E;             
-91  : E->i(W)             
-93  : W->i                
-98  : U->l                
+0   : S->tfi(F){N};S      
+4   : F->ti               
+8   : N->c(U=U)?{N}j{N}N  
+10  : U->i                
+12  : U->l                
+16  : N->o(U);            
+18  : U->l                
+24  : N->o(U);N           
+26  : U->l                
+29  : N->i=E;N            
+31  : E->iM               
+32  : M->vE               
+33  : E->l                
+35  : N->i=E;             
+37  : E->i(W)             
+39  : W->i                
+43  : N->rU;              
+44  : U->l                
+48  : S->s{N};            
+50  : N->nti;N            
+54  : N->i=E;N            
+56  : E->l                
+58  : N->i=E;N            
+60  : E->l                
+62  : N->i=E;N            
+64  : E->i(W)             
+66  : W->i                
+69  : N->rU;              
+70  : U->l                
 
 
 ======= Исходные данные =====
-Количество символов: 231
+Количество символов: 185
 Проигнорировано:     0
-Количество строк:    29
+Количество строк:    23

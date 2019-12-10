@@ -146,6 +146,18 @@ namespace FST
 		if (execute(fst))return 20; else return -1;
 	}
 
+	int Not(char* str) {
+		FST fst(
+			str,
+			4,
+			NODE(1, RELATION('n', 1)),
+			NODE(1, RELATION('o', 2)),
+			NODE(1, RELATION('t', 3)),
+			NODE()
+		);
+		if (execute(fst))return 22; else return -1;
+	}
+
 	int id(char* str) {
 		FST fst(
 			str,
@@ -182,6 +194,8 @@ namespace FST
 		);
 		if (execute(fst))return 7; else return -1;
 	}
+
+
 
 	bool literalInt(char* str)
 	{

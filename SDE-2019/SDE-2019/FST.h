@@ -48,6 +48,7 @@ namespace FST
 	int from(char* str);
 	int to(char* str);
 	int check(char* str);
+	int Not(char* str);
 	int id(char* str);
 	//int Short(char* str);
 	bool literalInt(char* str);
