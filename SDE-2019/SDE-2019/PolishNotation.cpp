@@ -114,7 +114,7 @@ bool polishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtab
 			inputOperEntries[counter2] = lextable.table[lextable_pos + i];
 			operatorPriority[counter2] = currentPriority;
 			inputOperEntries[counter2].index = buffershort;
-			if (lextable.table[lextable_pos + i].value == '*' || lextable.table[lextable_pos + i].value == '/')
+			if (lextable.table[lextable_pos + i].value == '*' || lextable.table[lextable_pos + i].value == '/'|| lextable.table[lextable_pos + i].value == '%')
 				operatorPriority[counter2]++;
 			counter2++;
 

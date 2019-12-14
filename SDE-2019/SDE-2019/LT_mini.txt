@@ -1,25 +1,50 @@
 ===========LEX TABLE mini==============
 
+nti;
+nti;
+nti;
+
+tfi()
+{
+i=i@1lv##
+ri;
+};
+
 tfi(ti)
+{
+nti;
+i=l;
+i=ilv;
+m(l)e(i)$
 {
 c(i=l)?
 {
-o(l);
+i=ilv;
 }
 
 j{
-o(l);
 i=ilv;
-i=i@1##
 }
+}
+i=@0##
+i=iiv;
+o(i);
+o(i);
 rl;
 };
 
 s
 {
-nti;
-i=l;
-i=l;
+m(l)e(l)$
+{
 i=i@1##
+}
+m(l)e(l)$
+{
+i=i@1##
+}
+o(l);
+o(l);
+o(i);
 rl;
 };

@@ -18,6 +18,7 @@
 #define LEX_CHECK		'c'	// лексема для check
 #define LEX_ENDCHECK	'?'	// лексема для endcheck
 #define LEX_LIBFUNCTION	'z'	// лексема для библиотечных функций
+#define LEX_INCLUDELIB	'w'	// лексема подключения библиотеки
 #define LEX_SEMICOLON	';'	// лексема для ;
 #define LEX_COMMA		','	// лексема для ,
 #define LEX_LEFTBRACE	'{'	// лексема для {

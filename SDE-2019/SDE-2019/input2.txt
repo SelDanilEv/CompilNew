@@ -185,3 +185,54 @@ x = 0;
 buffer = ch(x);
 return 0;
 };
+
+
+
+
+new text out;	
+new little x;
+new little sum;
+
+little function addn()
+{
+	x = textlenght(out) -1 ;
+	return x;
+};
+
+little function show(little u) 
+{
+	out = ' ';
+	x = u % 2;
+	from(0)to(u)$ 
+	{
+		check(x = 0)?
+		{
+			out = out + '@';
+		}
+		not
+		{
+			out = out + '*';
+		}
+	}
+	x = addn();
+	sum = sum + x;
+	output(out);
+	output(x);
+	return 0;
+}; 
+
+start 
+{
+	from(1)to(9)$ 
+	{
+		x = show(buffer);
+	}
+	from(9)to(1)$ 
+	{
+		x = show(buffer);
+	}
+	output(' ');
+	output('Sum');
+	output(sum);
+	return 0;
+};

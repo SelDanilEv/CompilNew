@@ -3,15 +3,26 @@
       Name           Type         Data type        First in LT                Value         Visibility
 
   0    buffer       variable         little             -1                        0              0
-  1        ch       function         little              2                        0              0
-  2         x      parameter         little              5                        0              0 1
-  3        L0        literal         little             12                        5              0 1
-  4        T0        literal           text             18                    'Yes'              0 1 2
-  5        T1        literal           text             26                     'No'              0 1 3
-  6        L1        literal         little             32                        1              0 1 3
-  7        L2        literal         little             44                        0              0 1
-  8     start       function         little             48                        0              0
-  9         x       variable         little             52                        0              0 4
- 10        L3        literal         little             56                        0              0 4
- 11        L4        literal         little             60                        0              0 4
- 12        L5        literal         little             70                        0              0 4
+  1       out       variable           text              2                       NV              0
+  2         x       variable         little              6                        0              0
+  3       sum       variable         little             10                        0              0
+  4      addn       function         little             14                        0              0
+  5        L0        literal         little             23                        1              0 1
+  6      show       function         little             34                        0              0
+  7         u      parameter         little             37                        0              0 2
+  8      kelp       variable         little             42                        0              0 2
+  9        T0        literal           text             46                      ' '              0 2
+ 10        L1        literal         little             51                        2              0 2
+ 11        L2        literal         little             56                        0              0 2
+ 12        L3        literal         little             68                        0              0 2 3
+ 13        T1        literal           text             75                      '@'              0 2 3 4
+ 14        T2        literal           text             84                      '*'              0 2 3 5
+ 15        L4        literal         little            112                        0              0 2
+ 16     start       function         little            116                        0              0
+ 17        L5        literal         little            120                        9              0 6
+ 18        L6        literal         little            124                        0              0 6
+ 19        L7        literal         little            138                        0              0 6
+ 20        L8        literal         little            142                        9              0 6
+ 21        T3        literal           text            156                      ' '              0 6
+ 22        T4        literal           text            161                    'Sum'              0 6
+ 23        L9        literal         little            170                        0              0 6

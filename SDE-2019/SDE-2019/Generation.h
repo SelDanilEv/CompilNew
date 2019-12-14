@@ -3,6 +3,7 @@
 #define TEXTMAXSIZE 255
 #define ASM_FILE_PATH "../ASM/ASM.asm"
 #define ASMCYCLE "MARK"
+#define ASMCYCLEOUT "MARKOUT"
 #define ASMCHECK "OUTCHECK"
 #define ASMCHECKNOT "CKECKNOT"
 
@@ -14,9 +15,6 @@ namespace Generation
 	};
 	std::string WriteSegment(OneSegment segment);
 
-	void Generate(LexA::Tables);
-	void GenerateOutput();
-	void GenerateReturn();
-	void GenerateExpression();
+	std::string Generate(LexA::Tables);
 	void GenerateFunction(int);
 }

@@ -190,60 +190,135 @@ namespace LexA
 		std::string fulltext = fulltextch;                         //исходный текст
 		std::string onelex[300];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
-		char symvols[] = "?$;,{}()+-*/=\n\t";                        //символы сепараторы
+		char symvols[] = "?$;,{}()+-%*/=\n\t";                        //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
 		currentLine = 0;
 		int LexInIT;                                      // какая строка в IT для лексемы
 
+		bool isLiteral = false;
+		bool isComent = false;
+		int sizeofLit = 0;
+
 
 		for (int counter = 0; counter < fulltext.size(); counter++)           //парсер для текста
 		{
-			if (!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE && fulltext[counter] != '\t')
+			switch (fulltext[counter])
 			{
-				if (fulltext[counter] == '\'')
-				{
-					int sizeofLit = 0;
-					onelex[amountOfLex] = fulltext[counter];
-					counter++;
-					if (fulltext[counter] != '\'')
-						do
-						{
-							if (sizeofLit > 255)
-								throw ERROR_THROW_IN(118, currentLine, 0);
-							sizeofLit++;
-							onelex[amountOfLex] += fulltext[counter];
-							counter++;
-						} while (fulltext[counter - 1] != '\'' && (fulltext[counter - 1] != '\n'));
-						counter--;
-				}
-				else
-				{
-					onelex[amountOfLex] += fulltext[counter];
-				}
-			}
-			else
-			{
-				if (fulltext[counter] != NEWLINE)            //новая строка
-				{
-					if (fulltext[counter] != SPACE && fulltext[counter] != '\t')
+			case '^':
+				if (!isLiteral && !isComent)
+					isComent = true;
+				break;
+			case '-':
+				if (!isLiteral && !isComent)
+					if (onelex[amountOfLex - 1] == "=" || onelex[amountOfLex - 1] == "(")
 					{
-						if ((fulltext[counter - 1] != '\t'&&fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1])) && fulltext[counter - 1] != LEX_ENDCONDCYCL)
-							amountOfLex++;
-						onelex[amountOfLex] = fulltext[counter];
-						amountOfLex++;
+						onelex[amountOfLex] += fulltext[counter];
+						break;
 					}
-					else {
-						if (fulltext[counter - 1] != SPACE && fulltext[counter - 1] != '\t' && !strchr(symvols, fulltext[counter - 1]))
-							amountOfLex++;
-					}
-				}
-				else {
-					linesForLex[currentLine] = amountOfLex;
-					currentLine++;
+			case '?':
+			case '$':
+			case ';':
+			case ',':
+			case '{':
+			case '}':
+			case '(':
+			case ')':
+			case '+':
+			case '%':
+			case '*':
+			case '/':
+			case '=':
+				if (!isLiteral && !isComent)
+				{
 					if (onelex[amountOfLex] != "")
 						amountOfLex++;
+					onelex[amountOfLex] += fulltext[counter];
 				}
+			case ' ':
+			case '\n':
+				if (!isLiteral&&fulltext[counter] == '\n')
+					if (!isComent)
+					{
+						linesForLex[currentLine] = amountOfLex;
+						currentLine++;
+					}
+					else
+					{
+						isComent = false;
+					}
+			case '\t':
+				if (!isComent)
+					if (!isLiteral)
+					{
+						if (onelex[amountOfLex] != "")
+							amountOfLex++;
+					}
+					else
+					{
+						sizeofLit++;
+						if (sizeofLit > 255)
+							throw ERROR_THROW_IN(118, currentLine, 0);
+						onelex[amountOfLex] += fulltext[counter];
+
+					}
+				break;
+			case '\'':
+				if (!isComent)
+				{
+					isLiteral = !isLiteral;
+					sizeofLit = 0;
+				}
+			default:
+				if (!isComent)
+					onelex[amountOfLex] += fulltext[counter];
+				break;
 			}
+			//if ((!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE && fulltext[counter] != '\t'))
+			//{
+			//	if (fulltext[counter] == '\'')
+			//	{
+			//		int sizeofLit = 0;
+			//		onelex[amountOfLex] = fulltext[counter];
+			//		counter++;
+			//		if (fulltext[counter] != '\'')
+			//			do
+			//			{
+			//				if (sizeofLit > 255)
+			//					throw ERROR_THROW_IN(118, currentLine, 0);
+			//				sizeofLit++;
+			//				onelex[amountOfLex] += fulltext[counter];
+			//				counter++;
+			//			} while (fulltext[counter - 1] != '\'' && (fulltext[counter - 1] != '\n'));
+			//			counter--;
+			//	}
+			//	else
+			//	{
+			//		onelex[amountOfLex] += fulltext[counter];
+			//	}
+			//}
+			//else
+			//{
+			//	if (fulltext[counter] != NEWLINE)            //новая строка
+			//	{
+			//		if (fulltext[counter] != SPACE && fulltext[counter] != '\t')
+			//		{
+			//			if ((fulltext[counter - 1] != '\t'&&fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1])) && fulltext[counter - 1] != LEX_ENDCONDCYCL)
+			//				amountOfLex++;
+			//			onelex[amountOfLex] = fulltext[counter];
+			//			amountOfLex++;
+			//		}
+			//		else {
+			//			if (fulltext[counter - 1] != SPACE && fulltext[counter - 1] != '\t' && !strchr(symvols, fulltext[counter - 1]))
+			//				amountOfLex++;
+			//		}
+			//	}
+			//	else {
+			//		linesForLex[currentLine] = amountOfLex;
+			//		currentLine++;
+			//		if (onelex[amountOfLex] != "")
+			//			amountOfLex++;
+			//	}
+			//}
 		}
 
 		Tables myTables;
@@ -344,8 +419,12 @@ namespace LexA
 				break;
 			case '-':
 				lex[0] = 16;
+				lex[1] = 8;
 				break;
 			case '*':
+				lex[0] = 16;
+				break;
+			case '%':
 				lex[0] = 16;
 				break;
 			case '/':
@@ -378,17 +457,23 @@ namespace LexA
 			for (int i = 0; i < 3; i++)
 			{
 				if (lex[i] != 7 && lex[i] > -1)
-					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18 || lex[i] == 20|| lex[i] == 22)         //если можно разобрать автоматом
+					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18 || lex[i] == 20 || lex[i] == 22)         //если можно разобрать автоматом
 					{
 						Update(str, lex[i]);
 						if (automats.automat[lex[i]] == lex[i])          //проверка подошел ли автомат
+						{
 							identifyLex = lex[i];
+							break;
+						}
 						else
 							lex[i] = -1;
 					}
 					else
 					{
-						identifyLex = lex[i];                      //по номеру
+						if (str.length() == 1 && lex[i] == 8 && str[0] == '-')
+							identifyLex = 16;
+						else
+							identifyLex = lex[i];                      //по номеру
 					}
 			}
 
