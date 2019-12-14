@@ -26,10 +26,10 @@ textlenght PROTO : DWORD
 	T1 byte '@', 0
 	T2 byte '*', 0
 	L4 sdword 0
-	L5 sdword 9
-	L6 sdword 0
-	L7 sdword 0
-	L8 sdword 9
+	L5 sdword 1
+	L6 sdword 9
+	L7 sdword 9
+	L8 sdword 1
 	T3 byte ' ', 0
 	T4 byte 'Sum', 0
 	L9 sdword 0
@@ -41,7 +41,6 @@ textlenght PROTO : DWORD
 	x00000 sdword ?
 	sum00000 sdword ?
 	cycleisneg1 dword 0
-	kelp02000 sdword ?
 	T0T byte 255 dup(0)
 	T1T byte 255 dup(0)
 	T2T byte 255 dup(0)

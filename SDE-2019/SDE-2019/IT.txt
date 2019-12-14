@@ -10,19 +10,18 @@
   5        L0        literal         little             23                        1              0 1
   6      show       function         little             34                        0              0
   7         u      parameter         little             37                        0              0 2
-  8      kelp       variable         little             42                        0              0 2
-  9        T0        literal           text             46                      ' '              0 2
- 10        L1        literal         little             51                        2              0 2
- 11        L2        literal         little             56                        0              0 2
- 12        L3        literal         little             68                        0              0 2 3
- 13        T1        literal           text             75                      '@'              0 2 3 4
- 14        T2        literal           text             84                      '*'              0 2 3 5
- 15        L4        literal         little            112                        0              0 2
- 16     start       function         little            116                        0              0
- 17        L5        literal         little            120                        9              0 6
- 18        L6        literal         little            124                        0              0 6
- 19        L7        literal         little            138                        0              0 6
- 20        L8        literal         little            142                        9              0 6
- 21        T3        literal           text            156                      ' '              0 6
- 22        T4        literal           text            161                    'Sum'              0 6
- 23        L9        literal         little            170                        0              0 6
+  8        T0        literal           text             42                      ' '              0 2
+  9        L1        literal         little             47                        2              0 2
+ 10        L2        literal         little             52                        0              0 2
+ 11        L3        literal         little             64                        0              0 2 3
+ 12        T1        literal           text             71                      '@'              0 2 3 4
+ 13        T2        literal           text             80                      '*'              0 2 3 5
+ 14        L4        literal         little            108                        0              0 2
+ 15     start       function         little            112                        0              0
+ 16        L5        literal         little            116                        1              0 6
+ 17        L6        literal         little            120                        9              0 6
+ 18        L7        literal         little            134                        9              0 6
+ 19        L8        literal         little            138                        1              0 6
+ 20        T3        literal           text            152                      ' '              0 6
+ 21        T4        literal           text            157                    'Sum'              0 6
+ 22        L9        literal         little            166                        0              0 6

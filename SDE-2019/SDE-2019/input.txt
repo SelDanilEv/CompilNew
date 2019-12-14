@@ -4,13 +4,12 @@ new little sum;
 
 little function addn()
 {
-	x = textlenght(out) - 1;
+	x = textlenght(out) -1 ;
 	return x;
 };
 
 little function show(little u) 
 {
-	new little kelp;  ^ffff +-GG
 	out = ' ';
 	x = u % 2;
 	from(0)to(u)$ 
@@ -33,11 +32,11 @@ little function show(little u)
 
 start 
 {
-	from(9)to(0)$ 
+	from(1)to(9)$ 
 	{
 		x = show(buffer);
 	}
-	from(0)to(9)$ 
+	from(9)to(1)$ 
 	{
 		x = show(buffer);
 	}

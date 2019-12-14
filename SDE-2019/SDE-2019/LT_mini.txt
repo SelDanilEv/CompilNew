@@ -12,7 +12,6 @@ ri;
 
 tfi(ti)
 {
-nti;
 i=l;
 i=ilv;
 m(l)e(i)$
