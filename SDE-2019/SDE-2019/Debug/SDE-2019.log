@@ -1,4 +1,4 @@
-﻿Сборка начата 14.12.2019 22:07:10.
+﻿Сборка начата 17.12.2019 21:19:14.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
@@ -64,45 +64,25 @@ windir = C:\WINDOWS
      1>InitializeBuildStatus:
          Создание "Debug\SDE-2019.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt pch.cpp
-         pch.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Error.cpp FST.cpp FilesManager.cpp Generation.cpp Greibach.cpp IT.cpp In.cpp LT.cpp LexAnaliz.cpp Log.cpp MFST.cpp Main.cpp Parm.cpp PolishNotation.cpp Semantic.cpp
-         Error.cpp
-     1>e:\compil\sde-2019\sde-2019\error.cpp(81): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "ERROR_ENTRY_NODEF"
-         FST.cpp
-     1>e:\compil\sde-2019\sde-2019\fst.cpp(284): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-         FilesManager.cpp
+         Для всех выходных данных обновления не требуется.
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"Debug\SDE-2019.pch" /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Generation.cpp LexAnaliz.cpp
          Generation.cpp
-     1>e:\compil\sde-2019\sde-2019\generation.cpp(201): warning C4129: p: неизвестная escape-последовательность
-         Greibach.cpp
-         IT.cpp
-         In.cpp
-     1>e:\compil\sde-2019\sde-2019\in.cpp(41): warning C4018: <: несоответствие типов со знаком и без знака
-         LT.cpp
+     1>e:\compil\sde-2019\sde-2019\generation.cpp(200): warning C4129: p: неизвестная escape-последовательность
          LexAnaliz.cpp
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(171): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(203): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(494): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(496): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(498): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(500): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(552): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(554): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(558): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(560): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(580): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(589): warning C4018: <: несоответствие типов со знаком и без знака
-     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(591): warning C4018: >=: несоответствие типов со знаком и без знака
-         Log.cpp
-         MFST.cpp
-     1>e:\compil\sde-2019\sde-2019\mfst.cpp(237): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
-         Main.cpp
-         Parm.cpp
-         PolishNotation.cpp
-         Semantic.cpp
-     1>e:\compil\sde-2019\sde-2019\semantic.cpp(81): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(172): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(204): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(501): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(503): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(505): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(507): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(559): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(561): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(565): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(567): warning C4018: >=: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(587): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(596): warning C4018: <: несоответствие типов со знаком и без знака
+     1>e:\compil\sde-2019\sde-2019\lexanaliz.cpp(598): warning C4018: >=: несоответствие типов со знаком и без знака
          Создание кода...
-     1>e:\compil\sde-2019\sde-2019\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\SDE-2019\Debug\SDE-2019.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\SDE-2019\Debug\SDE-2019.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\SDE-2019\Debug\SDE-2019.lib" /MACHINE:X86 Debug\Error.obj
          Debug\FilesManager.obj
@@ -130,28 +110,22 @@ windir = C:\WINDOWS
 
        "E:\Compil\SDE-2019\SDE-2019\SDE-2019.vcxproj" (целевой объект Build ) (1) ->
        (ClCompile конечный объект) -> 
-         e:\compil\sde-2019\sde-2019\error.cpp(81): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "ERROR_ENTRY_NODEF"
-         e:\compil\sde-2019\sde-2019\fst.cpp(284): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-         e:\compil\sde-2019\sde-2019\generation.cpp(201): warning C4129: p: неизвестная escape-последовательность
-         e:\compil\sde-2019\sde-2019\in.cpp(41): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(171): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(203): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(494): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(496): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(498): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(500): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(552): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(554): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(558): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(560): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(580): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(589): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(591): warning C4018: >=: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\mfst.cpp(237): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
-         e:\compil\sde-2019\sde-2019\semantic.cpp(81): warning C4018: <: несоответствие типов со знаком и без знака
-         e:\compil\sde-2019\sde-2019\polishnotation.cpp(41): warning C4715: findOperator: значение возвращается не при всех путях выполнения
+         e:\compil\sde-2019\sde-2019\generation.cpp(200): warning C4129: p: неизвестная escape-последовательность
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(172): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(204): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(501): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(503): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(505): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(507): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(559): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(561): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(565): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(567): warning C4018: >=: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(587): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(596): warning C4018: <: несоответствие типов со знаком и без знака
+         e:\compil\sde-2019\sde-2019\lexanaliz.cpp(598): warning C4018: >=: несоответствие типов со знаком и без знака
 
-    Предупреждений: 20
+    Предупреждений: 14
     Ошибок: 0
 
-Прошло времени 00:00:33.44
+Прошло времени 00:00:15.70

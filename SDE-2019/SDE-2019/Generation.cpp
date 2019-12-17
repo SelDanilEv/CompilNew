@@ -30,7 +30,7 @@ namespace Generation
 	bool IsCheck = false;
 	bool isID;
 	bool isCheck;
-	bool thereisnot=false;
+	bool thereisnot = false;
 
 	std::stack<std::string> MainStack;
 
@@ -156,10 +156,10 @@ namespace Generation
 						IsCycle = false;
 						buffstr += "\tmov eax,cycleisneg" + std::to_string(countOfCycles - 1) + "\n\tcmp eax,0\n\tje iter" + std::to_string(countOfCycles - 1) +
 							"\n\tsub buffer00000,1\n\tjmp enditer" + std::to_string(countOfCycles - 1) + "\niter" + std::to_string(countOfCycles - 1) + ":\n" +
-							"\tadd buffer00000,1\n\tenditer" + std::to_string(countOfCycles - 1) + ":\njmp "+ (std::string)ASMCYCLE + std::to_string(countOfCycles - 1)+'\n'+
-							(std::string)ASMCYCLEOUT + std::to_string(countOfCycles - 1) +":\n";
+							"\tadd buffer00000,1\n\tenditer" + std::to_string(countOfCycles - 1) + ":\njmp " + (std::string)ASMCYCLE + std::to_string(countOfCycles - 1) + '\n' +
+							(std::string)ASMCYCLEOUT + std::to_string(countOfCycles - 1) + ":\n";
 					}
-				if(IsCheck)
+				if (IsCheck)
 					if (counter == numbOfBracesChc)
 					{
 						if (lextable.table[i + 1].lexema != LEX_NOT) {
@@ -173,7 +173,7 @@ namespace Generation
 						}
 						else {
 							thereisnot = true;
-							buffstr +="jmp "+ (std::string)ASMCHECK + std::to_string(countOfChecks - 1) + "\n";
+							buffstr += "jmp " + (std::string)ASMCHECK + std::to_string(countOfChecks - 1) + "\n";
 							buffstr += (std::string)ASMCHECKNOT + std::to_string(countOfChecks - 1) + " :\n";
 						}
 					}
@@ -191,18 +191,35 @@ namespace Generation
 				break;
 			case LEX_ENDCONDCYCL:
 				IsCycleForIDAndLITERALS = false;
-				//buffstr += "\tpop eax\n\tpop ebx\n\tmov buffer00000,ebx\n\tsub eax,ebx\n\tmov ecx,eax\n";
 				buffstr += "\tpop eax\n\tpop ebx\n\tmov edx,eax\n\tsub eax,ebx\n\tcmp eax,0\n\tjl negative" + std::to_string(countOfCycles) + "\n" +
 					"\tmov buffer00000,ebx\n\tmov ecx,eax\n\tmov eax,0\n\tmov cycleisneg" + std::to_string(countOfCycles) +
 					",eax\n\tjmp endcondcycle" + std::to_string(countOfCycles) +
 					"\nnegative" + std::to_string(countOfCycles) + " :\n\tmov buffer00000,ebx\n\tneg eax\n\tmov ecx,eax\n\tadd ecx,1\n" +
 					"\tmov eax,1\n\tmov cycleisneg" + std::to_string(countOfCycles) + ",eax\nendcondcycle" + std::to_string(countOfCycles) + " :\n\tpush ecx\n";
-				Data.Code += "\tcycleisneg"+ std::to_string(countOfCycles) + " dword 0\n";
-				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":"+ "\pop ecx\n\tcmp ecx,0\nje " + (std::string)ASMCYCLEOUT + std::to_string(countOfCycles - 1) +"\n\tsub ecx,1\n\tpush ecx\n";
+				Data.Code += "\tcycleisneg" + std::to_string(countOfCycles) + " dword 0\n";
+				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":" + "\pop ecx\n\tcmp ecx,0\nje " + (std::string)ASMCYCLEOUT + std::to_string(countOfCycles - 1) + "\n\tsub ecx,1\n\tpush ecx\n";
 				break;
 			case LEX_ENDCHECK:
-				buffstr += "\tpop eax\n\tpop ebx\n\tcmp eax,ebx\n\tjne "+
-					(std::string)ASMCHECKNOT + std::to_string(countOfChecks++) +"\n";
+				buffstr += "\tpop eax\n\tpop ebx\n\tcmp eax,ebx\n";
+
+				switch (lextable.table[i - 3].lexema)
+				{
+				case LEX_EQUAL:
+					buffstr += "\tjne ";
+				case LEX_OPERCHECK:
+					switch (lextable.table[i - 3].value)
+					{
+					case '<':
+						buffstr += "\tjng ";
+						break;
+					case '>':
+						buffstr += "\tjnl ";
+						break;
+					}
+					break;
+				}
+
+				buffstr += (std::string)ASMCHECKNOT + std::to_string(countOfChecks++) + "\n";
 				IsCheckForIDAndLITERALS = false;
 				thereisnot = false;
 				break;
@@ -212,8 +229,8 @@ namespace Generation
 					break;
 				object = GetName(lextable.table[i - 1].idxTI, true);
 				if (idtable.table[lextable.table[i - 1].idxTI].idtype == IT::V && !isMain)
-					if(idtable.table[lextable.table[i - 1].idxTI].iddatatype!=IT::LIT)
-					object = "offset " + object;
+					if (idtable.table[lextable.table[i - 1].idxTI].iddatatype != IT::LIT)
+						object = "offset " + object;
 				bool TypeObject;  //true numb    false text
 				if (idtable.table[lextable.table[i - 1].idxTI].iddatatype == IT::LIT)TypeObject = true; else TypeObject = false;
 				while (lextable.table[i].lexema != LEX_SEMICOLON && lextable.table[i].lexema != LATTICE)
@@ -422,7 +439,7 @@ namespace Generation
 				isID = true;
 			case LEX_LITERAL:
 			{
-				if (IsCycleForIDAndLITERALS|| IsCheckForIDAndLITERALS)
+				if (IsCycleForIDAndLITERALS || IsCheckForIDAndLITERALS)
 					if (idtable.table[lextable.table[i].idxTI].iddatatype == IT::LIT)
 						buffstr += "\tpush " + GetName(lextable.table[i].idxTI, isID) + '\n';
 				break;

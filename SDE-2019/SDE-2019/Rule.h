@@ -9,7 +9,7 @@ namespace GRB
 {
 	Greibach greibach(
 		NS('S'), TS('$'),                     // стартовый символ, дно стека
-		7,									  // количество правил
+		8,									  // количество правил
 		Rule(
 			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы
 			8,                                // 
@@ -33,10 +33,10 @@ namespace GRB
 			Rule::Chain(4, TS('r'), NS('U'), TS(';'), NS('N')),
 			Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
 			Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
-			Rule::Chain(11, TS('c'), TS('('), NS('U'), TS('='), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}'), NS('N')),
-			Rule::Chain(15, TS('c'), TS('('), NS('U'), TS('='), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}'), TS('j'), TS('{'), NS('N'), TS('}'), NS('N')),
-			Rule::Chain(14, TS('c'), TS('('), NS('U'), TS('='), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}'), TS('j'), TS('{'), NS('N'), TS('}')),
-			Rule::Chain(10, TS('c'), TS('('), NS('U'), TS('='), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}')),
+			Rule::Chain(11, TS('c'), TS('('), NS('U'), NS('C'), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}'), NS('N')),
+			Rule::Chain(15, TS('c'), TS('('), NS('U'), NS('C'), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}'), TS('j'), TS('{'), NS('N'), TS('}'), NS('N')),
+			Rule::Chain(14, TS('c'), TS('('), NS('U'), NS('C'), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}'), TS('j'), TS('{'), NS('N'), TS('}')),
+			Rule::Chain(10, TS('c'), TS('('), NS('U'), NS('C'), NS('U'), TS(')'), TS('?'), TS('{'), NS('N'), TS('}')),
 			Rule::Chain(8, TS('n'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';')),
 			Rule::Chain(9, TS('n'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')),
 			Rule::Chain(6, TS('o'), TS('('), NS('U'), TS(')'), TS(';'), NS('N')),
@@ -83,6 +83,12 @@ namespace GRB
 			2,								  //
 			Rule::Chain(1, TS('i')),
 			Rule::Chain(1, TS('l'))
+		),
+		Rule(
+			NS('C'), GRB_ERROR_SERIES + 7,    // 
+			2,								  //
+			Rule::Chain(1, TS('v')),
+			Rule::Chain(1, TS('y'))
 		)
 	);
 }

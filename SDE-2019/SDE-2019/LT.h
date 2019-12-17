@@ -29,6 +29,7 @@
 #define LEX_MINUS		'v'	// лексема для -
 #define LEX_STAR		'v'	// лексема для *
 #define LEX_DIRSLASH	'v'	// лексема для /
+#define LEX_OPERCHECK	'y'	// лексема для /
 #define LEX_ENDCONDCYCL	'$'	// лексема для $
 #define LEX_OPERATOR	'v'	// лексема для операторов
 #define LEX_EQUAL		'=' // лексема для =

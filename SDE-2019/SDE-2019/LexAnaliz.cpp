@@ -15,9 +15,9 @@ namespace LexA
 {
 	struct MyAutomat                       //структура для автоматов
 	{
-		int automat[23];                        //массив автоматов
+		int automat[24];                        //массив автоматов
 
-		char lexema[23] = {
+		char lexema[24] = {
 			LEX_LITTLE,LEX_TEXT,LEX_FUNCTION,
 			LEX_START,LEX_NEW,LEX_RETURN,
 			LEX_OUTPUT,LEX_ID,LEX_LITERAL,
@@ -25,9 +25,10 @@ namespace LexA
 			LEX_RIGHTBRACE,LEX_LEFTTHESIS,LEX_RIGHTTHESIS,
 			LEX_EQUAL,LEX_OPERATOR,LEX_FROM,
 			LEX_TO,LEX_ENDCONDCYCL,LEX_CHECK,
-			LEX_ENDCHECK,LEX_NOT
+			LEX_ENDCHECK,LEX_NOT,LEX_OPERCHECK
 		};
-		char value[23] = {
+
+		char value[24] = {
 			'l','t',' ',
 			' ',' ',' ',
 			' ',' ',' ',
@@ -35,7 +36,7 @@ namespace LexA
 			' ',' ',' ',
 			' ',' ',' ',
 			' ','$',' ',
-			'?',' '
+			'?',' ',' '
 		};
 	}automats;
 
@@ -108,7 +109,7 @@ namespace LexA
 	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
 	{
 		entryL.lexema = automats.lexema[identifyLex];
-		if (identifyLex != 16)
+		if (identifyLex != 16&& identifyLex != 23)
 			entryL.value = automats.value[identifyLex];
 		if (isAStandartFunction)
 			entryL.value = LEX_LIBFUNCTION;
@@ -190,7 +191,7 @@ namespace LexA
 		std::string fulltext = fulltextch;                         //исходный текст
 		std::string onelex[300];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
-		char symvols[] = "?$;,{}()+-%*/=\n\t";                        //символы сепараторы
+		//char symvols[] = "?$;,{}()+-%*/=\n\t";                        //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
 		currentLine = 0;
 		int LexInIT;                                      // какая строка в IT для лексемы
@@ -223,6 +224,8 @@ namespace LexA
 			case '}':
 			case '(':
 			case ')':
+			case '>':
+			case '<':
 			case '+':
 			case '%':
 			case '*':
@@ -361,11 +364,15 @@ namespace LexA
 			if (str == "")break;//checker
 
 			identifyLex = 0;
-			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/) 17-from 18-to 19-$ 20-check 21-C
+			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/) 17-from 18-to 19-$ 20-check 21-? 22-not 23-<>
 			lex[0] = -1; lex[1] = -1; lex[2] = -1;
 
 			switch (temp)       //определение возможного типа лексемы
 			{
+			case '>':
+			case '<':
+				lex[0] = 23;
+				break;
 			case 'l':
 				lex[0] = 0;       //little
 				break;
@@ -658,7 +665,7 @@ namespace LexA
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
 			default:        //если не start  {}  id
-				if (identifyLex == 16)
+				if (identifyLex == 16||identifyLex==23)
 					myentryL.value = str[0];
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);

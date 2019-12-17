@@ -1,4 +1,4 @@
-﻿Сборка начата 13.12.2019 18:55:13.
+﻿Сборка начата 17.12.2019 21:20:54.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
@@ -65,20 +65,18 @@ windir = C:\WINDOWS
          Создание "Debug\ASM.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        _MASM:
          Assembling ASM.asm...
-         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmp14b7422312b24645bb3a4ad82e9fc781.cmd"
+         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmpf4678aa8d90d46948ef35be5dc6e7858.cmd"
          ml.exe /c /nologo /Zi /Fo"Debug\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\SDE-2019\Debug\ASM.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\SDE-2019\Debug\ASM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\SDE-2019\Debug\ASM.lib" /MACHINE:X86 Debug\ASM.obj
-     1>LINK : fatal error LNK1104: эх єфрхЄё  юЄъЁ√Є№ Їрщы "'../Debug/mylib.lib'"
-     1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Build) с ошибкой.
+         ASM.vcxproj -> E:\Compil\SDE-2019\Debug\ASM.exe
+       FinalizeBuildStatus:
+         Файл "Debug\ASM.tlog\unsuccessfulbuild" удаляется.
+         Обращение к "Debug\ASM.tlog\ASM.lastbuildstate".
+     1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Build).
 
-Ошибка сборки.
-
-       "E:\Compil\SDE-2019\ASM\ASM.vcxproj" (целевой объект Build ) (1) ->
-       (Link конечный объект) -> 
-         LINK : fatal error LNK1104: эх єфрхЄё  юЄъЁ√Є№ Їрщы "'../Debug/mylib.lib'"
-
+Сборка успешно завершена.
     Предупреждений: 0
-    Ошибок: 1
+    Ошибок: 0
 
-Прошло времени 00:00:01.53
+Прошло времени 00:00:01.51
