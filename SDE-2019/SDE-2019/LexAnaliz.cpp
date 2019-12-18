@@ -120,14 +120,22 @@ namespace LexA
 
 	bool FindIDByLexAndArea(LT::LexTable &lextable, IT::IdTable&idtable, std::string str) {
 		short* areaOfV = new short[5];
+		std::string b_str="";
+		for (int i = 0; i < MAXSIZEIDENTIFICATOR && i < str.length(); i++)
+		{
+			b_str += str[i];
+		}
 		for (int i = 0; i < 5; i++)
 			areaOfV[i] = areaOfVisibilityLexAnaliz[i];  //копия области видимости
 		bufferi = 4;
-		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX) {   //поиск подходящего идентификатора
+		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX &&
+			IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)b_str.c_str(), areaOfV) == TI_NULLIDX) {   //поиск подходящего идентификатора
 			areaOfV[bufferi--] = 0;
 			if (bufferi < 0)return true;
 		}
 		myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV);
+		if(myentryL.idxTI==-1)
+			myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)b_str.c_str(), areaOfV);
 		return false;
 	}
 
@@ -178,7 +186,7 @@ namespace LexA
 			}
 		}
 		else
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < MAXSIZEIDENTIFICATOR; i++)
 				myentryI.id[i] = buff_name[i];               //в таблицу идентификаторов
 		myentryI.iddatatype = iddatatype;
 		myentryI.idtype = idtype;
@@ -328,7 +336,7 @@ namespace LexA
 		myTables.myidtable = IT::Create(amountOfLex);                         //создания таблиц
 		myTables.mylextable = LT::Create(amountOfLex);
 
-		for (int i = 0; i < 5; i++)                //обнуление буфера имен
+		for (int i = 0; i < MAXSIZEIDENTIFICATOR; i++)                //обнуление буфера имен
 		{
 			buff_name[i] = NULL;
 		}
@@ -498,13 +506,13 @@ namespace LexA
 				if (str == standartFunction[i]) isAStandartFunction = true;
 			}
 
-			for (int i = 0; i < str.length() && i < 5; i++)            //берем имя
+			for (int i = 0; i < str.length() && i < MAXSIZEIDENTIFICATOR; i++)            //берем имя
 				buff_name[i] = str[i];
-			for (int i = 4; i >= str.length(); i--)
+			for (int i = MAXSIZEIDENTIFICATOR; i >= str.length(); i--)
 				buff_name[i] = NULL;
 			for (int i = 0; i < str.length(); i++)
 				buff_name_str[i] = str[i];
-			for (int i = 10; i >= str.length(); i--)
+			for (int i = 15; i >= str.length(); i--)
 				buff_name_str[i] = NULL;
 
 			switch (identifyLex)
@@ -515,7 +523,7 @@ namespace LexA
 					throw ERROR_THROW_IN(150, currentLine, 0);
 				}
 				myentryI.areaOfVisibility[0] = 0;
-				for (int q = 0; q < 5; q++)
+				for (int q = 0; q < MAXSIZEIDENTIFICATOR; q++)
 					myentryI.id[q] = buff_name[q];
 				myentryI.iddatatype = IT::LIT;
 				myentryI.idtype = IT::F;
@@ -626,7 +634,7 @@ namespace LexA
 								bufferi = 0;
 								bufferi1 = 1;
 								buffer = "";
-								for (int w = 0; w < 5; w++)
+								for (int w = 0; w < MAXSIZEIDENTIFICATOR; w++)
 									buffer += myTables.myidtable.table[y].id[w];
 								if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
 								{

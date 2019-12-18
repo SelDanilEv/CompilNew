@@ -1,0 +1,108 @@
+﻿Сборка начата 18.12.2019 2:33:03.
+Окружение на момент начала сборки:
+ALLUSERSPROFILE = C:\ProgramData
+APPDATA = C:\Users\USER\AppData\Roaming
+BTK_BASELIBCTX:11980 = 12785888
+CommonProgramFiles = C:\Program Files (x86)\Common Files
+CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
+CommonProgramW6432 = C:\Program Files\Common Files
+COMPUTERNAME = DEFENDER-SD
+ComSpec = C:\WINDOWS\system32\cmd.exe
+configsetroot = C:\WINDOWS\ConfigSetRoot
+C_EM64T_REDIST11 = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\
+DriverData = C:\Windows\System32\Drivers\DriverData
+easyplussdk = "C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin"
+ESET_OPTIONS =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+FPS_BROWSER_USER_PROFILE_STRING = Default
+FugueRepository = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2017\COMMUNITY\TEAM TOOLS\STATIC ANALYSIS TOOLS\FxCop\Repository
+HOMEDRIVE = C:
+HOMEPATH = \Users\USER
+KMP_DUPLICATE_LIB_OK = TRUE
+LOCALAPPDATA = C:\Users\USER\AppData\Local
+LOGONSERVER = \\DEFENDER-SD
+MKL_SERIAL = YES
+MSBuildLoadMicrosoftTargetsReadOnly = true
+NUMBER_OF_PROCESSORS = 4
+OneDrive = C:\Users\USER\OneDrive
+OS = Windows_NT
+Path = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\install\AOMEI Backupper;C:\Program Files\Java\jdk-10.0.1\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\install\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\atom\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\.dotnet\tools
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+PkgDefApplicationConfigFile = C:\Users\USER\AppData\Local\Microsoft\VisualStudio\15.0_3403365a\devenv.exe.config
+PROCESSOR_ARCHITECTURE = x86
+PROCESSOR_ARCHITEW6432 = AMD64
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
+PROCESSOR_LEVEL = 6
+PROCESSOR_REVISION = 4e03
+ProgramData = C:\ProgramData
+ProgramFiles = C:\Program Files (x86)
+ProgramFiles(x86) = C:\Program Files (x86)
+ProgramW6432 = C:\Program Files
+PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC = C:\Users\Public
+SESSIONNAME = Console
+SystemDrive = C:
+SystemRoot = C:\WINDOWS
+TEMP = C:\Users\USER\AppData\Local\Temp
+TMP = C:\Users\USER\AppData\Local\Temp
+USERDOMAIN = DEFENDER-SD
+USERDOMAIN_ROAMINGPROFILE = DEFENDER-SD
+USERNAME = USER
+USERPROFILE = C:\Users\USER
+VBOX_MSI_INSTALL_PATH = C:\install\VisualBox\
+VisualStudioDir = C:\Users\USER\Documents\Visual Studio 2017
+VisualStudioEdition = Microsoft Visual Studio Community 2017
+VisualStudioVersion = 15.0
+VS110COMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools\
+VS120COMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\
+VS140COMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+VSAPPIDDIR = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\
+VSAPPIDNAME = devenv.exe
+VSLANG = 1049
+VSSKUEDITION = Community
+windir = C:\WINDOWS
+
+     1>Проект "E:\Compil\SDE-2019\ASM\ASM.vcxproj" в узле 2 (целевые объекты Build).
+     1>InitializeBuildStatus:
+         Обращение к "x64\Release\ASM.tlog\unsuccessfulbuild".
+       _MASM:
+         Assembling ASM.asm...
+         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmp4342d320196a45b7a22e3d24a025876d.cmd"
+         ml64.exe /c /nologo /Zi /Fo"x64\Release\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm
+     1>ASM.asm(1): error A2008: syntax error : .
+     1>ASM.asm(2): error A2008: syntax error : .
+     1>ASM.asm(18): error A2008: syntax error : .
+     1>ASM.asm(39): error A2070: invalid instruction operands
+     1>ASM.asm(40): error A2070: invalid instruction operands
+     1>ASM.asm(41): error A2070: invalid instruction operands
+     1>ASM.asm(42): error A2070: invalid instruction operands
+     1>ASM.asm(45): error A2070: invalid instruction operands
+     1>ASM.asm(49): error A2070: invalid instruction operands
+     1>ASM.asm(56): error A2070: invalid instruction operands
+     1>ASM.asm(62): error A2008: syntax error : main
+     1>ASM.asm(63): error A2088: END directive required at end of file
+     1>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\BuildCustomizations\masm.targets(69,5): error MSB3721: выход из команды "ml64.exe /c /nologo /Zi /Fo"x64\Release\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm" с кодом "1".
+     1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Build) с ошибкой.
+
+Ошибка сборки.
+
+       "E:\Compil\SDE-2019\ASM\ASM.vcxproj" (целевой объект Build ) (1) ->
+       (_MASM конечный объект) -> 
+         ASM.asm(1): error A2008: syntax error : .
+         ASM.asm(2): error A2008: syntax error : .
+         ASM.asm(18): error A2008: syntax error : .
+         ASM.asm(39): error A2070: invalid instruction operands
+         ASM.asm(40): error A2070: invalid instruction operands
+         ASM.asm(41): error A2070: invalid instruction operands
+         ASM.asm(42): error A2070: invalid instruction operands
+         ASM.asm(45): error A2070: invalid instruction operands
+         ASM.asm(49): error A2070: invalid instruction operands
+         ASM.asm(56): error A2070: invalid instruction operands
+         ASM.asm(62): error A2008: syntax error : main
+         ASM.asm(63): error A2088: END directive required at end of file
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\BuildCustomizations\masm.targets(69,5): error MSB3721: выход из команды "ml64.exe /c /nologo /Zi /Fo"x64\Release\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm" с кодом "1".
+
+    Предупреждений: 0
+    Ошибок: 13
+
+Прошло времени 00:00:00.39

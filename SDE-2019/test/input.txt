@@ -1,0 +1,12 @@
+start 
+{
+	check(-2<5)?
+	{
+	output('true');
+	}
+	not
+	{
+	output('false');
+	}
+	return 0;
+};

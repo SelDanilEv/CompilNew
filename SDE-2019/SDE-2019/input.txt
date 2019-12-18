@@ -1,12 +1,26 @@
+new little x;
+new text outmessage;
+
+little function prnt()
+{
+	outmessage = 'Happy '+'new '+'Year';
+	from (10) to (5)$
+	{
+		output(outmessage);
+		x = buffer - x;
+		output(x);
+	}
+	return 0;
+};
+
 start 
 {
-	check(-2<5)?
+	from (3) to (0)$
 	{
-	output('true');
-	}
-	not
-	{
-	output('false');
+		output('start buffer');
+		output(buffer);
+		x = buffer;
+		x = prnt();
 	}
 	return 0;
 };

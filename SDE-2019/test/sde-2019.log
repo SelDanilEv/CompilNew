@@ -1,0 +1,90 @@
+Тест Без ошибок
+---- Протокол ------- Дата: 17.12.2019 21:38:44
+---- Параметры -------
+-log: sde-2019.log
+-out: sde-2019.asm
+-in: input.txt
+
+
+================LEX TABLE==============
+
+Num      Line   Lexema            ID in IT             value
+
+  0       1       s                   1                    
+  1       2       {                                        
+  2       3       c                                        
+  3       3       (                                        
+  4       3       l                   2                    
+  5       3       y                                       <
+  6       3       l                   3                    
+  7       3       )                                        
+  8       3       ?                                       ?
+  9       4       {                                        
+ 10       5       o                                        
+ 11       5       (                                        
+ 12       5       l                   4                    
+ 13       5       )                                        
+ 14       5       ;                                        
+ 15       6       }                                        
+ 16       8       j                                        
+ 17       8       {                                        
+ 18       9       o                                        
+ 19       9       (                                        
+ 20       9       l                   5                    
+ 21       9       )                                        
+ 22       9       ;                                        
+ 23      10       }                                        
+ 24      11       r                                        
+ 25      11       l                   6                    
+ 26      11       ;                                        
+ 27      12       }                                        
+ 28      12       ;                                        
+                  
+
+===========LEX TABLE mini==============
+
+s
+{
+c(lyl)?
+{
+o(l);
+}
+
+j{
+o(l);
+}
+rl;
+};
+
+=================ID TABLE==============
+
+      Name           Type         Data type        First in LT                Value         Visibility
+
+  0    buffer       variable         little             -1                        0              0
+  1     start       function         little              0                        0              0
+  2        L0        literal         little              4                       -2              0 1
+  3        L1        literal         little              6                        5              0 1
+  4        T0        literal           text             12                   'true'              0 1 2
+  5        T1        literal           text             20                  'false'              0 1 3
+  6        L2        literal         little             25                        0              0 1
+
+
+
+
+0   : S->s{N};            
+2   : N->c(UCU)?{N}j{N}N  
+4   : U->l                
+5   : C->y                
+6   : U->l                
+10  : N->o(U);            
+12  : U->l                
+18  : N->o(U);            
+20  : U->l                
+24  : N->rU;              
+25  : U->l                
+
+
+======= Исходные данные =====
+Количество символов: 78
+Проигнорировано:     0
+Количество строк:    12

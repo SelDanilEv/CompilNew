@@ -3,9 +3,17 @@
       Name           Type         Data type        First in LT                Value         Visibility
 
   0    buffer       variable         little             -1                        0              0
-  1     start       function         little              0                        0              0
-  2        L0        literal         little              4                       -2              0 1
-  3        L1        literal         little              6                        5              0 1
-  4        T0        literal           text             12                   'true'              0 1 2
-  5        T1        literal           text             20                  'false'              0 1 3
-  6        L2        literal         little             25                        0              0 1
+  1         x       variable         little              2                        0              0
+  2outmessage       variable           text              6                       NV              0
+  3      prnt       function         little             10                        0              0
+  4        T0        literal           text             16                 'Happy '              0 1
+  5        T1        literal           text             17                   'new '              0 1
+  6        T2        literal           text             19                   'Year'              0 1
+  7        L0        literal         little             24                       10              0 1
+  8        L1        literal         little             28                        5              0 1
+  9        L2        literal         little             50                        0              0 1
+ 10     start       function         little             54                        0              0
+ 11        L3        literal         little             58                        3              0 3
+ 12        L4        literal         little             62                        0              0 3
+ 13        T3        literal           text             68           'start buffer'              0 3 4
+ 14        L5        literal         little             88                        0              0 3

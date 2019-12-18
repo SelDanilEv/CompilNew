@@ -197,7 +197,7 @@ namespace Generation
 					"\nnegative" + std::to_string(countOfCycles) + " :\n\tmov buffer00000,ebx\n\tneg eax\n\tmov ecx,eax\n\tadd ecx,1\n" +
 					"\tmov eax,1\n\tmov cycleisneg" + std::to_string(countOfCycles) + ",eax\nendcondcycle" + std::to_string(countOfCycles) + " :\n\tpush ecx\n";
 				Data.Code += "\tcycleisneg" + std::to_string(countOfCycles) + " dword 0\n";
-				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":" + "\pop ecx\n\tcmp ecx,0\nje " + (std::string)ASMCYCLEOUT + std::to_string(countOfCycles - 1) + "\n\tsub ecx,1\n\tpush ecx\n";
+				buffstr += (std::string)ASMCYCLE + std::to_string(countOfCycles++) + ":" + "\pop ecx\n\tcmp ecx,0\nje " + (std::string)ASMCYCLEOUT + std::to_string(countOfCycles - 1) + "\n\tsub ecx,1\n\tmov buffer00000,ecx\n\tpush ecx\n";
 				break;
 			case LEX_ENDCHECK:
 				buffstr += "\tpop eax\n\tpop ebx\n\tcmp eax,ebx\n";
