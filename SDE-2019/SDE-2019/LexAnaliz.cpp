@@ -15,9 +15,9 @@ namespace LexA
 {
 	struct MyAutomat                       //структура для автоматов
 	{
-		int automat[21];                        //массив автоматов
+		int automat[24];                        //массив автоматов
 
-		char lexema[22] = {
+		char lexema[24] = {
 			LEX_LITTLE,LEX_TEXT,LEX_FUNCTION,
 			LEX_START,LEX_NEW,LEX_RETURN,
 			LEX_OUTPUT,LEX_ID,LEX_LITERAL,
@@ -25,9 +25,10 @@ namespace LexA
 			LEX_RIGHTBRACE,LEX_LEFTTHESIS,LEX_RIGHTTHESIS,
 			LEX_EQUAL,LEX_OPERATOR,LEX_FROM,
 			LEX_TO,LEX_ENDCONDCYCL,LEX_CHECK,
-			LEX_ENDCHECK
+			LEX_ENDCHECK,LEX_NOT,LEX_OPERCHECK
 		};
-		char value[22] = {
+
+		char value[24] = {
 			'l','t',' ',
 			' ',' ',' ',
 			' ',' ',' ',
@@ -35,7 +36,7 @@ namespace LexA
 			' ',' ',' ',
 			' ',' ',' ',
 			' ','$',' ',
-			'?'
+			'?',' ',' '
 		};
 	}automats;
 
@@ -97,6 +98,9 @@ namespace LexA
 		case 20:
 			automats.automat[20] = FST::check((char*)str.c_str());
 			break;
+		case 22:
+			automats.automat[22] = FST::Not((char*)str.c_str());
+			break;
 		default:
 			break;
 		}
@@ -105,7 +109,7 @@ namespace LexA
 	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
 	{
 		entryL.lexema = automats.lexema[identifyLex];
-		if (identifyLex != 16)
+		if (identifyLex != 16&& identifyLex != 23)
 			entryL.value = automats.value[identifyLex];
 		if (isAStandartFunction)
 			entryL.value = LEX_LIBFUNCTION;
@@ -116,14 +120,22 @@ namespace LexA
 
 	bool FindIDByLexAndArea(LT::LexTable &lextable, IT::IdTable&idtable, std::string str) {
 		short* areaOfV = new short[5];
+		std::string b_str="";
+		for (int i = 0; i < MAXSIZEIDENTIFICATOR && i < str.length(); i++)
+		{
+			b_str += str[i];
+		}
 		for (int i = 0; i < 5; i++)
 			areaOfV[i] = areaOfVisibilityLexAnaliz[i];  //копия области видимости
 		bufferi = 4;
-		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX) {   //поиск подходящего идентификатора
+		while (IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV) == TI_NULLIDX &&
+			IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)b_str.c_str(), areaOfV) == TI_NULLIDX) {   //поиск подходящего идентификатора
 			areaOfV[bufferi--] = 0;
 			if (bufferi < 0)return true;
 		}
 		myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV);
+		if(myentryL.idxTI==-1)
+			myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)b_str.c_str(), areaOfV);
 		return false;
 	}
 
@@ -174,7 +186,7 @@ namespace LexA
 			}
 		}
 		else
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < MAXSIZEIDENTIFICATOR; i++)
 				myentryI.id[i] = buff_name[i];               //в таблицу идентификаторов
 		myentryI.iddatatype = iddatatype;
 		myentryI.idtype = idtype;
@@ -187,61 +199,144 @@ namespace LexA
 		std::string fulltext = fulltextch;                         //исходный текст
 		std::string onelex[300];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
-		char symvols[] = "?$;,{}()+-*/=\n\t";                        //символы сепараторы
+		//char symvols[] = "?$;,{}()+-%*/=\n\t";                        //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
 		currentLine = 0;
 		int LexInIT;                                      // какая строка в IT для лексемы
 
+		bool isLiteral = false;
+		bool isComent = false;
+		int sizeofLit = 0;
+
 
 		for (int counter = 0; counter < fulltext.size(); counter++)           //парсер для текста
 		{
-			if (!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE && fulltext[counter] != '\t')
+			switch (fulltext[counter])
 			{
-				if (fulltext[counter] == '\'')
+			case '^':
+				if (!isLiteral && !isComent)
+					isComent = true;
+				break;
+			case '-':
+				if (!isLiteral && !isComent)
+					if (onelex[amountOfLex - 1] == "=" || onelex[amountOfLex - 1] == "(")
+					{
+						onelex[amountOfLex] += fulltext[counter];
+						break;
+					}
+			case '?':
+			case '$':
+			case ';':
+			case ',':
+			case '{':
+			case '}':
+			case '(':
+			case ')':
+			case '>':
+			case '<':
+			case '+':
+			case '%':
+			case '*':
+			case '/':
+			case '=':
+				if (!isLiteral && !isComent)
 				{
-					onelex[amountOfLex] = fulltext[counter];
-					counter++;
-					if (fulltext[counter] != '\'')
-						do
-						{
-							onelex[amountOfLex] += fulltext[counter];
-							counter++;
-						} while (fulltext[counter - 1] != '\'' && (fulltext[counter - 1] != '\n'));
-						counter--;
-				}
-				else
-				{
+					if (onelex[amountOfLex] != "")
+						amountOfLex++;
 					onelex[amountOfLex] += fulltext[counter];
 				}
-			}
-			else
-			{
-				if (fulltext[counter] != NEWLINE)            //новая строка
-				{
-					if (fulltext[counter] != SPACE && fulltext[counter] != '\t')
+			case ' ':
+			case '\n':
+				if (!isLiteral&&fulltext[counter] == '\n')
+					if (!isComent)
 					{
-						if ((fulltext[counter - 1] != '\t'&&fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1])) && fulltext[counter - 1] != LEX_ENDCONDCYCL)
-							amountOfLex++;
-						onelex[amountOfLex] = fulltext[counter];
-						amountOfLex++;
+						linesForLex[currentLine] = amountOfLex;
+						currentLine++;
 					}
-					else {
-						if (fulltext[counter - 1] != SPACE && fulltext[counter - 1] != '\t' && !strchr(symvols, fulltext[counter - 1]))
+					else
+					{
+						isComent = false;
+					}
+			case '\t':
+				if (!isComent)
+					if (!isLiteral)
+					{
+						if (onelex[amountOfLex] != "")
 							amountOfLex++;
 					}
+					else
+					{
+						sizeofLit++;
+						if (sizeofLit > 255)
+							throw ERROR_THROW_IN(118, currentLine, 0);
+						onelex[amountOfLex] += fulltext[counter];
+
+					}
+				break;
+			case '\'':
+				if (!isComent)
+				{
+					isLiteral = !isLiteral;
+					sizeofLit = 0;
 				}
-				else {
-					linesForLex[currentLine] = amountOfLex;
-					currentLine++;
-				}
+			default:
+				if (!isComent)
+					onelex[amountOfLex] += fulltext[counter];
+				break;
 			}
+			//if ((!strchr(symvols, fulltext[counter]) && fulltext[counter] != SPACE && fulltext[counter] != '\t'))
+			//{
+			//	if (fulltext[counter] == '\'')
+			//	{
+			//		int sizeofLit = 0;
+			//		onelex[amountOfLex] = fulltext[counter];
+			//		counter++;
+			//		if (fulltext[counter] != '\'')
+			//			do
+			//			{
+			//				if (sizeofLit > 255)
+			//					throw ERROR_THROW_IN(118, currentLine, 0);
+			//				sizeofLit++;
+			//				onelex[amountOfLex] += fulltext[counter];
+			//				counter++;
+			//			} while (fulltext[counter - 1] != '\'' && (fulltext[counter - 1] != '\n'));
+			//			counter--;
+			//	}
+			//	else
+			//	{
+			//		onelex[amountOfLex] += fulltext[counter];
+			//	}
+			//}
+			//else
+			//{
+			//	if (fulltext[counter] != NEWLINE)            //новая строка
+			//	{
+			//		if (fulltext[counter] != SPACE && fulltext[counter] != '\t')
+			//		{
+			//			if ((fulltext[counter - 1] != '\t'&&fulltext[counter - 1] != SPACE && !strchr(symvols, fulltext[counter - 1])) && fulltext[counter - 1] != LEX_ENDCONDCYCL)
+			//				amountOfLex++;
+			//			onelex[amountOfLex] = fulltext[counter];
+			//			amountOfLex++;
+			//		}
+			//		else {
+			//			if (fulltext[counter - 1] != SPACE && fulltext[counter - 1] != '\t' && !strchr(symvols, fulltext[counter - 1]))
+			//				amountOfLex++;
+			//		}
+			//	}
+			//	else {
+			//		linesForLex[currentLine] = amountOfLex;
+			//		currentLine++;
+			//		if (onelex[amountOfLex] != "")
+			//			amountOfLex++;
+			//	}
+			//}
 		}
 
 		Tables myTables;
 		myTables.myidtable = IT::Create(amountOfLex);                         //создания таблиц
 		myTables.mylextable = LT::Create(amountOfLex);
 
-		for (int i = 0; i < 5; i++)                //обнуление буфера имен
+		for (int i = 0; i < MAXSIZEIDENTIFICATOR; i++)                //обнуление буфера имен
 		{
 			buff_name[i] = NULL;
 		}
@@ -277,11 +372,15 @@ namespace LexA
 			if (str == "")break;//checker
 
 			identifyLex = 0;
-			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/) 17-from 18-to 19-$ 20-check 21-C
+			int lex[3];	//0-little  1-text 2-function 3-start  4-new  5-return  6-print  7-id 8-literal 9-;  10-,  11-{  12-}  13-(  14-)  15-=  16-(+-*/) 17-from 18-to 19-$ 20-check 21-? 22-not 23-<>
 			lex[0] = -1; lex[1] = -1; lex[2] = -1;
 
 			switch (temp)       //определение возможного типа лексемы
 			{
+			case '>':
+			case '<':
+				lex[0] = 23;
+				break;
 			case 'l':
 				lex[0] = 0;       //little
 				break;
@@ -301,6 +400,7 @@ namespace LexA
 				break;
 			case 'n':
 				lex[0] = 4;
+				lex[1] = 22;
 				break;
 			case 'r':
 				lex[0] = 5;
@@ -334,17 +434,21 @@ namespace LexA
 				break;
 			case '-':
 				lex[0] = 16;
+				lex[1] = 8;
 				break;
 			case '*':
+				lex[0] = 16;
+				break;
+			case '%':
 				lex[0] = 16;
 				break;
 			case '/':
 				lex[0] = 16;
 				break;
-			case '$':
+			case LEX_ENDCONDCYCL:
 				lex[0] = 19;
 				break;
-			case '?':
+			case LEX_ENDCHECK:
 				lex[0] = 21;
 				break;
 			case '!':
@@ -368,17 +472,23 @@ namespace LexA
 			for (int i = 0; i < 3; i++)
 			{
 				if (lex[i] != 7 && lex[i] > -1)
-					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18 || lex[i] == 20)         //если можно разобрать автоматом
+					if (lex[i] < 7 || lex[i] == 17 || lex[i] == 18 || lex[i] == 20 || lex[i] == 22)         //если можно разобрать автоматом
 					{
 						Update(str, lex[i]);
 						if (automats.automat[lex[i]] == lex[i])          //проверка подошел ли автомат
+						{
 							identifyLex = lex[i];
+							break;
+						}
 						else
 							lex[i] = -1;
 					}
 					else
 					{
-						identifyLex = lex[i];                      //по номеру
+						if (str.length() == 1 && lex[i] == 8 && str[0] == '-')
+							identifyLex = 16;
+						else
+							identifyLex = lex[i];                      //по номеру
 					}
 			}
 
@@ -396,13 +506,13 @@ namespace LexA
 				if (str == standartFunction[i]) isAStandartFunction = true;
 			}
 
-			for (int i = 0; i < str.length() && i < 5; i++)            //берем имя
+			for (int i = 0; i < str.length() && i < MAXSIZEIDENTIFICATOR; i++)            //берем имя
 				buff_name[i] = str[i];
-			for (int i = 4; i >= str.length(); i--)
+			for (int i = MAXSIZEIDENTIFICATOR; i >= str.length(); i--)
 				buff_name[i] = NULL;
 			for (int i = 0; i < str.length(); i++)
 				buff_name_str[i] = str[i];
-			for (int i = 10; i >= str.length(); i--)
+			for (int i = 15; i >= str.length(); i--)
 				buff_name_str[i] = NULL;
 
 			switch (identifyLex)
@@ -413,7 +523,7 @@ namespace LexA
 					throw ERROR_THROW_IN(150, currentLine, 0);
 				}
 				myentryI.areaOfVisibility[0] = 0;
-				for (int q = 0; q < 5; q++)
+				for (int q = 0; q < MAXSIZEIDENTIFICATOR; q++)
 					myentryI.id[q] = buff_name[q];
 				myentryI.iddatatype = IT::LIT;
 				myentryI.idtype = IT::F;
@@ -426,12 +536,14 @@ namespace LexA
 			case 11:                                                         //область видимости
 				counterOfBracket++;
 				counterOfAreaOfVisibility++;
+				if (counterOfAreaOfVisibility > 4)
+					throw ERROR_THROW_IN(119, currentLine, 0);
 				myentryI.areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
 				areaOfVisibilityLexAnaliz[counterOfAreaOfVisibility] = counterOfBracket;
 				bufferi = myTables.mylextable.size;
 				while (myTables.mylextable.table[bufferi].lexema != LEX_LEFTTHESIS && myTables.mylextable.table[bufferi].lexema != LEX_START &&
 					myTables.mylextable.table[bufferi].lexema != LEX_SEMICOLON && myTables.mylextable.table[bufferi].lexema != LEX_ENDCONDCYCL &&
-					myTables.mylextable.table[bufferi].lexema != LEX_ENDCHECK)
+					myTables.mylextable.table[bufferi].lexema != LEX_ENDCHECK && myTables.mylextable.table[bufferi].lexema != LEX_RIGHTBRACE)
 				{
 					if (myTables.mylextable.table[bufferi].lexema == LEX_ID)
 						myTables.myidtable.table[myTables.mylextable.table[bufferi].idxTI].areaOfVisibility[counterOfAreaOfVisibility] = counterOfBracket;
@@ -522,7 +634,7 @@ namespace LexA
 								bufferi = 0;
 								bufferi1 = 1;
 								buffer = "";
-								for (int w = 0; w < 5; w++)
+								for (int w = 0; w < MAXSIZEIDENTIFICATOR; w++)
 									buffer += myTables.myidtable.table[y].id[w];
 								if (std::strcmp(str.c_str(), buffer.c_str()) == 0)        //если названия сошлись
 								{
@@ -561,7 +673,7 @@ namespace LexA
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
 			default:        //если не start  {}  id
-				if (identifyLex == 16)
+				if (identifyLex == 16||identifyLex==23)
 					myentryL.value = str[0];
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);

@@ -1,4 +1,5 @@
 #pragma once
+#define MAXSIZEIDENTIFICATOR 10
 
 namespace LexA
 {

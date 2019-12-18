@@ -1,29 +1,26 @@
-new text out;
 new little x;
+new text outmessage;
 
-little function show(little u) 
+little function prnt()
 {
-out = '';
-from(0)to(u)$
-{
-out = out + '*';
-}
-output(out);
-return 0;
-}; 
+	outmessage = 'Happy '+'new '+'Year';
+	from (10) to (5)$
+	{
+		output(outmessage);
+		x = buffer - x;
+		output(x);
+	}
+	return 0;
+};
 
 start 
 {
-from(1)to(10)$ 
-{
-x = buffer;
-x = show(x);
-}
-out = ' ';
-from(10)to(1)$
-{
-x = buffer;
-x = show(x);
-}
-return 0;
+	from (3) to (0)$
+	{
+		output('start buffer');
+		output(buffer);
+		x = buffer;
+		x = prnt();
+	}
+	return 0;
 };

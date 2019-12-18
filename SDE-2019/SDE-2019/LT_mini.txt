@@ -3,14 +3,15 @@
 nti;
 nti;
 
-tfi(ti)
+tfi()
 {
-i=l;
-m(l)e(i)$
+i=llvlv;
+m(l)e(l)$
 {
-i=ilv;
-}
 o(i);
+i=iiv;
+o(i);
+}
 rl;
 };
 
@@ -18,14 +19,10 @@ s
 {
 m(l)e(l)$
 {
+o(l);
+o(i);
 i=i;
-i=i@1##
-}
-i=l;
-m(l)e(l)$
-{
-i=i;
-i=i@1##
+i=@0##
 }
 rl;
 };

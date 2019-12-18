@@ -14,9 +14,11 @@
 #define LEX_START		's'	// лексема для start
 #define LEX_FROM		'm'	// лексема для from
 #define LEX_TO			'e'	// лексема для to
+#define LEX_NOT			'j'	// лексема для not
 #define LEX_CHECK		'c'	// лексема для check
 #define LEX_ENDCHECK	'?'	// лексема для endcheck
 #define LEX_LIBFUNCTION	'z'	// лексема для библиотечных функций
+#define LEX_INCLUDELIB	'w'	// лексема подключения библиотеки
 #define LEX_SEMICOLON	';'	// лексема для ;
 #define LEX_COMMA		','	// лексема для ,
 #define LEX_LEFTBRACE	'{'	// лексема для {
@@ -27,6 +29,7 @@
 #define LEX_MINUS		'v'	// лексема для -
 #define LEX_STAR		'v'	// лексема для *
 #define LEX_DIRSLASH	'v'	// лексема для /
+#define LEX_OPERCHECK	'y'	// лексема для /
 #define LEX_ENDCONDCYCL	'$'	// лексема для $
 #define LEX_OPERATOR	'v'	// лексема для операторов
 #define LEX_EQUAL		'=' // лексема для =

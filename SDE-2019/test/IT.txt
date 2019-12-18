@@ -1,0 +1,11 @@
+=================ID TABLE==============
+
+      Name           Type         Data type        First in LT                Value         Visibility
+
+  0    buffer       variable         little             -1                        0              0
+  1     start       function         little              0                        0              0
+  2        L0        literal         little              4                       -2              0 1
+  3        L1        literal         little              6                        5              0 1
+  4        T0        literal           text             12                   'true'              0 1 2
+  5        T1        literal           text             20                  'false'              0 1 3
+  6        L2        literal         little             25                        0              0 1

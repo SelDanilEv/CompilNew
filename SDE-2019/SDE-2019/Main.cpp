@@ -35,13 +35,19 @@ int _tmain(int argc, _TCHAR ** argv)
 		FilesManager::WriteFiles(myTables);
 
 		Semantic::CheckSemanticAfterPolish(myTables);
-		Generation::Generate(myTables);
+
+		std::ofstream outfileASM;
+		outfileASM.open(parm.out);
+		outfileASM << Generation::Generate(myTables);
+		outfileASM.close();
+
 		Log::WriteIn(log, in);
 		Log::Close(log);
 	}
 	catch (Error::ERROR e)
 	{
 		Log::WriteError(log, e);
+		return -1;
 	}
 	return 0;
 }
