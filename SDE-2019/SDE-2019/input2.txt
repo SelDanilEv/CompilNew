@@ -236,3 +236,426 @@ start
 	output(sum);
 	return 0;
 };
+
+
+
+
+
+new little x;
+new text outmessage;
+
+little function prnt()
+{
+	outmessage = 'Happy '+'new '+'Year';
+	from (10) to (5)$
+	{
+		output(outmessage);
+		x = buffer - x;
+		output(x);
+	}
+	return 0;
+};
+
+start 
+{
+	from (3) to (0)$
+	{
+		output('start buffer');
+		output(buffer);
+		x = buffer;
+		x = prnt();
+	}
+	return 0;
+};
+
+
+
+
+new little x;
+
+start 
+{
+	x = 10;
+	from(1)to(999)$ 
+	{
+		x = x + x * x * buffer;
+		output(buffer);
+		output(x);
+	}
+	return 0;
+};
+
+
+
+new text out;	
+new little x;
+new little sum;
+
+little function addn()
+{
+	x = textlenght(out);
+	return x;
+};
+
+little function show(little u) 
+{
+	x = u % 2;
+	check(x = 0)?
+		{
+			out = '@';
+		}
+		not
+		{
+			out ='*';
+		}
+
+	from(0)to(u)$ 
+	{
+		check(x = 0)?
+		{
+			out = out + '@';
+		}
+		not
+		{
+			out = out + '*';
+		}
+	}
+	x = addn();
+	sum = sum + x;
+	output(out);
+	output(x);
+	return 0;
+}; 
+
+start 
+{
+	from(0)to(!1001)$ 
+	{
+		x = show(buffer);
+	}
+	from(!1001)to(0)$ 
+	{
+		x = show(buffer);
+	}
+	output(' ');
+	output('Sum');
+	output(sum);
+	return 0;
+};
+
+
+
+
+new text out;	
+new little x;
+new little y;
+
+new little flag1;
+new little flag2;
+
+new little buf1;
+new little buf2;
+new little buf3;
+
+
+little function addspace2()
+{
+	check(flag2 = 0)?
+	{
+		out = out + ' ';
+	}
+	return 0;
+};
+
+little function addspace1()
+{
+	check(flag1 = 0)?
+	{
+		buf3 = addspace2();
+	}
+	return 0;
+};
+
+
+little function addstar()
+{
+	check(flag1 = 0)?
+	{
+		out = out + '*';
+	}
+	return 0;
+};
+
+little function adda2()
+{
+	check(flag1 = 0)?
+	{
+		out = out + '@';
+	}
+	return 0;
+};
+
+little function adda1()
+{
+	check(flag2 = 0)?
+	{
+		buf3 = adda2();
+	}
+	return 0;
+};
+
+
+little function addsymb(little vict)
+{	
+	check(vict = 0)?
+	{
+		buf3 = addstar();
+	}
+	not
+	{
+		buf3 = adda1();
+	}
+	return 0;
+};
+
+
+little function letsdo() 
+{
+	out = ' ';
+	from (0) to (6)$
+	{
+		flag1 = 0;
+		flag2 = 0;
+		y = buffer;
+		buf1 = x + y;
+		buf2 = x - y;
+		check(buf1 = 3)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(buf1 = 6)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(buf2 = 3)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(buf2 = -3)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(x = 3)?
+		{
+			buf3 = addsymb(1);
+			flag2 = 1;
+		}
+		check(y = 3)?
+		{
+			buf3 = addsymb(1);
+			flag2 = 1;
+		}
+		buf3 = addspace1();
+	}
+	output(out);
+	return 0;
+}; 
+
+start 
+{
+	from (0) to (6)$
+	{
+		x = buffer;
+		buf3 = letsdo();
+	}
+	return 0;
+};
+
+
+
+
+new little x;
+
+little function letsdo()
+{
+	from (6) to (1)$
+	{
+		output('func');
+		output(buffer);
+	}
+	return 0;
+};
+
+start 
+{
+	from (0) to (6)$
+	{
+		output('main');
+		output(buffer);
+		x = letsdo();
+	}
+	return 0;
+};
+
+
+
+
+
+new text out;	
+new little x;
+new little y;
+
+new little flag1;
+new little flag2;
+
+new little buf1;
+new little buf2;
+new little buf3;
+
+
+little function addspace2()
+{
+	check(flag2 = 0)?
+	{
+		out = out + ' ';
+	}
+	return 0;
+};
+
+little function addspace1()
+{
+	check(flag1 = 0)?
+	{
+		buf3 = addspace2();
+	}
+	return 0;
+};
+
+
+little function addstar()
+{
+	check(flag1 = 0)?
+	{
+		out = out + '*';
+	}
+	return 0;
+};
+
+little function adda4()
+{
+	check(x = 3)?
+	{
+		out = out + 'D';
+	}
+	not
+	{
+		out = out + '@';
+	}
+	return 0;
+};
+
+little function adda3()
+{
+	check(y = 3)?
+	{
+		buf3 = adda4();
+	}
+	not
+	{
+		out = out + '@';
+	}
+	return 0;
+};
+
+little function adda2()
+{
+	check(flag1 = 0)?
+	{
+		buf3 = adda3();
+	}
+	return 0;
+};
+
+little function adda1()
+{
+	check(flag2 = 0)?
+	{
+		buf3 = adda2();
+	}
+	return 0;
+};
+
+
+little function addsymb(little vict)
+{	
+	check(vict = 0)?
+	{
+		buf3 = addstar();
+	}
+	not
+	{
+		buf3 = adda1();
+	}
+	return 0;
+};
+
+
+little function letsdo() 
+{
+	out = ' ';
+	from (0) to (6)$
+	{
+		flag1 = 0;
+		flag2 = 0;
+		y = buffer;
+		buf1 = x + y;
+		buf2 = x - y;
+		check(buf1 = 3)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(buf1 = 9)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(buf2 = 3)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(buf2 = -3)?
+		{
+			buf3 = addsymb(0);
+			flag1 = 1;
+		}
+		check(x = 3)?
+		{
+			buf3 = addsymb(1);
+			flag2 = 1;
+		}
+		check(y = 3)?
+		{
+			buf3 = addsymb(1);
+			flag2 = 1;
+		}
+		buf3 = addspace1();
+	}
+	output(out);
+	return 0;
+}; 
+
+start 
+{
+	from (0) to (6)$
+	{
+		x = buffer;
+		buf3 = letsdo();
+	}
+	return 0;
+};

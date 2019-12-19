@@ -1,19 +1,28 @@
 =================ID TABLE==============
 
-      Name           Type         Data type        First in LT                Value         Visibility
+      Name           Type         Data type        First in LT        Value     Visibility
 
-  0    buffer       variable         little             -1                        0              0
-  1         x       variable         little              2                        0              0
-  2outmessage       variable           text              6                       NV              0
-  3      prnt       function         little             10                        0              0
-  4        T0        literal           text             16                 'Happy '              0 1
-  5        T1        literal           text             17                   'new '              0 1
-  6        T2        literal           text             19                   'Year'              0 1
-  7        L0        literal         little             24                       10              0 1
-  8        L1        literal         little             28                        5              0 1
-  9        L2        literal         little             50                        0              0 1
- 10     start       function         little             54                        0              0
- 11        L3        literal         little             58                        3              0 3
- 12        L4        literal         little             62                        0              0 3
- 13        T3        literal           text             68           'start buffer'              0 3 4
- 14        L5        literal         little             88                        0              0 3
+  0    buffer       variable         little             -1              0            0
+  1       out       variable           text              2             NV            0
+  2         x       variable         little              6              0            0
+  3       sum       variable         little             10              0            0
+  4      addn       function         little             14              0            0
+  5      show       function         little             32              0            0
+  6         u      parameter         little             35              0            0 2
+  7        L0        literal         little             41              2            0 2
+  8        L1        literal         little             48              0            0 2
+  9        T0        literal           text             54            '@'            0 2 3
+ 10        T1        literal           text             61            '*'            0 2 4
+ 11        L2        literal         little             66              0            0 2
+ 12        L3        literal         little             78              0            0 2 5
+ 13        T2        literal           text             85            '@'            0 2 5 6
+ 14        T3        literal           text             94            '*'            0 2 5 7
+ 15        L4        literal         little            122              0            0 2
+ 16     start       function         little            126              0            0
+ 17        L5        literal         little            130              0            0 8
+ 18        L6        literal         little            134              0            0 8
+ 19        L7        literal         little            148              9            0 8
+ 20        L8        literal         little            152              0            0 8
+ 21        T4        literal           text            166            ' '            0 8
+ 22        T5        literal           text            171          'Sum'            0 8
+ 23        L9        literal         little            180              0            0 8

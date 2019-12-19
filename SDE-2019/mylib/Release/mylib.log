@@ -1,8 +1,7 @@
-﻿Сборка начата 18.12.2019 2:36:05.
+﻿Сборка начата 20.12.2019 2:27:25.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:11980 = 12785888
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -15,7 +14,6 @@ easyplussdk = "C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin"
 ESET_OPTIONS =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 FPS_BROWSER_USER_PROFILE_STRING = Default
-FugueRepository = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2017\COMMUNITY\TEAM TOOLS\STATIC ANALYSIS TOOLS\FxCop\Repository
 HOMEDRIVE = C:
 HOMEPATH = \Users\USER
 KMP_DUPLICATE_LIB_OK = TRUE
@@ -62,14 +60,11 @@ VSLANG = 1049
 VSSKUEDITION = Community
 windir = C:\WINDOWS
 
-     1>Проект "E:\Compil\SDE-2019\mylib\mylib.vcxproj" в узле 2 (целевые объекты Rebuild).
-     1>_PrepareForClean:
-         Файл "Release\mylib.tlog\mylib.lastbuildstate" удаляется.
-       InitializeBuildStatus:
+     1>Проект "E:\Compil\SDE-2019\mylib\mylib.vcxproj" в узле 2 (целевые объекты Build).
+     1>InitializeBuildStatus:
          Создание "Release\mylib.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /nologo /W3 /WX- /diagnostics:classic /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"Release\mylib.pch" /Fo"Release\\" /Fd"Release\mylib.pdb" /Gd /TP /analyze- /FC /errorReport:prompt stdafx.cpp
-         stdafx.cpp
+         Для всех выходных данных обновления не требуется.
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /nologo /W3 /WX- /diagnostics:classic /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Release\mylib.pch" /Fo"Release\\" /Fd"Release\mylib.pdb" /Gd /TP /analyze- /FC /errorReport:prompt mylib.cpp
          mylib.cpp
        Lib:
@@ -80,10 +75,10 @@ windir = C:\WINDOWS
        FinalizeBuildStatus:
          Файл "Release\mylib.tlog\unsuccessfulbuild" удаляется.
          Обращение к "Release\mylib.tlog\mylib.lastbuildstate".
-     1>Сборка проекта "E:\Compil\SDE-2019\mylib\mylib.vcxproj" завершена (целевые объекты Rebuild).
+     1>Сборка проекта "E:\Compil\SDE-2019\mylib\mylib.vcxproj" завершена (целевые объекты Build).
 
 Сборка успешно завершена.
     Предупреждений: 0
     Ошибок: 0
 
-Прошло времени 00:00:02.53
+Прошло времени 00:00:05.67

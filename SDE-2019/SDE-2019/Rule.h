@@ -79,15 +79,15 @@ namespace GRB
 			Rule::Chain(3, TS('v'), NS('E'), NS('M'))
 		),
 		Rule(
-			NS('U'), GRB_ERROR_SERIES + 6,    // 
+			NS('U'), GRB_ERROR_SERIES + 7,    // ошибка передачи параметров в операторы
 			2,								  //
 			Rule::Chain(1, TS('i')),
 			Rule::Chain(1, TS('l'))
 		),
 		Rule(
-			NS('C'), GRB_ERROR_SERIES + 7,    // 
+			NS('C'), GRB_ERROR_SERIES + 8,    // ошибка ожидался логический оператор
 			2,								  //
-			Rule::Chain(1, TS('v')),
+			Rule::Chain(1, TS('=')),
 			Rule::Chain(1, TS('y'))
 		)
 	);

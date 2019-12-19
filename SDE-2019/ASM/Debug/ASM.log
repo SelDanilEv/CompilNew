@@ -1,8 +1,7 @@
-﻿Сборка начата 18.12.2019 23:44:39.
+﻿Сборка начата 20.12.2019 2:55:47.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:19848 = 10B8F918
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -25,7 +24,7 @@ MSBuildLoadMicrosoftTargetsReadOnly = true
 NUMBER_OF_PROCESSORS = 4
 OneDrive = C:\Users\USER\OneDrive
 OS = Windows_NT
-Path = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\install\AOMEI Backupper;C:\Program Files\Java\jdk-10.0.1\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\install\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\atom\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\.dotnet\tools
+Path = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\install\AOMEI Backupper;C:\Program Files\Java\jdk-10.0.1\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\install\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\atom\bin;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\.dotnet\tools
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 PkgDefApplicationConfigFile = C:\Users\USER\AppData\Local\Microsoft\VisualStudio\15.0_3403365a\devenv.exe.config
 PROCESSOR_ARCHITECTURE = x86
@@ -39,7 +38,6 @@ ProgramFiles(x86) = C:\Program Files (x86)
 ProgramW6432 = C:\Program Files
 PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 PUBLIC = C:\Users\Public
-SESSIONNAME = Console
 SystemDrive = C:
 SystemRoot = C:\WINDOWS
 TEMP = C:\Users\USER\AppData\Local\Temp
@@ -60,36 +58,35 @@ VSAPPIDNAME = devenv.exe
 VSLANG = 1049
 VSSKUEDITION = Community
 windir = C:\WINDOWS
+__COMPAT_LAYER = Installer
 
-     1>Проект "E:\Compil\SDE-2019\ASM\ASM.vcxproj" в узле 2 (целевые объекты Build).
-     1>InitializeBuildStatus:
+     1>Проект "E:\Compil\SDE-2019\ASM\ASM.vcxproj" в узле 2 (целевые объекты Rebuild).
+     1>_PrepareForClean:
+         Файл "Debug\ASM.tlog\ASM.lastbuildstate" удаляется.
+       InitializeBuildStatus:
          Создание "Debug\ASM.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        _MASM:
          Assembling ASM.asm...
-         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmp8236abee267f459d9011345bfe84f961.cmd"
+         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmp1c1d70291dec45a3b7fe302ab3536d87.cmd"
          ml.exe /c /nologo /Fo"Debug\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\SDE-2019\Debug\ASM.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"E:\Compil\SDE-2019\Debug\ASM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\SDE-2019\Debug\ASM.lib" /MACHINE:X86 Debug\ASM.obj
-     1>mylib.lib(Source.obj) : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/INCREMENTAL:NO"
+     1>mylib.lib(mylib.obj) : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/INCREMENTAL:NO"
      1>LINK : warning LNK4098: библиотека по умолчанию "libucrt.lib" противоречит использованию других библиотек; используйте параметр /NODEFAULTLIB:library
-     1>mylib.lib(Source.obj) : warning LNK4204: в "E:\Compil\SDE-2019\Debug\mylib.pdb" отсутствуют отладочные данные для ссылок на модуль; компоновка объекта выполняется как при отсутствии отладочных данных
-     1>mylib.lib(stdafx.obj) : warning LNK4204: в "E:\Compil\SDE-2019\Debug\mylib.pdb" отсутствуют отладочные данные для ссылок на модуль; компоновка объекта выполняется как при отсутствии отладочных данных
          ASM.vcxproj -> E:\Compil\SDE-2019\Debug\ASM.exe
        FinalizeBuildStatus:
          Файл "Debug\ASM.tlog\unsuccessfulbuild" удаляется.
          Обращение к "Debug\ASM.tlog\ASM.lastbuildstate".
-     1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Build).
+     1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Rebuild).
 
 Сборка успешно завершена.
 
-       "E:\Compil\SDE-2019\ASM\ASM.vcxproj" (целевой объект Build ) (1) ->
+       "E:\Compil\SDE-2019\ASM\ASM.vcxproj" (целевой объект Rebuild ) (1) ->
        (Link конечный объект) -> 
-         mylib.lib(Source.obj) : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/INCREMENTAL:NO"
+         mylib.lib(mylib.obj) : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/INCREMENTAL:NO"
          LINK : warning LNK4098: библиотека по умолчанию "libucrt.lib" противоречит использованию других библиотек; используйте параметр /NODEFAULTLIB:library
-         mylib.lib(Source.obj) : warning LNK4204: в "E:\Compil\SDE-2019\Debug\mylib.pdb" отсутствуют отладочные данные для ссылок на модуль; компоновка объекта выполняется как при отсутствии отладочных данных
-         mylib.lib(stdafx.obj) : warning LNK4204: в "E:\Compil\SDE-2019\Debug\mylib.pdb" отсутствуют отладочные данные для ссылок на модуль; компоновка объекта выполняется как при отсутствии отладочных данных
 
-    Предупреждений: 4
+    Предупреждений: 2
     Ошибок: 0
 
-Прошло времени 00:00:06.44
+Прошло времени 00:00:20.03

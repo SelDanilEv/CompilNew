@@ -73,7 +73,7 @@ namespace IT
 
 		file << std::setfill('=') << std::setw(25) << "ID TABLE" << std::setw(16) << "\n\n";              //вывод преамбулы
 		file << std::setfill(' ') << std::setw(10) << "Name" << std::setw(15) << "Type" << std::setw(18) << "Data type" <<
-			std::setw(19) << "First in LT" << std::setw(21) << "Value"  << std::setw(19) << "Visibility" << "\n\n";
+			std::setw(19) << "First in LT" << std::setw(13) << "Value"  << std::setw(15) << "Visibility" << "\n\n";
 
 		for (int i = 0; i < idtable.size; i++)                                 //вывод таблицы
 		{
@@ -118,7 +118,7 @@ namespace IT
 				break;
 			}
 
-			file << std::setfill(' ') << idtable.table[i].idxfirstLE << std::setw(25);
+			file << std::setfill(' ') << idtable.table[i].idxfirstLE << std::setw(15);
 
 
 			if (idtype != 4)
@@ -144,7 +144,7 @@ namespace IT
 			}
 
 			counter = 1;
-			file << std::setfill(' ') << std::setw(15) << '0';
+			file << std::setfill(' ') << std::setw(13) << '0';
 			while (idtable.table[i].areaOfVisibility[counter] != NULL)
 			{
 				file << " " << idtable.table[i].areaOfVisibility[counter];

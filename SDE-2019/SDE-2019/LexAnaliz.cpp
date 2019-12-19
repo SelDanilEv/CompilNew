@@ -109,7 +109,7 @@ namespace LexA
 	void addToLT(int identifyLex, int currentLine, LT::LexTable &lextable, LT::Entry entryL)
 	{
 		entryL.lexema = automats.lexema[identifyLex];
-		if (identifyLex != 16&& identifyLex != 23)
+		if (identifyLex != 16 && identifyLex != 23)
 			entryL.value = automats.value[identifyLex];
 		if (isAStandartFunction)
 			entryL.value = LEX_LIBFUNCTION;
@@ -120,7 +120,7 @@ namespace LexA
 
 	bool FindIDByLexAndArea(LT::LexTable &lextable, IT::IdTable&idtable, std::string str) {
 		short* areaOfV = new short[5];
-		std::string b_str="";
+		std::string b_str = "";
 		for (int i = 0; i < MAXSIZEIDENTIFICATOR && i < str.length(); i++)
 		{
 			b_str += str[i];
@@ -134,7 +134,7 @@ namespace LexA
 			if (bufferi < 0)return true;
 		}
 		myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)str.c_str(), areaOfV);
-		if(myentryL.idxTI==-1)
+		if (myentryL.idxTI == -1)
 			myentryL.idxTI = IT::IsIdWithAreaOfVisibility(idtable, (unsigned char*)b_str.c_str(), areaOfV);
 		return false;
 	}
@@ -197,7 +197,7 @@ namespace LexA
 	Tables analyze(int currentLine, char *fulltextch)                         //функция анализа
 	{
 		std::string fulltext = fulltextch;                         //исходный текст
-		std::string onelex[300];                                 //массив лексем(будущий)
+		std::string onelex[1000];                                 //массив лексем(будущий)
 		int amountOfLex = 0;                              //кол во лексем
 		//char symvols[] = "?$;,{}()+-%*/=\n\t";                        //символы сепараторы
 		int *linesForLex = new int[currentLine];                  //массив содержит инфу о строках
@@ -598,7 +598,21 @@ namespace LexA
 						myentryI.value.vint = numb;
 					}
 					else
-						myentryI.value.vint = std::stoi(str);
+					{
+						short corrector=0;
+						if (str[0] == '-')
+							corrector = 1;
+						if (str.length()-corrector  < 10)
+						{
+							long buffer = std::stoi(str);
+							if (buffer<2147483600 && buffer > -2147483600)
+								myentryI.value.vint = std::stoi(str);
+							else
+								throw ERROR_THROW_IN(120,currentLine,0);
+						}
+						else
+							throw ERROR_THROW_IN(120, currentLine, 0);
+					}
 					myentryI.id[0] = 'L';
 					buffer = std::to_string(counterOfIntegerLiteral++);
 					for (int i = 0; i < buffer.length(); i++)
@@ -673,7 +687,7 @@ namespace LexA
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);
 				break;
 			default:        //если не start  {}  id
-				if (identifyLex == 16||identifyLex==23)
+				if (identifyLex == 16 || identifyLex == 23)
 					myentryL.value = str[0];
 				myentryL.idxTI = LT_TI_NULLIDX;              //просто в таблицу лексем
 				addToLT(identifyLex, currentLine, myTables.mylextable, myentryL);

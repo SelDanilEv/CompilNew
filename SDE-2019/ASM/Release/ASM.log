@@ -1,8 +1,7 @@
-﻿Сборка начата 18.12.2019 2:36:23.
+﻿Сборка начата 20.12.2019 2:27:30.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:11980 = 12785888
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -15,7 +14,6 @@ easyplussdk = "C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin"
 ESET_OPTIONS =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 FPS_BROWSER_USER_PROFILE_STRING = Default
-FugueRepository = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2017\COMMUNITY\TEAM TOOLS\STATIC ANALYSIS TOOLS\FxCop\Repository
 HOMEDRIVE = C:
 HOMEPATH = \Users\USER
 KMP_DUPLICATE_LIB_OK = TRUE
@@ -66,25 +64,32 @@ windir = C:\WINDOWS
      1>InitializeBuildStatus:
          Обращение к "Release\ASM.tlog\unsuccessfulbuild".
        _MASM:
-       Целевой объект "_MASM" пропускается, так как все выходные файлы актуальны по отношению к входным.
+         Assembling ASM.asm...
+         cmd.exe /C "C:\Users\USER\AppData\Local\Temp\tmpce2f2146bf9d4b2f878f6905564c0994.cmd"
+         ml.exe /c /nologo /Zi /Fo"Release\ASM.obj" /W3 /errorReport:prompt  /TaASM.asm
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Compil\SDE-2019\Release\ASM.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Compil\SDE-2019\Release\ASM.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Compil\SDE-2019\Release\ASM.lib" /MACHINE:X86 /SAFESEH Release\ASM.obj
-     1>mylib.lib(mylib.obj) : error LNK2001: неразрешенный внешний символ "___CxxFrameHandler3"
-     1>mylib.lib(mylib.obj) : error LNK2001: неразрешенный внешний символ "___std_terminate"
-     1>mylib.lib(mylib.obj) : error LNK2001: неразрешенный внешний символ "__imp__system"
-     1>E:\Compil\SDE-2019\Release\ASM.exe : fatal error LNK1120: неразрешенных внешних элементов: 3
+     1>mylib.lib(mylib.obj) : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/OPT:ICF"
+     1>LINK : warning LNK4098: библиотека по умолчанию "libucrt.lib" противоречит использованию других библиотек; используйте параметр /NODEFAULTLIB:library
+         LINK : указан параметр /LTCG, но не требуется создание кода; удалите /LTCG из командной строки компоновки для повышения производительности компоновщика
+     1>ASM.obj : error LNK2026: небезопасный модуль для образа SAFESEH.
+     1>E:\Compil\SDE-2019\Release\ASM.exe : fatal error LNK1281: Не удается создать образ SAFESEH.
      1>Сборка проекта "E:\Compil\SDE-2019\ASM\ASM.vcxproj" завершена (целевые объекты Build) с ошибкой.
 
 Ошибка сборки.
 
        "E:\Compil\SDE-2019\ASM\ASM.vcxproj" (целевой объект Build ) (1) ->
        (Link конечный объект) -> 
-         mylib.lib(mylib.obj) : error LNK2001: неразрешенный внешний символ "___CxxFrameHandler3"
-         mylib.lib(mylib.obj) : error LNK2001: неразрешенный внешний символ "___std_terminate"
-         mylib.lib(mylib.obj) : error LNK2001: неразрешенный внешний символ "__imp__system"
-         E:\Compil\SDE-2019\Release\ASM.exe : fatal error LNK1120: неразрешенных внешних элементов: 3
+         mylib.lib(mylib.obj) : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/OPT:ICF"
+         LINK : warning LNK4098: библиотека по умолчанию "libucrt.lib" противоречит использованию других библиотек; используйте параметр /NODEFAULTLIB:library
 
-    Предупреждений: 0
-    Ошибок: 4
 
-Прошло времени 00:00:01.12
+       "E:\Compil\SDE-2019\ASM\ASM.vcxproj" (целевой объект Build ) (1) ->
+       (Link конечный объект) -> 
+         ASM.obj : error LNK2026: небезопасный модуль для образа SAFESEH.
+         E:\Compil\SDE-2019\Release\ASM.exe : fatal error LNK1281: Не удается создать образ SAFESEH.
+
+    Предупреждений: 2
+    Ошибок: 2
+
+Прошло времени 00:00:00.95

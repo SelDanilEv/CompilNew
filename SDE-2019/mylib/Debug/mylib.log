@@ -1,8 +1,7 @@
-﻿Сборка начата 18.12.2019 23:44:36.
+﻿Сборка начата 20.12.2019 2:55:43.
 Окружение на момент начала сборки:
 ALLUSERSPROFILE = C:\ProgramData
 APPDATA = C:\Users\USER\AppData\Roaming
-BTK_BASELIBCTX:19848 = 10B8F918
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
 CommonProgramW6432 = C:\Program Files\Common Files
@@ -25,7 +24,7 @@ MSBuildLoadMicrosoftTargetsReadOnly = true
 NUMBER_OF_PROCESSORS = 4
 OneDrive = C:\Users\USER\OneDrive
 OS = Windows_NT
-Path = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\install\AOMEI Backupper;C:\Program Files\Java\jdk-10.0.1\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\install\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\atom\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\.dotnet\tools
+Path = C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\install\AOMEI Backupper;C:\Program Files\Java\jdk-10.0.1\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\install\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\atom\bin;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\.dotnet\tools
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 PkgDefApplicationConfigFile = C:\Users\USER\AppData\Local\Microsoft\VisualStudio\15.0_3403365a\devenv.exe.config
 PROCESSOR_ARCHITECTURE = x86
@@ -39,7 +38,6 @@ ProgramFiles(x86) = C:\Program Files (x86)
 ProgramW6432 = C:\Program Files
 PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 PUBLIC = C:\Users\Public
-SESSIONNAME = Console
 SystemDrive = C:
 SystemRoot = C:\WINDOWS
 TEMP = C:\Users\USER\AppData\Local\Temp
@@ -60,12 +58,16 @@ VSAPPIDNAME = devenv.exe
 VSLANG = 1049
 VSSKUEDITION = Community
 windir = C:\WINDOWS
+__COMPAT_LAYER = Installer
 
-     1>Проект "E:\Compil\SDE-2019\mylib\mylib.vcxproj" в узле 2 (целевые объекты Build).
-     1>InitializeBuildStatus:
+     1>Проект "E:\Compil\SDE-2019\mylib\mylib.vcxproj" в узле 2 (целевые объекты Rebuild).
+     1>_PrepareForClean:
+         Файл "Debug\mylib.tlog\mylib.lastbuildstate" удаляется.
+       InitializeBuildStatus:
          Создание "Debug\mylib.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
-         Для всех выходных данных обновления не требуется.
+         C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"Debug\mylib.pch" /Fo"Debug\\" /Fd"Debug\mylib.pdb" /Gd /TP /analyze- /FC /errorReport:prompt stdafx.cpp
+         stdafx.cpp
          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:classic /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\mylib.pch" /Fo"Debug\\" /Fd"Debug\mylib.pdb" /Gd /TP /analyze- /FC /errorReport:prompt mylib.cpp
          mylib.cpp
        Lib:
@@ -77,10 +79,10 @@ windir = C:\WINDOWS
        FinalizeBuildStatus:
          Файл "Debug\mylib.tlog\unsuccessfulbuild" удаляется.
          Обращение к "Debug\mylib.tlog\mylib.lastbuildstate".
-     1>Сборка проекта "E:\Compil\SDE-2019\mylib\mylib.vcxproj" завершена (целевые объекты Build).
+     1>Сборка проекта "E:\Compil\SDE-2019\mylib\mylib.vcxproj" завершена (целевые объекты Rebuild).
 
 Сборка успешно завершена.
     Предупреждений: 0
     Ошибок: 0
 
-Прошло времени 00:00:02.34
+Прошло времени 00:00:03.13
